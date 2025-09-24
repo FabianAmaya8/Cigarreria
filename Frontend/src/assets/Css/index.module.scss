@@ -1,0 +1,128 @@
+/* ---------------- HEADER ---------------- */
+.Header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.Header-container {
+    width: 95%;
+    background: var(--header-bg);
+    border-radius: 10px;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.Header-logo {
+    width: 80px;
+    height: 80px;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+}
+
+.Header-title {
+    color: var(--texto);
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.Header-nav {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.Header-list {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+
+    li a {
+        text-decoration: none;
+        color: var(--texto);
+        font-weight: 500;
+        transition: color 0.3s ease;
+
+        &:hover {
+            color: #ffe0e0;
+        }
+    }
+}
+
+/* RESPONSIVE HEADER */
+@media (max-width: 768px) {
+    .Header-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .Header-logo {
+        display: none;
+    }
+
+    .Header-list {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .Header-title {
+        font-size: 1.2rem;
+    }
+}
+
+/* ---------------- CONTAINER ---------------- */
+.Container {
+    width: 90%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+/* ---------------- FOOTER ---------------- */
+.Footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.Footer-container {
+    width: 95%;
+    background: var(--footer-bg);
+    border-radius: 10px;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    color: var(--texto);
+
+    p {
+        margin: 5px 0;
+    }
+}
+
+/* RESPONSIVE FOOTER */
+@media (max-width: 600px) {
+    .Footer-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 5px;
+    }
+}

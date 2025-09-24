@@ -1,0 +1,154 @@
+:root {
+    /* -------------------- BASE / SUPERFICIES -------------------- */
+    --fondo: #191919;
+    --fondo-elevado: #121012;
+    --superficie: #151214;
+    --glass: rgba(255,255,255,0.02);
+
+    /* -------------------- PALETA ROJOS (tonos) -------------------- */
+    --rojo-900: #2b0000;
+    --rojo-800: #420a0a;
+    --rojo-700: #6d1414;
+    --rojo-600: #9b1f1f;
+    --rojo-500: #c62828;
+    --rojo-400: #e53935;
+    --rojo-300: #f57373;
+    --rojo-100: #ffdede;
+
+    /* -------------------- SEMÁNTICOS / TIPOGRAFÍA -------------------- */
+    --texto: #f5f3f3;
+    --texto-sec: #cfc9c9;
+    --texto-muted: #9b8f8f;
+    --placeholder: #7e7373;
+
+    /* -------------------- CABECERA / FOOTER -------------------- */
+    --header-bg: var(--rojo-800);
+    --footer-bg: var(--rojo-900);
+
+    /* -------------------- BOTONES -------------------- */
+    --btn-primary-bg: var(--rojo-600);
+    --btn-primary-bg-hover: var(--rojo-500);
+    --btn-primary-bg-active: var(--rojo-700);
+    --btn-primary-text: #ffffff;
+
+    --btn-secondary-bg: #3f2626;
+    --btn-secondary-bg-hover: #5b3333;
+    --btn-secondary-bg-active: #2f1c1c;
+    --btn-secondary-text: var(--texto);
+
+    --btn-disabled-bg: #221818;
+    --btn-disabled-text: #6b6161;
+
+    /* -------------------- INPUTS -------------------- */
+    --input-bg: #110e0e;
+    --input-text: var(--texto);
+    --input-placeholder: var(--placeholder);
+    --input-border: #2a1f1f;
+    --input-focus-border: var(--rojo-500);
+
+    /* -------------------- CARDS -------------------- */
+    --card-bg: var(--superficie);
+    --card-border: #201515;
+
+    /* -------------------- SOMBRAS -------------------- */
+    --shadow-1: 0 2px 6px rgba(0,0,0,0.55);
+    --shadow-2: 0 8px 18px rgba(0,0,0,0.6);
+
+    /* -------------------- GRADIENTS -------------------- */
+    --gradient-primary: linear-gradient(135deg, var(--rojo-600), var(--rojo-500));
+
+    /* -------------------- UTILIDADES -------------------- */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --border-width: 1px;
+    --transition-fast: 150ms cubic-bezier(.2,.9,.2,1);
+
+    /* -------------------- STATUS COLORS -------------------- */
+    --success: #27ae60;
+    --warning: #f39c12;
+    --info: #3498db;
+    --danger: var(--rojo-500);
+
+    /* -------------------- BOOTSTRAP OVERRIDES -------------------- */
+    --bs-body-bg: var(--fondo);
+    --bs-body-color: var(--texto);
+    --bs-primary: var(--rojo-600);
+    --bs-primary-rgb: 155, 31, 31;
+    --bs-secondary: #3f2626;
+    --bs-secondary-rgb: 63, 38, 38;
+    --bs-danger: var(--rojo-500);
+    --bs-success: var(--success);
+    --bs-warning: var(--warning);
+    --bs-info: var(--info);
+    --bs-link-color: var(--rojo-400);
+    --bs-link-hover-color: var(--rojo-300);
+}
+
+body,
+#root {
+    width: 100%;
+    height: 100vh;
+    background: var(--fondo) !important;
+    color: var(--texto);
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin: 0;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ajustes para que Bootstrap use tus colores */
+.btn-primary {
+    background-color: var(--btn-primary-bg) !important;
+    border-color: var(--btn-primary-bg) !important;
+    color: var(--btn-primary-text) !important;
+}
+.btn-primary:hover {
+    background-color: var(--btn-primary-bg-hover) !important;
+    border-color: var(--btn-primary-bg-hover) !important;
+}
+.btn-secondary {
+    background-color: var(--btn-secondary-bg) !important;
+    border-color: var(--btn-secondary-bg) !important;
+    color: var(--btn-secondary-text) !important;
+}
+.btn-secondary:hover {
+    background-color: var(--btn-secondary-bg-hover) !important;
+    border-color: var(--btn-secondary-bg-hover) !important;
+}
+
+.card {
+    background-color: var(--card-bg) !important;
+    border: 1px solid var(--card-border) !important;
+    color: var(--texto) !important;
+}
+
+.form-control {
+    background-color: var(--input-bg) !important;
+    color: var(--input-text) !important;
+    border: 1px solid var(--input-border) !important;
+}
+.form-control:focus {
+    border-color: var(--input-focus-border) !important;
+    box-shadow: 0 0 0 0.25rem rgba(198,40,40,0.25) !important;
+}
+
+a {
+    color: var(--bs-link-color);
+    text-decoration: none;
+}
+a:hover {
+    color: var(--bs-link-hover-color);
+    text-decoration: underline;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
