@@ -172,8 +172,9 @@ CREATE TABLE usuarios (
     nombre VARCHAR(100) NOT NULL,
     usuario VARCHAR(50) UNIQUE NOT NULL,
     contrasena VARCHAR(255) NOT NULL,
+    correo VARCHAR(100) UNIQUE NOT NULL,
+    imagen VARCHAR(255),
     rol INT,
-    correo VARCHAR(100),
     activo BOOLEAN DEFAULT TRUE,
     FOREIGN KEY (rol) REFERENCES roles(id_rol)
 );

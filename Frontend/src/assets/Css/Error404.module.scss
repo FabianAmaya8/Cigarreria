@@ -1,0 +1,43 @@
+.Error404 {
+    width: 90%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--texto);
+}
+
+.Error404-title {
+    font-size: 6rem;
+    color: var(--danger);
+}
+
+.Error404-text {
+    font-size: 1.5rem;
+    text-align: center;
+    color: var(--texto-sec);
+    margin: 1rem 0;
+}
+
+.Error404-button {
+    padding: 1rem 2rem;
+    border-radius: var(--radius-md);
+    border: none;
+    background-color: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background-color var(--transition-fast), transform var(--transition-fast);
+    box-shadow: var(--shadow-1);
+
+    &:hover {
+        background-color: var(--btn-primary-bg-hover);
+        transform: scale(1.05);
+    }
+
+    &:active {
+        background-color: var(--btn-primary-bg-active);
+        transform: scale(0.95);
+    }
+}

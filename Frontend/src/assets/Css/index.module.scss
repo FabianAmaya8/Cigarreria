@@ -10,24 +10,26 @@
 .Header-container {
     width: 95%;
     background: var(--header-bg);
-    border-radius: 10px;
+    border-radius: var(--radius-md);
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 20px;
     flex-wrap: wrap;
+    box-shadow: var(--shadow-1);
 }
 
-.Header-logo {
+.Header-logo, 
+.Overlay-logo {
     width: 80px;
     height: 80px;
-
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-    }
+}
+.Header-logo img, 
+.Overlay-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .Header-title {
@@ -42,42 +44,107 @@
     justify-content: flex-end;
 }
 
+/* ===== LISTAS DE NAVEGACIÓN ===== */
 .Header-list {
     list-style: none;
     display: flex;
+    text-align: center;
     gap: 20px;
     margin: 0;
     padding: 0;
+}
 
-    li a {
-        text-decoration: none;
-        color: var(--texto);
-        font-weight: 500;
-        transition: color 0.3s ease;
+/* ===== LINKS DE NAVEGACIÓN ===== */
+.Header-link {
+    position: relative;
+    padding: 10px;
+    border-radius: var(--radius-md);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    text-decoration: none;
+    color: var(--texto);
+    font-weight: 500;
+    font-size: 1rem;
+    transition: color var(--transition-fast);
+    overflow: hidden;
+    z-index: 1;
 
-        &:hover {
-            color: #ffe0e0;
-        }
+    i {
+        font-size: 1.5rem;
     }
 }
 
-/* RESPONSIVE HEADER */
-@media (max-width: 768px) {
-    .Header-container {
-        flex-direction: column;
-        align-items: center;
-    }
+.Header-link::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0%;
+    background: var(--gradient-primary);
+    transition: height var(--transition-fast);
+    z-index: -1;
+}
 
-    .Header-logo {
+.Header-link:hover {
+    color: var(--rojo-900);
+}
+
+.Header-link:hover::before {
+    height: 100%;
+}
+
+/* Botón hamburguesa */
+.Header-burger {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--texto);
+    cursor: pointer;
+}
+
+/* Overlay lateral */
+.Header-overlay {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--header-bg);
+    transition: left var(--transition-fast);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Header-overlay.is-open {
+    left: 0;
+}
+
+.Overlay-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+@media (max-width: 768px) {
+    .only-desktop {
         display: none;
+    }
+    .only-mobile {
+        display: block;
     }
 
     .Header-list {
         flex-direction: column;
-        gap: 10px;
-        align-items: center;
+        gap: 20px;
     }
-
+    .Header-nav {
+        display: none; 
+    }
     .Header-title {
         font-size: 1.2rem;
     }
@@ -105,17 +172,14 @@
 .Footer-container {
     width: 95%;
     background: var(--footer-bg);
-    border-radius: 10px;
+    border-radius: var(--radius-md);
     padding: 15px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     color: var(--texto);
-
-    p {
-        margin: 5px 0;
-    }
+    box-shadow: var(--shadow-1);
 }
 
 /* RESPONSIVE FOOTER */

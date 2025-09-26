@@ -22,7 +22,7 @@ cd Backend
 python -m venv venv
 source venv/Scripts/activate
 pip install -r requirements.txt
-uvicorn main:app --reload
+uvicorn app.main:app --reload
 ```
 
 **CMD (Windows):**
@@ -32,7 +32,7 @@ cd Backend
 python -m venv venv
 venv\Scripts\activate
 pip install -r requirements.txt
-uvicorn main:app --reload
+uvicorn app.main:app --reload
 ```
 
 ---
@@ -44,7 +44,7 @@ uvicorn main:app --reload
 ```bash
 cd Backend
 source venv/Scripts/activate
-uvicorn main:app --reload
+uvicorn app.main:app --reload
 ```
 
 **CMD (Windows):**
@@ -52,7 +52,7 @@ uvicorn main:app --reload
 ```cmd
 cd Backend
 venv\Scripts\activate
-uvicorn main:app --reload
+uvicorn app.main:app --reload
 ```
 
 ---

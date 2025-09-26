@@ -1,11 +1,11 @@
 :root {
     /* -------------------- BASE / SUPERFICIES -------------------- */
-    --fondo: #191919;
+    --fondo: linear-gradient(var(--rojo-900) 0%, var(--azul-900) 100%);
     --fondo-elevado: #121012;
     --superficie: #151214;
-    --glass: rgba(255,255,255,0.02);
+    --glass: #ffffff05;
 
-    /* -------------------- PALETA ROJOS (tonos) -------------------- */
+    /* -------------------- PALETA ROJOS (principal) -------------------- */
     --rojo-900: #2b0000;
     --rojo-800: #420a0a;
     --rojo-700: #6d1414;
@@ -13,7 +13,19 @@
     --rojo-500: #c62828;
     --rojo-400: #e53935;
     --rojo-300: #f57373;
+    --rojo-200: #ffabab;
     --rojo-100: #ffdede;
+
+    /* -------------------- PALETA azul (complementaria) -------------------- */
+    --azul-900: #0a1a26;
+    --azul-800: #0f2536;
+    --azul-700: #15354c;
+    --azul-600: #1e4a6a;
+    --azul-500: #2b6fa3;
+    --azul-400: #3d8bbd;
+    --azul-300: #5fa8d3;
+    --azul-200: #91c9e8;
+    --azul-100: #cfeaf7;
 
     /* -------------------- SEMÁNTICOS / TIPOGRAFÍA -------------------- */
     --texto: #f5f3f3;
@@ -23,9 +35,9 @@
 
     /* -------------------- CABECERA / FOOTER -------------------- */
     --header-bg: var(--rojo-800);
-    --footer-bg: var(--rojo-900);
+    --footer-bg: var(--azul-800);
 
-    /* -------------------- BOTONES -------------------- */
+    /* -------------------- BOTONES (rojo principal) -------------------- */
     --btn-primary-bg: var(--rojo-600);
     --btn-primary-bg-hover: var(--rojo-500);
     --btn-primary-bg-active: var(--rojo-700);
@@ -38,6 +50,12 @@
 
     --btn-disabled-bg: #221818;
     --btn-disabled-text: #6b6161;
+
+    /* -------------------- BOTONES (azul complementario) -------------------- */
+    --btn-terciario-bg: var(--azul-600);
+    --btn-terciario-bg-hover: var(--azul-500);
+    --btn-terciario-bg-active: var(--azul-700);
+    --btn-terciario-text: #ffffff;
 
     /* -------------------- INPUTS -------------------- */
     --input-bg: #110e0e;
@@ -55,14 +73,15 @@
     --shadow-2: 0 8px 18px rgba(0,0,0,0.6);
 
     /* -------------------- GRADIENTS -------------------- */
-    --gradient-primary: linear-gradient(135deg, var(--rojo-600), var(--rojo-500));
+    --gradient-primary: linear-gradient(135deg, var(--rojo-100), var(--rojo-800));
+    --gradient-alt: linear-gradient(135deg, var(--azul-100), var(--azul-700));
 
     /* -------------------- UTILIDADES -------------------- */
     --radius-sm: 6px;
     --radius-md: 10px;
     --radius-lg: 16px;
     --border-width: 1px;
-    --transition-fast: 150ms cubic-bezier(.2,.9,.2,1);
+    --transition-fast: 0.3s ease;
 
     /* -------------------- STATUS COLORS -------------------- */
     --success: #27ae60;
@@ -83,6 +102,38 @@
     --bs-info: var(--info);
     --bs-link-color: var(--rojo-400);
     --bs-link-hover-color: var(--rojo-300);
+
+    /* Nuevo: asignación opcional para usar azul como "info-alt" */
+    --bs-purple: var(--azul-600);
+    --bs-purple-rgb: 106, 13, 173;
+}
+
+/* ---- EXTRA ---- */
+/* Botón terciario */
+.btn-terciario {
+    background-color: var(--btn-terciario-bg) !important;
+    border-color: var(--btn-terciario-bg) !important;
+    color: var(--btn-terciario-text) !important;
+}
+.btn-terciario:hover {
+    background-color: var(--btn-terciario-bg-hover) !important;
+    border-color: var(--btn-terciario-bg-hover) !important;
+}
+.btn-terciario:active {
+    background-color: var(--btn-terciario-bg-active) !important;
+    border-color: var(--btn-terciario-bg-active) !important;
+}
+
+/* Badge azul */
+.badge-azul {
+    background-color: var(--azul-600);
+    color: #fff;
+}
+
+/* Card alternativa */
+.card-alt {
+    background: var(--gradient-alt);
+    color: #fff;
 }
 
 body,
@@ -144,7 +195,6 @@ a {
 }
 a:hover {
     color: var(--bs-link-hover-color);
-    text-decoration: underline;
 }
 
 * {

@@ -1,11 +1,28 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from app.routers import categorias , usuarios , auth
+from scalar_fastapi import get_scalar_api_reference
 
-app = FastAPI()
+app = FastAPI(
+    title="Cigarreria API",
+    version="1.0.0",
+    docs_url="/docs",   # Swagger
+    redoc_url="/redoc"  # ReDoc
+)
 
-@app.get("/")
-def read_root():
-    return {"message": "¡Hola FastAPI!"}
+# cors
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: str = None):
-    return {"item_id": item_id, "q": q}
+# Rutas
+app.include_router(categorias.router)
+app.include_router(usuarios.router)
+app.include_router(auth.router, tags=["Autenticación"])
+
+# Scalar
+app.add_route("/scalar", get_scalar_api_reference(), include_in_schema=False)
