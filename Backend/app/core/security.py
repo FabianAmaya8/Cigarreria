@@ -13,10 +13,12 @@ from dotenv import load_dotenv
 load_dotenv()
 
 Secret_Key_Env = os.getenv("Secret-Key")
+Time_Env = os.getenv("Tiempo-Token")
+Time_Env = int(Time_Env)
 
 SECRET_KEY = Secret_Key_Env
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
+ACCESS_TOKEN_EXPIRE_MINUTES = Time_Env
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")

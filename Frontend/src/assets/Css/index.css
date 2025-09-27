@@ -69,8 +69,8 @@
     --card-border: #201515;
 
     /* -------------------- SOMBRAS -------------------- */
-    --shadow-1: 0 2px 6px rgba(0,0,0,0.55);
-    --shadow-2: 0 8px 18px rgba(0,0,0,0.6);
+    --shadow-1: 0 2px 6px #0000008c;
+    --shadow-2: 0 2px 6px #ffffff99;
 
     /* -------------------- GRADIENTS -------------------- */
     --gradient-primary: linear-gradient(135deg, var(--rojo-100), var(--rojo-800));
@@ -141,6 +141,9 @@ body,
     width: 100%;
     height: 100vh;
     background: var(--fondo) !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+    background-size: cover !important;
     color: var(--texto);
     font-family: sans-serif;
     display: flex;
@@ -173,6 +176,16 @@ body,
     border-color: var(--btn-secondary-bg-hover) !important;
 }
 
+.btn-outline-primary{
+    color: var(--btn-primary-bg) !important;
+    border-color: var(--btn-primary-bg) !important;
+}
+.btn-outline-primary:hover{
+    background-color: var(--btn-primary-bg-hover) !important;
+    border-color: var(--btn-primary-bg-hover) !important;
+    color: var(--btn-primary-text) !important;
+}
+
 .card {
     background-color: var(--card-bg) !important;
     border: 1px solid var(--card-border) !important;
@@ -201,4 +214,18 @@ a:hover {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+/*----- Cargando -----*/
+.cargando{
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.cargando i{
+    font-size: 150px;
+    color: var(--azul-500);
 }

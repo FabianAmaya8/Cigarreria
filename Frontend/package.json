@@ -17,10 +17,13 @@
     "@toolpad/core": "^0.16.0",
     "bootstrap": "^5.3.8",
     "boxicons": "^2.1.4",
+    "chart.js": "^4.5.0",
     "jwt-decode": "^4.0.0",
+    "ldrs": "^1.1.7",
     "lucide-react": "^0.544.0",
     "react": "^19.1.0",
     "react-bootstrap": "^2.10.10",
+    "react-chartjs-2": "^5.3.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.8.2",
     "sweetalert2": "^11.22.5"

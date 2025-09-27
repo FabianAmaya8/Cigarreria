@@ -74,8 +74,8 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depend
     # Diccionario de redirecciones según rol
     role_redirects = {
         1: "/Administrador",
-        2: "/Moderador",
-        3: "/Inicio"
+        2: "/Estadisticas",
+        3: "/"
     }
     destino = role_redirects.get(user.rol, "/Inicio")
 
@@ -83,7 +83,7 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depend
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
 
     access_token = create_access_token(
-        data={"sub": user.usuario, "rol": user.rol},
+        data={"id": user.id_usuario, "rol": user.rol},
         expires_delta=access_token_expires
     )
 

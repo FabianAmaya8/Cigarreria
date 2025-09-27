@@ -8,6 +8,7 @@ import './assets/Css/index.css';
 // Estilos librerias 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'boxicons/css/boxicons.min.css';
+import 'ldrs/react/Hourglass.css'
 
 import router from './router.jsx';
 import { AuthProvider } from './Pages/Context/AuthContext.jsx';

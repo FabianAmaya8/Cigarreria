@@ -6,7 +6,7 @@ CREATE DATABASE Cigarreria_JJ;
 USE Cigarreria_JJ;
 
 -- =======================================
--- TABLAS DE CATALOGO
+-- TABLAS DE CATÁLOGO
 -- =======================================
 
 CREATE TABLE categorias (
@@ -18,7 +18,9 @@ CREATE TABLE categorias (
 CREATE TABLE marcas (
     id_marca INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
-    descripcion TEXT
+    descripcion TEXT,
+    id_categoria INT,
+    FOREIGN KEY (id_categoria) REFERENCES categorias(id_categoria)
 );
 
 CREATE TABLE productos (
@@ -27,7 +29,6 @@ CREATE TABLE productos (
     nombre VARCHAR(150) NOT NULL,
     imagen VARCHAR(255),
     descripcion TEXT,
-    id_categoria INT,
     id_marca INT,
     precio_compra DECIMAL(12,2) NOT NULL,
     precio_venta DECIMAL(12,2) NOT NULL,
@@ -35,8 +36,28 @@ CREATE TABLE productos (
     stock_minimo INT DEFAULT 0,
     unidad_medida VARCHAR(50),
     activo BOOLEAN DEFAULT TRUE,
-    FOREIGN KEY (id_categoria) REFERENCES categorias(id_categoria),
     FOREIGN KEY (id_marca) REFERENCES marcas(id_marca)
+);
+
+-- =======================================
+-- ROLES Y USUARIOS
+-- =======================================
+
+CREATE TABLE roles (
+    id_rol INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_rol VARCHAR(50)
+);
+
+CREATE TABLE usuarios (
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    usuario VARCHAR(50) UNIQUE NOT NULL,
+    contrasena VARCHAR(255) NOT NULL,
+    correo VARCHAR(100) UNIQUE NOT NULL,
+    imagen VARCHAR(255),
+    rol INT,
+    activo BOOLEAN DEFAULT TRUE,
+    FOREIGN KEY (rol) REFERENCES roles(id_rol)
 );
 
 -- =======================================
@@ -74,6 +95,16 @@ CREATE TABLE proveedores (
     pais VARCHAR(100)
 );
 
+-- Relación muchos a muchos proveedores-productos
+CREATE TABLE proveedores_productos (
+    id_proveedor INT,
+    id_producto INT,
+    precio_sugerido DECIMAL(12,2),
+    PRIMARY KEY (id_proveedor, id_producto),
+    FOREIGN KEY (id_proveedor) REFERENCES proveedores(id_proveedor),
+    FOREIGN KEY (id_producto) REFERENCES productos(id_producto)
+);
+
 CREATE TABLE compras (
     id_compra INT AUTO_INCREMENT PRIMARY KEY,
     id_proveedor INT,
@@ -96,18 +127,8 @@ CREATE TABLE detalle_compra (
 );
 
 -- =======================================
--- CLIENTES Y VENTAS
+-- CAJAS Y VENTAS
 -- =======================================
-
-CREATE TABLE clientes (
-    id_cliente INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(150) NOT NULL,
-    tipo_documento VARCHAR(20),
-    numero_documento VARCHAR(50),
-    telefono VARCHAR(50),
-    correo VARCHAR(100),
-    direccion VARCHAR(150)
-);
 
 CREATE TABLE cajas (
     id_caja INT AUTO_INCREMENT PRIMARY KEY,
@@ -119,13 +140,13 @@ CREATE TABLE cajas (
 
 CREATE TABLE ventas (
     id_venta INT AUTO_INCREMENT PRIMARY KEY,
-    id_cliente INT,
+    id_usuario INT,
     id_caja INT,
     fecha_venta TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     total DECIMAL(12,2),
-    estado ENUM('pendiente','pagada','cancelada'),
+    estado ENUM('pendiente','pagada','cancelada','fiada'),
     observaciones TEXT,
-    FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente),
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
     FOREIGN KEY (id_caja) REFERENCES cajas(id_caja)
 );
 
@@ -137,6 +158,46 @@ CREATE TABLE detalle_venta (
     precio_unitario DECIMAL(12,2) NOT NULL,
     subtotal DECIMAL(12,2) AS (cantidad * precio_unitario) STORED,
     FOREIGN KEY (id_venta) REFERENCES ventas(id_venta) ON DELETE CASCADE,
+    FOREIGN KEY (id_producto) REFERENCES productos(id_producto)
+);
+
+-- Métodos de pago y pagos asociados a ventas
+CREATE TABLE metodos_pago (
+    id_metodo INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE pagos_venta (
+    id_pago INT AUTO_INCREMENT PRIMARY KEY,
+    id_venta INT,
+    id_metodo INT,
+    monto DECIMAL(12,2),
+    FOREIGN KEY (id_venta) REFERENCES ventas(id_venta) ON DELETE CASCADE,
+    FOREIGN KEY (id_metodo) REFERENCES metodos_pago(id_metodo)
+);
+
+-- =======================================
+-- DEUDAS (clientes = usuarios con rol Usuario)
+-- =======================================
+
+CREATE TABLE deudas (
+    id_deuda INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT,
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    total DECIMAL(12,2) NOT NULL,
+    estado ENUM('pendiente','pagada','parcial') DEFAULT 'pendiente',
+    observaciones TEXT,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
+);
+
+CREATE TABLE detalle_deuda (
+    id_detalle_deuda INT AUTO_INCREMENT PRIMARY KEY,
+    id_deuda INT,
+    id_producto INT,
+    cantidad INT NOT NULL,
+    precio_unitario DECIMAL(12,2) NOT NULL,
+    subtotal DECIMAL(12,2) AS (cantidad * precio_unitario) STORED,
+    FOREIGN KEY (id_deuda) REFERENCES deudas(id_deuda) ON DELETE CASCADE,
     FOREIGN KEY (id_producto) REFERENCES productos(id_producto)
 );
 
@@ -153,31 +214,16 @@ CREATE TABLE movimientos_inventario (
     id_almacen_destino INT,
     motivo TEXT,
     fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    id_usuario INT,
     FOREIGN KEY (id_producto) REFERENCES productos(id_producto),
     FOREIGN KEY (id_almacen_origen) REFERENCES almacenes(id_almacen),
-    FOREIGN KEY (id_almacen_destino) REFERENCES almacenes(id_almacen)
+    FOREIGN KEY (id_almacen_destino) REFERENCES almacenes(id_almacen),
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
 );
 
 -- =======================================
--- USUARIOS Y LOGS
+-- LOGS
 -- =======================================
-
-CREATE TABLE roles (
-    id_rol INT AUTO_INCREMENT PRIMARY KEY,
-    nombre_rol VARCHAR(50)
-);
-
-CREATE TABLE usuarios (
-    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    usuario VARCHAR(50) UNIQUE NOT NULL,
-    contrasena VARCHAR(255) NOT NULL,
-    correo VARCHAR(100) UNIQUE NOT NULL,
-    imagen VARCHAR(255),
-    rol INT,
-    activo BOOLEAN DEFAULT TRUE,
-    FOREIGN KEY (rol) REFERENCES roles(id_rol)
-);
 
 CREATE TABLE logs (
     id_log INT AUTO_INCREMENT PRIMARY KEY,
@@ -220,16 +266,16 @@ CREATE TABLE arqueos_caja (
 );
 
 -- =======================================
--- INSERCION DE DATOS
+-- INSERCIÓN DE DATOS BÁSICOS
 -- =======================================
 
 INSERT INTO roles (nombre_rol) VALUES
     ('Admin'),
-    ('Moderador'),
-    ('Usuario');
+    ('Vendedor'),
+    ('Cliente');
 
 INSERT INTO almacenes (nombre, activo) VALUES
-    ('Bodega ', true),
+    ('Bodega', true),
     ('Vitrinas', true);
 
 INSERT INTO cajas (nombre, activo) VALUES
@@ -237,3 +283,8 @@ INSERT INTO cajas (nombre, activo) VALUES
     ('Chanse', true),
     ('Recargas', true);
 
+INSERT INTO metodos_pago (nombre) VALUES
+    ('Efectivo'),
+    ('Tarjeta'),
+    ('Daviplata'),
+    ('Nequi');

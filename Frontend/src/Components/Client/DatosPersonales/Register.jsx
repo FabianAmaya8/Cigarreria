@@ -27,6 +27,32 @@ const Register = () => {
             <div className="card w-75 p-3">
                 <h3 className="card-title text-center">Register</h3>
                 <form onSubmit={handleSubmit}>
+                    <div className="mb-3 mt-3">
+                        <label htmlFor="imgProfileInput" className="form-label d-flex justify-content-center w-100" style={{cursor: 'pointer'}}>
+                            {registerForm.fotoPreview ? (
+                                <img
+                                id="imagen"
+                                src={registerForm.fotoPreview}
+                                alt="Profile Picture"
+                                className="rounded-circle border"
+                                style={{width: '150px', height: '150px', objectFit: 'cover'}}
+                                />
+                            ) : (
+                                <div className="d-flex flex-column text-center">
+                                    <i className="bx bx-image-add fs-1"></i> 
+                                    <p>Subir Foto</p>
+                                </div>
+                            )}
+                        </label>
+                        <input
+                            type="file"
+                            className="d-none"
+                            id="imgProfileInput"
+                            name="imagen"
+                            accept="image/*"
+                            onChange={handleFileChange}
+                        />
+                    </div>
                     <div className="mb-3">
                         <label htmlFor="nombre" className="form-label">
                             <i className="bx bx-user"></i> Nombre
@@ -90,32 +116,6 @@ const Register = () => {
                             value={registerForm.confirmPassword}
                             onChange={handleChange}
                             required
-                        />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="imgProfileInput" className="form-label d-flex justify-content-center w-100" style={{cursor: 'pointer'}}>
-                            {registerForm.fotoPreview ? (
-                                <img
-                                id="imagen"
-                                src={registerForm.fotoPreview}
-                                alt="Profile Picture"
-                                className="rounded-circle border"
-                                style={{width: '150px', height: '150px', objectFit: 'cover'}}
-                                />
-                            ) : (
-                                <div className="d-flex flex-column text-center">
-                                    <i className="bx bx-image-add fs-1"></i> 
-                                    <p>Subir Foto</p>
-                                </div>
-                            )}
-                        </label>
-                        <input
-                            type="file"
-                            className="d-none"
-                            id="imgProfileInput"
-                            name="imagen"
-                            accept="image/*"
-                            onChange={handleFileChange}
                         />
                     </div>
                     <div className="d-grid">

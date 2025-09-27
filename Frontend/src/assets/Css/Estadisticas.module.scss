@@ -1,0 +1,74 @@
+.estadisticas {
+    h2, h3 {
+        color: var(--texto);
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Contenedor de gráficos */
+    .chartContainer {
+        width: 95%;
+        border: var(--border-width) solid var(--card-border);
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-1);
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        transition: var(--transition-fast);
+
+        &:hover {
+            box-shadow: var(--shadow-2);
+        }
+    }
+
+    /* Tabla personalizada */
+    .tableContainer {
+        background: var(--card-bg);
+        border: var(--border-width) solid var(--card-border);
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-1);
+        padding: 1rem;
+        margin-top: 2rem;
+
+        table {
+            color: var(--texto-sec);
+
+            thead {
+                background: var(--azul-800);
+                color: var(--texto);
+                border-radius: var(--radius-sm);
+            }
+
+            tbody tr {
+                transition: var(--transition-fast);
+
+                &:hover {
+                    background: var(--glass);
+                }
+            }
+
+            td, th {
+                vertical-align: middle;
+            }
+        }
+    }
+
+    /* Badges de stock */
+    .badge-success {
+        background: var(--success) !important;
+        color: #fff;
+        font-weight: 500;
+    }
+
+    .badge-danger {
+        background: var(--danger) !important;
+        color: #fff;
+        font-weight: 500;
+    }
+
+    .badge-secondary {
+        background: var(--azul-600) !important;
+        color: #fff;
+        font-weight: 500;
+    }
+}

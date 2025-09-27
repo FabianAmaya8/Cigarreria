@@ -1,0 +1,74 @@
+[
+    {
+        "ruta": "/",
+        "texto": "Inicio",
+        "icon": "bx bx-home",
+        "roles": "all",
+        "auth": "any",
+        "descripcion": "Página principal de la aplicación",
+        "tarea": true
+    },
+    {
+        "ruta": "/Administrador",
+        "texto": "Administrador",
+        "icon": "bx bxs-binoculars",
+        "roles": [1],
+        "auth": true,
+        "descripcion": "Panel exclusivo para administradores",
+        "tarea": true
+    },
+    {
+        "ruta": "/Estadisticas",
+        "texto": "Estadísticas",
+        "icon": "bx bx-bar-chart-alt-2",
+        "roles": [1, 2],
+        "auth": true,
+        "descripcion": "Panel de estadísticas de ventas y productos",
+        "tarea": true
+    },
+    {
+        "ruta": "/Productos",
+        "texto": "Productos",
+        "icon": "bx bx-package",
+        "roles": "all",
+        "auth": true,
+        "descripcion": "Explora el catálogo de productos disponibles",
+        "tarea": true
+    },
+    {
+        "ruta": "/Contacto",
+        "texto": "Contacto",
+        "icon": "bx bx-phone",
+        "roles": "all",
+        "auth": true,
+        "descripcion": "Comunícate con nosotros a través de esta sección",
+        "tarea": true
+    },
+    {
+        "ruta": "/logout",
+        "texto": "Cerrar Sesión",
+        "icon": "bx bx-log-out",
+        "roles": "all",
+        "auth": true,
+        "descripcion": "Salir de la aplicación de forma segura",
+        "tarea": false
+    },
+    {
+        "ruta": "/login",
+        "texto": "Login",
+        "icon": "bx bx-user",
+        "roles": "all",
+        "auth": false,
+        "descripcion": "Accede a tu cuenta con tus credenciales",
+        "tarea": true
+    },
+    {
+        "ruta": "/Register",
+        "texto": "Register",
+        "icon": "bx bx-user-plus",
+        "roles": "all",
+        "auth": false,
+        "descripcion": "Crea una nueva cuenta en la aplicación",
+        "tarea": true
+    }
+]

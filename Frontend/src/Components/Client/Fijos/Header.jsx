@@ -2,22 +2,24 @@ import { NavLink } from "react-router-dom";
 import styles from "../../../assets/Css/index.module.scss";
 import { useAuthContext } from "../../../Pages/Context/AuthContext";
 import { useState } from "react";
+import navConfig from "../../../Utils/RutasNav.json";
 
 function Header() {
-    const { isAuthenticated } = useAuthContext();
+    const { isAuthenticated, user } = useAuthContext();
     const [menuOpen, setMenuOpen] = useState(false);
 
-    const navBar = [
-        { ruta: "/", texto: "Home", icon: "bx bx-home" },
-        { ruta: "/Productos", texto: "Productos", icon: "bx bx-package" },
-        { ruta: "/Contacto", texto: "Contacto", icon: "bx bx-phone" },
-        ...(isAuthenticated
-            ? [{ ruta: "/logout", texto: "Cerrar Sesión", icon: "bx bx-log-out" }]
-            : [
-                    { ruta: "/login", texto: "Login", icon: "bx bx-user" },
-                    { ruta: "/Register", texto: "Register", icon: "bx bx-user-plus" },
-            ]),
-    ];
+    // Filtrar según rol y autenticación
+    const navBar = navConfig.filter(item => {
+        const roleOk =
+            item.roles === "all" || (Array.isArray(item.roles) && item.roles.includes(user?.rol));
+
+        const authOk =
+            item.auth === "any" ||
+            (item.auth === true && isAuthenticated) ||
+            (item.auth === false && !isAuthenticated);
+
+        return roleOk && authOk;
+    });
 
     return (
         <header className={styles.Header}>
@@ -28,7 +30,7 @@ function Header() {
                 </NavLink>
 
                 {/* Título siempre visible */}
-                <h2 className={styles["Header-title"]}>Cigarrería JJ</h2>
+                <h1 className={styles["Header-title"]}>Cigarrería JJ</h1>
 
                 {/* Nav SOLO en escritorio */}
                 <nav className={`${styles["Header-nav"]} ${styles["only-desktop"]}`}>
