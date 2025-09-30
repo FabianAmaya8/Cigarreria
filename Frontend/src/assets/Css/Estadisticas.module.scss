@@ -9,6 +9,7 @@
     /* Contenedor de gráficos */
     .chartContainer {
         width: 95%;
+        background: var(--rojo-100);
         border: var(--border-width) solid var(--card-border);
         border-radius: var(--radius-md);
         box-shadow: var(--shadow-1);

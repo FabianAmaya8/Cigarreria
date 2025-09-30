@@ -1,4 +1,5 @@
-import { useAuth } from "../../../Hooks/useAuth";
+import { useState } from "react";
+import { useAuth } from "../../../Hooks/Client/useAuth";
 import styles from "../../../assets/Css/index.module.scss";
 
 const Register = () => {
@@ -10,6 +11,8 @@ const Register = () => {
         handleChange,
         handleFileChange 
     } = useAuth();
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -55,7 +58,7 @@ const Register = () => {
                     </div>
                     <div className="mb-3">
                         <label htmlFor="nombre" className="form-label">
-                            <i className="bx bx-user"></i> Nombre
+                            <i className="bx bx-user"></i> Nombre y Apellido
                         </label>
                         <input
                             type="text"
@@ -68,7 +71,7 @@ const Register = () => {
                     </div>
                     <div className="mb-3">
                         <label htmlFor="usuario" className="form-label">
-                            <i className="bx bx-id-card"></i> Usuario
+                            <i className="bx bx-id-card"></i> Usuario Visible
                         </label>
                         <input
                             type="text"
@@ -92,31 +95,51 @@ const Register = () => {
                             required
                         />
                     </div>
-                    <div className="mb-3">
+                    <div className="mb-3 position-relative">
                         <label htmlFor="contrasena" className="form-label">
                             <i className="bx bx-lock-alt"></i> Contraseña
                         </label>
                         <input
-                            type="password"
+                            type={showPassword ? "text" : "password"}
                             className="form-control"
                             id="contrasena"
                             value={registerForm.contrasena}
                             onChange={handleChange}
                             required
                         />
+                        <i 
+                            className={`bx ${showPassword ? 'bxs-show' : 'bxs-hide'}`}
+                            style={{
+                                position: 'absolute',
+                                right: '10px',
+                                top: '38px',
+                                cursor: 'pointer'
+                            }}
+                            onClick={() => setShowPassword(!showPassword)}
+                        ></i>
                     </div>
-                    <div className="mb-3">
+                    <div className="mb-3 position-relative">
                         <label htmlFor="confirmPassword" className="form-label">
                             <i className="bx bx-lock-alt"></i> Confirmar Contraseña
                         </label>
                         <input
-                            type="password"
+                            type={showConfirmPassword ? "text" : "password"}
                             className="form-control"
                             id="confirmPassword"
                             value={registerForm.confirmPassword}
                             onChange={handleChange}
                             required
                         />
+                        <i 
+                            className={`bx ${showConfirmPassword ? 'bxs-show' : 'bxs-hide'}`}
+                            style={{
+                                position: 'absolute',
+                                right: '10px',
+                                top: '38px',
+                                cursor: 'pointer'
+                            }}
+                            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                        ></i>
                     </div>
                     <div className="d-grid">
                         <button type="submit" className="btn btn-primary" disabled={loading}>

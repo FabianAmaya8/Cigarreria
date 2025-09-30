@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers import categorias , usuarios , auth , estadisticas
+from app.routers import categorias , usuarios , auth , estadisticas , deudas
 from scalar_fastapi import get_scalar_api_reference
 
 app = FastAPI(
@@ -23,6 +23,7 @@ app.add_middleware(
 app.include_router(categorias.router)
 app.include_router(usuarios.router)
 app.include_router(estadisticas.router)
+app.include_router(deudas.router)
 app.include_router(auth.router, tags=["Autenticación"])
 
 # Scalar

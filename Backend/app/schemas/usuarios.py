@@ -18,6 +18,9 @@ class UsuarioUpdate(BaseModel):
     rol: Optional[int] = None
     activo: Optional[bool] = None
 
+class UsuarioImagenResponse(BaseModel):
+    imagen: str | None   # Puede ser None si no hay imagen
+
 class UsuarioOut(UsuarioBase):
     id_usuario: int
 

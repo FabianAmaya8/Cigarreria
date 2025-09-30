@@ -6,7 +6,8 @@
         "roles": "all",
         "auth": "any",
         "descripcion": "Página principal de la aplicación",
-        "tarea": true
+        "tarea": false,
+        "navBar": true
     },
     {
         "ruta": "/Administrador",
@@ -15,7 +16,8 @@
         "roles": [1],
         "auth": true,
         "descripcion": "Panel exclusivo para administradores",
-        "tarea": true
+        "tarea": true,
+        "navBar": true
     },
     {
         "ruta": "/Estadisticas",
@@ -24,25 +26,18 @@
         "roles": [1, 2],
         "auth": true,
         "descripcion": "Panel de estadísticas de ventas y productos",
-        "tarea": true
+        "tarea": true,
+        "navBar": true
     },
     {
-        "ruta": "/Productos",
-        "texto": "Productos",
-        "icon": "bx bx-package",
+        "ruta": "/Deudas",
+        "texto": "Deudas",
+        "icon": "bx bx-money",
         "roles": "all",
         "auth": true,
-        "descripcion": "Explora el catálogo de productos disponibles",
-        "tarea": true
-    },
-    {
-        "ruta": "/Contacto",
-        "texto": "Contacto",
-        "icon": "bx bx-phone",
-        "roles": "all",
-        "auth": true,
-        "descripcion": "Comunícate con nosotros a través de esta sección",
-        "tarea": true
+        "descripcion": "Panel de deudas pendientes",
+        "tarea": true,
+        "navBar": false
     },
     {
         "ruta": "/logout",
@@ -51,7 +46,8 @@
         "roles": "all",
         "auth": true,
         "descripcion": "Salir de la aplicación de forma segura",
-        "tarea": false
+        "tarea": false,
+        "navBar": true
     },
     {
         "ruta": "/login",
@@ -60,7 +56,8 @@
         "roles": "all",
         "auth": false,
         "descripcion": "Accede a tu cuenta con tus credenciales",
-        "tarea": true
+        "tarea": false,
+        "navBar": true
     },
     {
         "ruta": "/Register",
@@ -69,6 +66,7 @@
         "roles": "all",
         "auth": false,
         "descripcion": "Crea una nueva cuenta en la aplicación",
-        "tarea": true
+        "tarea": false,
+        "navBar": true
     }
 ]

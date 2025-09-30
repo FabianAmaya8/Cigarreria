@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.database import get_db
 from app.models.usuarios import Usuario
-from app.schemas.usuarios import UsuarioCreate, UsuarioUpdate, UsuarioOut
+from app.schemas.usuarios import UsuarioCreate, UsuarioUpdate, UsuarioOut, UsuarioImagenResponse
 from typing import List
 from app.utils.security import hash_password
 
@@ -75,3 +75,10 @@ def delete_usuario(usuario_id: int, db: Session = Depends(get_db)):
     db.delete(usuario)
     db.commit()
     return {"detail": "Usuario eliminado correctamente"}
+
+@router.get("/imagen/{id_usuario}", response_model=UsuarioImagenResponse)
+def get_usuario_imagen(id_usuario: int, db: Session = Depends(get_db)):
+    usuario = db.query(Usuario).filter(Usuario.id_usuario == id_usuario).first()
+    if not usuario:
+        raise HTTPException(status_code=404, detail="Usuario no encontrado")
+    return usuario

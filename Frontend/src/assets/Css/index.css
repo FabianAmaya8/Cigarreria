@@ -2,7 +2,7 @@
     /* -------------------- BASE / SUPERFICIES -------------------- */
     --fondo: linear-gradient(var(--rojo-900) 0%, var(--azul-900) 100%);
     --fondo-elevado: #121012;
-    --superficie: #151214;
+    --superficie: #372525;
     --glass: #ffffff05;
 
     /* -------------------- PALETA ROJOS (principal) -------------------- */
@@ -228,4 +228,22 @@ a:hover {
 .cargando i{
     font-size: 150px;
     color: var(--azul-500);
+}
+
+.volver{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+
+    button{
+        border-radius: var(--radius-md);
+        padding: 5px 10px;
+        background-color: var(--btn-terciario-bg);
+        border: none;
+        color: var(--btn-terciario-text);
+        cursor: pointer;
+    }
+    button:hover{
+        background-color: var(--btn-terciario-bg-hover);
+    }
 }

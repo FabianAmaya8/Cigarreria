@@ -17,10 +17,7 @@ export default function Inicio() {
                 (item.auth === true && isAuthenticated) ||
                 (item.auth === false && !isAuthenticated);
 
-            const tareaOk =
-                item.tarea === "any" ||
-                (item.tarea === true && isAuthenticated) ||
-                (item.tarea === false && !isAuthenticated);
+            const tareaOk = item.tarea === true;
     
             return roleOk && authOk && tareaOk;
         });

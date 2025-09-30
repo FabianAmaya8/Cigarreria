@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { urlDB } from "../urlDB";
+import { urlDB } from "../../urlDB";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "../Pages/Context/AuthContext";
+import { useAuthContext } from "../../Pages/Context/AuthContext";
 
 export function useAuth() {
     const [loading, setLoading] = useState(false);

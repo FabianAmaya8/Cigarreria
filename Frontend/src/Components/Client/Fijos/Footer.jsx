@@ -1,7 +1,7 @@
 import { useAuthContext } from "../../../Pages/Context/AuthContext";
 import { Hourglass } from 'ldrs/react'
 import { CalendarClock } from 'lucide-react';
-import useContador from "../../../Hooks/Contador";
+import useContador from "../../../Hooks/Client/Contador";
 import styles from "../../../assets/Css/index.module.scss";
 
 function Footer() {

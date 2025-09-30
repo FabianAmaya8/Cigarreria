@@ -1,8 +1,10 @@
-import { useAuth } from "../../../Hooks/useAuth";
+import { useState } from "react";
+import { useAuth } from "../../../Hooks/Client/useAuth";
 import styles from "../../../assets/Css/index.module.scss";
 
 const Login = () => {
     const { login, loading, error, loginForm, handleLoginChange } = useAuth();
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -33,14 +35,27 @@ const Login = () => {
                         <label htmlFor="password" className="form-label">
                             <i className="bx bx-lock-alt"></i> Contraseña
                         </label>
-                        <input
-                            type="password"
-                            className="form-control"
-                            id="password"
-                            value={loginForm.password}
-                            onChange={handleLoginChange}
-                            required
-                        />
+                        <div className="input-group">
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                className="form-control"
+                                id="password"
+                                value={loginForm.password}
+                                onChange={handleLoginChange}
+                                required
+                            />
+                            <button
+                                className="btn btn-outline-secondary"
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                            >
+                                <i
+                                    className={`bx ${
+                                        showPassword ? "bx-hide" : "bx-show"
+                                    }`}
+                                ></i>
+                            </button>
+                        </div>
                     </div>
                     <div className="d-grid">
                         <button type="submit" className="btn btn-primary" disabled={loading}>
@@ -52,5 +67,6 @@ const Login = () => {
         </main>
     );
 };
+
 
 export default Login;
