@@ -81,7 +81,7 @@
     --radius-md: 10px;
     --radius-lg: 16px;
     --border-width: 1px;
-    --transition-fast: 0.3s ease;
+    --transition-fast: 0.5s ease;
 
     /* -------------------- STATUS COLORS -------------------- */
     --success: #27ae60;

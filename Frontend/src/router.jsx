@@ -17,6 +17,8 @@ import Deudas from "./Components/Client/Tareas/Deudas";
 import ListaDeudas from "./Components/Vendedor/Deudas/ListaDeudas";
 import DetallesDeuda from "./Components/Vendedor/Deudas/DetallesDeuda";
 import CrearDeuda from "./Components/Vendedor/Deudas/CrearDeuda";
+import Catalogo from "./Components/Client/Tareas/Catalogo";
+import Personal from "./Components/Client/Personal/personal";
 
 const router = createBrowserRouter([
     {
@@ -32,11 +34,10 @@ const router = createBrowserRouter([
     {
         element: <LayoutPrivado requiredRole={3} />,
         children: [
-            { path: "/Productos", element: <h1>Productos</h1>, },
-            { path: "/Contacto", element: <h1>Contacto</h1>, },
             { path: "/Deudas", element: <Deudas/>, },
             { path: "/Detallesdeuda/:id", element: <DetallesDeuda />, },
-            { path: "/Personal", element: <h1>Personal</h1>, },
+            { path: "/Catalogo", element: <Catalogo />, },
+            { path: "/Personal", element: <Personal />, },
         ],
     },
     {

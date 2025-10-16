@@ -10,6 +10,46 @@
         "navBar": true
     },
     {
+        "ruta": "/Deudas",
+        "texto": "Deudas",
+        "icon": "bx bx-money",
+        "roles": [1, 2],
+        "auth": true,
+        "descripcion": "Panel de deudas pendientes",
+        "tarea": true,
+        "navBar": false
+    },
+    {
+        "ruta": "/Deudas",
+        "texto": "Deudas",
+        "icon": "bx bx-money",
+        "roles": [3],
+        "auth": true,
+        "descripcion": "Panel de deudas pendientes",
+        "tarea": true,
+        "navBar": true
+    },
+    {
+        "ruta": "/Catalogo",
+        "texto": "Catalogo",
+        "icon": "bx bx-store",
+        "roles": [3],
+        "auth": true,
+        "descripcion": "Panel de productos",
+        "tarea": true,
+        "navBar": true
+    },
+    {
+        "ruta": "/Catalogo",
+        "texto": "Catalogo",
+        "icon": "bx bx-store",
+        "roles": [1, 2],
+        "auth": true,
+        "descripcion": "Panel de productos",
+        "tarea": true,
+        "navBar": false
+    },
+    {
         "ruta": "/Administrador",
         "texto": "Administrador",
         "icon": "bx bxs-binoculars",
@@ -28,16 +68,6 @@
         "descripcion": "Panel de estadísticas de ventas y productos",
         "tarea": true,
         "navBar": true
-    },
-    {
-        "ruta": "/Deudas",
-        "texto": "Deudas",
-        "icon": "bx bx-money",
-        "roles": "all",
-        "auth": true,
-        "descripcion": "Panel de deudas pendientes",
-        "tarea": true,
-        "navBar": false
     },
     {
         "ruta": "/logout",

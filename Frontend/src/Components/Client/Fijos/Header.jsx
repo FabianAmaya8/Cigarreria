@@ -97,7 +97,11 @@ function Header() {
                         ))}
                     </ul>
                     {isAuthenticated ? (
-                        <NavLink to="/Personal" className={`${styles["HeaderUser"]} ${styles["Overlay-logo"]}`}>
+                        <NavLink 
+                            to="/Personal" 
+                            className={`${styles["HeaderUser"]} ${styles["Overlay-logo"]}`}
+                            onClick={() => setMenuOpen(false)}
+                        >
                             {loading ? (<Hourglass size={80} color="var(--texto)" />) : 
                             imagen ? (
                                 <img src={imagen} alt="Imagen de Perfil" />

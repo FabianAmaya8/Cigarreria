@@ -45,28 +45,39 @@ export default function ListaDeudas() {
 
             {/* Filtros */}
             <div className={`${stylesDeuda.Item} ${stylesDeuda.Filtros}`}>
-                <input
-                    type="text"
-                    placeholder="Buscar por nombre o usuario..."
-                    value={filtroBusqueda}
-                    onChange={(e) => setFiltroBusqueda(e.target.value)}
-                />
-                <select
-                    value={filtroEstado}
-                    onChange={(e) => setFiltroEstado(e.target.value)}
-                >
-                    <option value="">Todos los estados</option>
-                    <option value="pendiente">Pendiente</option>
-                    <option value="parcial">Parcial</option>
-                    <option value="pagada">Pagada</option>
-                </select>
-                <select
-                    value={ordenFecha}
-                    onChange={(e) => setOrdenFecha(e.target.value)}
-                >
-                    <option value="desc">Más recientes</option>
-                    <option value="asc">Más antiguas</option>
-                </select>
+                <label>
+                    Buscar
+                    <input
+                        type="text"
+                        placeholder="Buscar por nombre o usuario..."
+                        value={filtroBusqueda}
+                        onChange={(e) => setFiltroBusqueda(e.target.value)}
+                    />
+                </label>
+
+                <label>
+                    Estado
+                    <select
+                        value={filtroEstado}
+                        onChange={(e) => setFiltroEstado(e.target.value)}
+                    >
+                        <option value="">Todos los estados</option>
+                        <option value="pendiente">Pendiente</option>
+                        <option value="parcial">Parcial</option>
+                        <option value="pagada">Pagada</option>
+                    </select>
+                </label>
+
+                <label>
+                    Ordenar por fecha
+                    <select
+                        value={ordenFecha}
+                        onChange={(e) => setOrdenFecha(e.target.value)}
+                    >
+                        <option value="desc">Más recientes</option>
+                        <option value="asc">Más antiguas</option>
+                    </select>
+                </label>
             </div>
 
             {/* Lista de deudas */}

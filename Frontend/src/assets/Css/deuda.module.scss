@@ -175,28 +175,37 @@
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-    align-items: center;
     margin-bottom: 1.5rem;
     padding: 1rem;
     background: var(--superficie);
     border-radius: 12px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 
-    input,
-    select {
+    label {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
         flex: 1;
         min-width: 200px;
-        padding: 0.6rem 1rem;
-        border: 1px solid var(--glass);
-        border-radius: 8px;
-        background-color: #fff;
-        font-size: 0.95rem;
-        transition: all 0.2s ease-in-out;
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--texto-sec);
+        text-transform: capitalize;
 
-        &:focus {
-            outline: none;
-            border-color: var(--rojo-500);
-            box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.2);
+        input,
+        select {
+            padding: 0.6rem 1rem;
+            border: 1px solid var(--glass);
+            border-radius: 8px;
+            background-color: #fff;
+            font-size: 0.95rem;
+            transition: all 0.2s ease-in-out;
+
+            &:focus {
+                outline: none;
+                border-color: var(--rojo-500);
+                box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.2);
+            }
         }
     }
 }
