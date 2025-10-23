@@ -1,40 +1,30 @@
 import styles from "../../../assets/Css/index.module.scss";
 import stylesDeuda from "../../../assets/Css/deuda.module.scss";
 import { Hourglass } from "ldrs/react";
-import { useNavigate, useParams } from "react-router-dom";
 import useDetallesDeudas from "../../../Hooks/Vendedor/Deudas/useDetallesDeudas";
+import { Loading, Error } from "../../../Utils/Cargando";
 
 export default function DetallesDeuda() {
-    const navigate = useNavigate();
     const { id } = useParams();
     const { data: deuda, isLoading, error } = useDetallesDeudas(id);
 
+    const msgError = error?.response?.status === 403
+                        ? "No autorizado para ver esta deuda"
+                        : "Ocurrió un error al cargar los detalles"
+
     return (
         <main className={`${styles.Container} ${stylesDeuda.Container}`}>
-            {/* Botón volver */}
-            <div className="volver">
-                <button onClick={() => navigate(-1)}>
-                    <i className="bx bx-arrow-back"></i>
-                    Volver
-                </button>
-            </div>
 
             <h2>Detalles de deuda</h2>
 
             {/* Cargando */}
             {isLoading && (
-                <h2 className="cargando">
-                    <Hourglass size="150" color="var(--rojo-500)" />
-                </h2>
+                <Loading />
             )}
 
             {/* Error */}
             {error && (
-                <h2 className="cargando">
-                    {error?.response?.status === 403
-                        ? "No autorizado para ver esta deuda"
-                        : "Ocurrió un error al cargar los detalles"}
-                </h2>
+                <Error msg={msgError} errorCode={error} />
             )}
 
             {/* Información de deuda */}

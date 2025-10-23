@@ -10,6 +10,26 @@
         "navBar": true
     },
     {
+        "ruta": "/GestionInventario",
+        "texto": "Gestión de Inventario",
+        "icon": "bx bxs-cog",
+        "roles": [1, 2],
+        "auth": true,
+        "descripcion": "Panel de gestión de inventario como productos, categorías y marcas",
+        "tarea": true,
+        "navBar": false
+    },
+    {
+        "ruta": "/Catalogo",
+        "texto": "Catalogo",
+        "icon": "bx bx-store",
+        "roles": "all",
+        "auth": true,
+        "descripcion": "Panel de productos",
+        "tarea": true,
+        "navBar": true
+    },
+    {
         "ruta": "/Deudas",
         "texto": "Deudas",
         "icon": "bx bx-money",
@@ -26,36 +46,6 @@
         "roles": [3],
         "auth": true,
         "descripcion": "Panel de deudas pendientes",
-        "tarea": true,
-        "navBar": true
-    },
-    {
-        "ruta": "/Catalogo",
-        "texto": "Catalogo",
-        "icon": "bx bx-store",
-        "roles": [3],
-        "auth": true,
-        "descripcion": "Panel de productos",
-        "tarea": true,
-        "navBar": true
-    },
-    {
-        "ruta": "/Catalogo",
-        "texto": "Catalogo",
-        "icon": "bx bx-store",
-        "roles": [1, 2],
-        "auth": true,
-        "descripcion": "Panel de productos",
-        "tarea": true,
-        "navBar": false
-    },
-    {
-        "ruta": "/Administrador",
-        "texto": "Administrador",
-        "icon": "bx bxs-binoculars",
-        "roles": [1],
-        "auth": true,
-        "descripcion": "Panel exclusivo para administradores",
         "tarea": true,
         "navBar": true
     },
@@ -68,6 +58,16 @@
         "descripcion": "Panel de estadísticas de ventas y productos",
         "tarea": true,
         "navBar": true
+    },
+    {
+        "ruta": "/Administrador",
+        "texto": "Administrador",
+        "icon": "bx bxs-binoculars",
+        "roles": [1],
+        "auth": true,
+        "descripcion": "Panel exclusivo para administradores",
+        "tarea": true,
+        "navBar": false
     },
     {
         "ruta": "/logout",

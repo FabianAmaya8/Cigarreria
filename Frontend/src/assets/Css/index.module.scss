@@ -5,6 +5,9 @@
     justify-content: center;
     align-items: center;
     padding: 10px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .Header-container {
@@ -152,7 +155,7 @@
     gap: 40px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 850px) {
     .only-desktop {
         display: none;
     }
@@ -224,7 +227,7 @@
 }
 
 /* RESPONSIVE FOOTER */
-@media (max-width: 600px) {
+@media (max-width: 850px) {
     .Footer-container {
         flex-direction: column;
         text-align: center;

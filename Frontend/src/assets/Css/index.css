@@ -139,7 +139,8 @@
 body,
 #root {
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
+    height: auto;
     background: var(--fondo) !important;
     background-repeat: no-repeat !important;
     background-attachment: fixed !important;
@@ -154,6 +155,7 @@ body,
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    position: relative;
 }
 
 /* Ajustes para que Bootstrap use tus colores */
@@ -230,14 +232,20 @@ a:hover {
     color: var(--azul-500);
 }
 
+main{
+    width: 90% !important;
+}
+
+
 .volver{
     position: absolute;
-    top: 0px;
-    left: 0px;
+    top: 120px;
+    left: 20px;
+    z-index: 100;
 
     button{
         border-radius: var(--radius-md);
-        padding: 5px 10px;
+        padding: 10px;
         background-color: var(--btn-terciario-bg);
         border: none;
         color: var(--btn-terciario-text);
@@ -245,5 +253,18 @@ a:hover {
     }
     button:hover{
         background-color: var(--btn-terciario-bg-hover);
+    }
+}
+
+/* media queries */
+@media (max-width: 768px) {
+    main{
+        width: 95% !important;
+    }
+    main > h2{
+        margin-top: 2rem;
+    }
+    .volver{
+        top: 90px;
     }
 }

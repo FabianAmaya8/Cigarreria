@@ -172,6 +172,8 @@
 }
 
 .Filtros {
+    position: sticky;
+    top: 2rem;
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
@@ -268,13 +270,12 @@
 
 
 /* media queries */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 850px) {
     .Container {
         grid-template-columns: 1fr;
         gap: 1rem;
 
         h2 {
-            margin-top: 3rem;
             grid-column: span 1 / span 1;
         }
     }
@@ -284,5 +285,8 @@
     .Imagen{
         width: 80px;
         height: 80px;
+    }
+    .Filtros{
+        position: static;
     }
 }

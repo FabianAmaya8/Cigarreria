@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.routers import (
-    categorias , usuarios , auth , estadisticas , 
+    usuarios , auth , estadisticas , 
     deudas , ventas , productos , usuario_personal
 )
 from scalar_fastapi import get_scalar_api_reference
@@ -23,7 +23,6 @@ app.add_middleware(
 )
 
 # Rutas
-app.include_router(categorias.router)
 app.include_router(usuarios.router)
 app.include_router(estadisticas.router)
 app.include_router(deudas.router)

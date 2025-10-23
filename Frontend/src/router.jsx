@@ -19,6 +19,10 @@ import DetallesDeuda from "./Components/Vendedor/Deudas/DetallesDeuda";
 import CrearDeuda from "./Components/Vendedor/Deudas/CrearDeuda";
 import Catalogo from "./Components/Client/Tareas/Catalogo";
 import Personal from "./Components/Client/Personal/personal";
+import GestionInventario from "./Components/Vendedor/GestionInventario/GestionInventario";
+import ProductosView from "./Components/Vendedor/GestionInventario/CRUDsProductos/Productos";
+import MarcasView from "./Components/Vendedor/GestionInventario/CrudMarcas/MarcasView";
+import CategoriasView from "./Components/Vendedor/GestionInventario/CrudCategorias/CategoriasView";
 
 const router = createBrowserRouter([
     {
@@ -47,6 +51,12 @@ const router = createBrowserRouter([
             { path: "/ListaDeudas", element: <ListaDeudas />, },
             { path: "/CrearDeuda", element: <CrearDeuda />, },
             { path: "/EditarDeuda", element: <ListaDeudas />, },
+
+            // Gestion de Inventario
+            { path: "/GestionInventario", element: <GestionInventario />, },
+            { path: "/Gestion/Productos", element: <ProductosView />, },
+            { path: "/Gestion/Marcas", element: <MarcasView />,},
+            { path: "/Gestion/Categorias", element: <CategoriasView />,},
         ],
     },
     {

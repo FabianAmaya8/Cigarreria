@@ -71,3 +71,13 @@
     display: flex;
     justify-content: space-between;
 }
+.ProductoInactivo{
+    color: var(--rojo-300);
+    font-weight: bold;
+    text-align: center;
+}
+
+.FiltroActivo{
+    border-top: 1px solid var(--texto-sec);
+    padding-top: 1rem;
+}

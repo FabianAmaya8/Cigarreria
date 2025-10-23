@@ -1,0 +1,484 @@
+.Contenedor {
+    gap: 2rem;
+    color: var(--texto);
+}
+
+/* ================================
+    SECCIÓN TABLA PRODUCTOS
+   ================================ */
+
+.TablaSection {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background: var(--card-bg);
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    box-shadow: var(--shadow-1);
+    border: 1px solid var(--card-border);
+    overflow-x: auto;
+
+    h2 {
+        color: var(--texto);
+        font-size: 1.4rem;
+        font-weight: 600;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        color: var(--texto-sec);
+
+        thead {
+            color: var(--texto);
+        }
+
+        th, td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--card-border);
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        th {
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        tbody tr {
+            transition: var(--transition-fast);
+
+            &:hover {
+                background: var(--glass);
+                cursor: pointer;
+            }
+        }
+
+        button {
+            padding: 5px 10px;
+            border-radius: var(--radius-sm);
+        }
+    }
+}
+
+/* Imagen dentro de la tabla */
+.ImagenProducto {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    background: var(--fondo-elevado);
+    box-shadow: var(--shadow-2);
+}
+
+/* ================================
+    HEADER TABLA
+   ================================ */
+.Header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    button {
+        background-color: var(--btn-primary-bg);
+        border: none;
+        color: var(--btn-primary-text);
+        padding: 0.5rem 1rem;
+        border-radius: var(--radius-sm);
+        cursor: pointer;
+        font-weight: 500;
+        transition: var(--transition-fast);
+        box-shadow: var(--shadow-1);
+
+        &:hover {
+            background-color: var(--btn-primary-bg-hover);
+        }
+
+        &:active {
+            background-color: var(--btn-primary-bg-active);
+        }
+    }
+}
+
+/* ================================
+    PAGINACIÓN
+   ================================ */
+.Paginacion {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--texto-sec);
+    gap: 1rem;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--texto-sec);
+    padding-top: 1rem;
+
+    button {
+        border-radius: var(--radius-sm);
+        padding: 0.4rem 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: var(--transition-fast);
+
+        &.btn-secondary {
+            background-color: var(--btn-secondary-bg);
+            border: 1px solid var(--btn-secondary-bg);
+            color: var(--btn-secondary-text);
+
+            &:hover {
+                background-color: var(--btn-secondary-bg-hover);
+            }
+
+            &:disabled {
+                background-color: var(--btn-disabled-bg);
+                color: var(--btn-disabled-text);
+                cursor: not-allowed;
+            }
+        }
+    }
+
+    select {
+        width: 150px;
+        background: var(--input-bg);
+        border: 1px solid var(--input-border);
+        color: var(--input-text);
+        border-radius: var(--radius-sm);
+        padding: 0.4rem 0.6rem;
+
+        &:focus {
+            border-color: var(--input-focus-border);
+        }
+    }
+}
+
+.PaginacionBotones {
+    width: 100%;
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ================================
+    MODAL (ACTUALIZADA)
+   ================================ */
+
+.ModalOverlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.65);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+    overflow-y: auto;
+    padding: 2rem;
+}
+
+.Modal {
+    position: relative;
+    background: var(--fondo-elevado);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-1);
+    color: var(--texto);
+    border: 1px solid var(--card-border);
+    animation: fadeIn 0.3s ease-in-out;
+    padding: 2rem;
+    width: 100%;
+    max-width: 700px;
+    max-height: 90vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+
+    h3 {
+        text-align: center;
+        font-weight: 600;
+    }
+}
+
+.CloseButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    color: var(--texto);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: 0.2s;
+
+    &:hover {
+        color: var(--rojo-400);
+        transform: scale(1.1);
+    }
+}
+
+.ModalContent {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    select {
+        background: var(--input-bg);
+        border: 1px solid var(--input-border);
+        color: var(--input-text);
+        border-radius: var(--radius-sm);
+        padding: 0.4rem 0.6rem;
+
+        &:focus {
+            border-color: var(--input-focus-border);
+        }
+    }
+
+    label {
+        display: flex;
+        flex-direction: column;
+        font-weight: 500;
+        color: var(--texto-sec);
+        font-size: 0.9rem;
+
+        input, textarea {
+            background: var(--input-bg);
+            color: var(--input-text);
+            border: 1px solid var(--input-border);
+            border-radius: var(--radius-sm);
+            padding: 0.6rem;
+            margin-top: 0.4rem;
+            transition: 0.2s;
+
+            &:focus {
+                border-color: var(--rojo-600);
+                box-shadow: 0 0 5px var(--rojo-600);
+            }
+        }
+    }
+}
+.SwitchLabel {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+    cursor: pointer;
+    user-select: none;
+    color: var(--texto-sec);
+
+    input {
+        display: none;
+    }
+
+    .Switch {
+        position: relative;
+        width: 42px;
+        height: 22px;
+        background: var(--azul-600);
+        border-radius: 22px;
+        transition: background var(--transition-fast);
+
+        &::before {
+        content: '';
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 18px;
+        height: 18px;
+        background: var(--texto);
+        border-radius: 50%;
+        transition: transform var(--transition-fast), background var(--transition-fast);
+        }
+    }
+
+    .SwitchText {
+        transition: color var(--transition-fast);
+    }
+
+    /* --- Estado activo --- */
+    input:checked + .Switch {
+        background: var(--rojo-600);
+
+        &::before {
+            transform: translateX(20px);
+        }
+    }
+
+    input:checked ~ .SwitchText {
+        color: var(--success);
+    }
+
+    /* --- Estado inactivo --- */
+    input:not(:checked) ~ .SwitchText {
+        color: var(--danger);
+    }
+
+    input:focus + .Switch {
+        box-shadow: 0 0 4px var(--rojo-600);
+    }
+}
+
+.FilaInputs {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+
+    label {
+        flex: 1;
+    }
+}
+
+.ModalActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+
+    button {
+        padding: 0.5rem 1.2rem;
+        font-weight: 500;
+        border-radius: var(--radius-sm);
+        cursor: pointer;
+        transition: var(--transition-fast);
+        box-shadow: var(--shadow-1);
+
+        &.btn-secondary {
+            background-color: var(--btn-secondary-bg);
+            color: var(--btn-secondary-text);
+            border: none;
+
+            &:hover {
+                background-color: var(--btn-secondary-bg-hover);
+            }
+        }
+
+        &.btn-primary {
+            background-color: var(--btn-primary-bg);
+            color: var(--btn-primary-text);
+            border: none;
+
+            &:hover {
+                background-color: var(--btn-primary-bg-hover);
+            }
+
+            &:active {
+                background-color: var(--btn-primary-bg-active);
+            }
+        }
+    }
+}
+
+.ImagenContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+
+    label {
+        font-weight: 500;
+        color: var(--texto-sec);
+    }
+
+    input[type="file"] {
+        background-color: var(--input-bg);
+        color: var(--input-text);
+        border: 1px solid var(--input-border);
+        border-radius: var(--radius-sm);
+        padding: 0.4rem;
+        cursor: pointer;
+        transition: var(--transition-fast);
+
+        &:hover {
+            border-color: var(--input-focus-border);
+        }
+    }
+}
+
+.ImagenPreview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.5rem;
+
+    img {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--card-border);
+        background: var(--fondo-elevado);
+        box-shadow: var(--shadow-2);
+    }
+
+    i {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 120px;
+        color: var(--azul-200);
+        border-radius: var(--radius-md);
+        border: 1px solid var(--card-border);
+        background: var(--fondo-elevado);
+        box-shadow: var(--shadow-2);
+    }
+}
+
+
+/* ================================
+    Modal ImgGrande
+   ================================ */
+.ImgGrande{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+
+    img{
+        max-width: 90%;
+        max-height: 90%;
+        object-fit: contain;
+    }
+
+    i{
+        font-size: 200px;
+        color: var(--rojo-200);
+    }
+}
+
+
+/* ================================
+    RESPONSIVE
+   ================================ */
+@media (max-width: 768px) {
+    .Modal {
+        width: 95%;
+        padding: 1.5rem;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    .Header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+/* ================================
+    ANIMACIÓN
+   ================================ */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

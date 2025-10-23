@@ -54,13 +54,7 @@ export default function CrearDeuda() {
 
     return (
         <main className={`${styles.Container} ${stylesDeuda.Container}`}>
-            {/* Botón volver */}
-            <div className="volver">
-                <button onClick={() => navigate(-1)} className={stylesDeuda.BotonVolver}>
-                    <i className="bx bx-arrow-back"></i>
-                    Volver
-                </button>
-            </div>
+            
 
             <h2>Crear Deuda</h2>
 

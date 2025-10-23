@@ -1,10 +1,10 @@
 import styles from "../../../assets/Css/index.module.scss";
 import stylesDeuda from "../../../assets/Css/deuda.module.scss";
-import { Hourglass } from 'ldrs/react'
 import { HandCoins, Coins  } from 'lucide-react';
 import { useAuthContext } from "../../../Pages/Context/AuthContext";
 import { NavLink } from "react-router-dom";
 import useDeudasUsuario from "../../../Hooks/Vendedor/Deudas/useDeudasUsuario";
+import { Loading, Error  } from "../../../Utils/Cargando";
 
 export default function Deudas() {
     const { user } = useAuthContext();
@@ -18,6 +18,7 @@ export default function Deudas() {
 
     return (
         <main className={`${styles.Container} ${stylesDeuda.Container}`} >
+            
             <h2>Historial de deudas</h2>
             {user?.rol === 1 || user?.rol === 2 ?
             (
@@ -38,11 +39,9 @@ export default function Deudas() {
             </div>)}
             <div className={stylesDeuda.Item}>
                 {loading ? (
-                    <div className="cargando">
-                        <Hourglass size={80} speed={1} color="var(--azul-500)" />
-                    </div>
+                    <Loading />
                 ) : error ? (
-                    <p>Error: {error.message}</p>
+                    <Error msg={error.message} errorCode={error.status} />
                 ) : Array.isArray(deudaPersonal) ? (
                     <div className={stylesDeuda.Deudas}>
                         {deudaPersonal.map((deuda) => (

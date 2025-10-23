@@ -1,16 +1,17 @@
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Hourglass } from "ldrs/react";
 import { useAuthContext } from "../../../Pages/Context/AuthContext";
 import useInfoPersonal from "../../../Hooks/Client/useInfoPersonal";
 import styles from "../../../assets/Css/index.module.scss";
 import stylesPersonal from "../../../assets/Css/PerfilPersonal.module.scss";
+import { Loading, Error } from "../../../Utils/Cargando";
 
 export default function Personal() {
     const { user } = useAuthContext();
     const {
         perfil,
         isLoadingPerfil,
+        errorPerfil,
         actualizarDatos,
         cambiarPassword,
         actualizarImagen,
@@ -24,9 +25,17 @@ export default function Personal() {
         correo: "",
         usuario: ""
     });
+
     const [passwords, setPasswords] = useState({
         actual: "",
-        nueva: ""
+        nueva: "",
+        confirmar: ""
+    });
+
+    const [showPassword, setShowPassword] = useState({
+        actual: false,
+        nueva: false,
+        confirmar: false
     });
 
     useEffect(() => {
@@ -39,13 +48,9 @@ export default function Personal() {
         }
     }, [perfil]);
 
-    if (isLoadingPerfil) {
-        return (
-            <div className="cargando">
-                <Hourglass size="150" color="var(--rojo-500)" />
-            </div>
-        );
-    }
+    if (isLoadingPerfil) return <Loading />;
+    if (errorPerfil)
+        return <Error msg="Error al cargar el perfil" errorCode={errorPerfil} />;
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -56,13 +61,24 @@ export default function Personal() {
     };
 
     const handlePassword = async () => {
+        if (passwords.nueva !== passwords.confirmar) {
+            alert("Las contraseñas no coinciden");
+            return;
+        }
         await cambiarPassword(passwords);
-        setPasswords({ actual: "", nueva: "" });
+        setPasswords({ actual: "", nueva: "", confirmar: "" });
     };
 
     const handleImagen = async (e) => {
         const file = e.target.files[0];
         if (file) await actualizarImagen(file);
+    };
+
+    const toggleVisibility = (field) => {
+        setShowPassword((prev) => ({
+            ...prev,
+            [field]: !prev[field]
+        }));
     };
 
     return (
@@ -80,19 +96,22 @@ export default function Personal() {
             >
                 <h2 className={stylesPersonal.Title}>Mi Perfil</h2>
 
+                {/* Imagen de perfil */}
                 <section className={stylesPersonal.ImagenSection + " card"}>
-                    {perfil?.imagen === null ?
-                        (
-                            <i className="bx bx-user"></i>
-                        ):
-                        (<motion.img
+                    {perfil?.imagen === null ? (
+                        <i className="bx bx-user"></i>
+                    ) : (
+                        <motion.img
                             src={perfil?.imagen || "/default-user.png"}
                             alt="perfil"
                             className={stylesPersonal.ImagenPerfil}
                             whileHover={{ scale: 1.05 }}
-                        />)
-                    }
-                        <label htmlFor="imagen" className={ stylesPersonal.BtnSubir + " btn btn-primary"}>
+                        />
+                    )}
+                    <label
+                        htmlFor="imagen"
+                        className={stylesPersonal.BtnSubir + " btn btn-primary"}
+                    >
                         Cambiar imagen
                         <input
                             id="imagen"
@@ -104,6 +123,7 @@ export default function Personal() {
                     </label>
                 </section>
 
+                {/* Datos personales */}
                 <section className={stylesPersonal.Datos + " card"}>
                     <h3>Información Personal</h3>
                     <div className={stylesPersonal.Grupo}>
@@ -142,6 +162,7 @@ export default function Personal() {
                     </button>
                 </section>
 
+                {/* Cambio de contraseña */}
                 <motion.section
                     className={stylesPersonal.PasswordSection + " card"}
                     initial={{ opacity: 0 }}
@@ -149,32 +170,79 @@ export default function Personal() {
                     transition={{ delay: 0.5 }}
                 >
                     <h3>Cambiar Contraseña</h3>
+
+                    {/* Contraseña actual */}
                     <div className={stylesPersonal.Grupo}>
                         <label>Contraseña actual</label>
-                        <input
-                            type="password"
-                            value={passwords.actual}
-                            onChange={(e) =>
-                                setPasswords({
-                                    ...passwords,
-                                    actual: e.target.value
-                                })
-                            }
-                        />
+                        <div className={stylesPersonal.InputPassword}>
+                            <input
+                                type={showPassword.actual ? "text" : "password"}
+                                value={passwords.actual}
+                                onChange={(e) =>
+                                    setPasswords({
+                                        ...passwords,
+                                        actual: e.target.value
+                                    })
+                                }
+                                placeholder="Contraseña actual"
+                            />
+                            <i
+                                className={`bx ${
+                                    showPassword.actual ? "bx-show" : "bx-hide"
+                                }`}
+                                onClick={() => toggleVisibility("actual")}
+                            ></i>
+                        </div>
                     </div>
+
+                    {/* Nueva contraseña */}
                     <div className={stylesPersonal.Grupo}>
                         <label>Nueva contraseña</label>
-                        <input
-                            type="password"
-                            value={passwords.nueva}
-                            onChange={(e) =>
-                                setPasswords({
-                                    ...passwords,
-                                    nueva: e.target.value
-                                })
-                            }
-                        />
+                        <div className={stylesPersonal.InputPassword}>
+                            <input
+                                type={showPassword.nueva ? "text" : "password"}
+                                value={passwords.nueva}
+                                onChange={(e) =>
+                                    setPasswords({
+                                        ...passwords,
+                                        nueva: e.target.value
+                                    })
+                                }
+                                placeholder="Nueva contraseña"
+                            />
+                            <i
+                                className={`bx ${
+                                    showPassword.nueva ? "bx-show" : "bx-hide"
+                                }`}
+                                onClick={() => toggleVisibility("nueva")}
+                            ></i>
+                        </div>
                     </div>
+
+                    {/* Confirmar contraseña */}
+                    <div className={stylesPersonal.Grupo}>
+                        <label>Confirmar contraseña</label>
+                        <div className={stylesPersonal.InputPassword}>
+                            <input
+                                type={showPassword.confirmar ? "text" : "password"}
+                                value={passwords.confirmar}
+                                onChange={(e) =>
+                                    setPasswords({
+                                        ...passwords,
+                                        confirmar: e.target.value
+                                    })
+                                }
+                                placeholder="Confirmar nueva contraseña"
+                            />
+                            <i
+                                className={`bx ${
+                                    showPassword.confirmar ? "bx-show" : "bx-hide"
+                                }`}
+                                onClick={() => toggleVisibility("confirmar")}
+                            ></i>
+                        </div>
+                    </div>
+
                     <button
                         className="btn btn-primary"
                         onClick={handlePassword}

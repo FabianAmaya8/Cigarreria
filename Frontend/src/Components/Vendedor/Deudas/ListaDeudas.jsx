@@ -32,14 +32,6 @@ export default function ListaDeudas() {
 
     return (
         <main className={`${styles.Container} ${stylesDeuda.Container}`}>
-            <div className="volver">
-                <button
-                    onClick={() => navigate(-1)}
-                >
-                    <i className="bx bx-arrow-back"></i>
-                    Volver
-                </button>
-            </div>
 
             <h2>Lista de deudas</h2>
 

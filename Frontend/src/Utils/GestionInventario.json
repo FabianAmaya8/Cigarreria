@@ -1,0 +1,48 @@
+[
+    {
+        "Titulo": "Catálogo de Productos",
+        "items": [
+            {
+                "ruta": "/Gestion/Productos",
+                "nombre": "Gestión de Productos",
+                "descripcion": "Módulo para gestionar el inventario de productos, incluyendo agregar, editar y eliminar productos.",
+                "icono": "bx bx-box"
+            },
+            {
+                "ruta": "/Gestion/Marcas",
+                "nombre": "Gestión de Marcas",
+                "descripcion": "Módulo para gestionar las marcas asociadas a los productos, incluyendo agregar nuevas marcas y editar existentes.",
+                "icono": "bx bx-label"
+            },
+            {
+                "ruta": "/Gestion/Categorias",
+                "nombre": "Gestión de Categorías",
+                "descripcion": "Módulo para gestionar las categorías de productos, permitiendo la creación y organización de categorías.",
+                "icono": "bx bx-category"
+            }
+        ]
+    },
+    {
+        "Titulo": "Operaciones del Punto de Venta",
+        "items": [
+            {
+                "ruta": "/Gestion/Proveedores",
+                "nombre": "Gestión de Proveedores",
+                "descripcion": "Módulo para gestionar los proveedores de productos, incluyendo agregar, editar y eliminar proveedores.",
+                "icono": "bx bxs-truck"
+            },
+            {
+                "ruta": "/Gestion/Almacenes",
+                "nombre": "Gestión de Almacenes",
+                "descripcion": "Módulo para gestionar los almacenes donde se almacenan los productos, permitiendo la creación y edición de almacenes.",
+                "icono": "bx bx-building"
+            },
+            {
+                "ruta": "/Gestion/Cajas",
+                "nombre": "Gestión de Cajas",
+                "descripcion": "Módulo para gestionar las cajas registradoras, incluyendo la configuración y monitoreo de las mismas.",
+                "icono": "bx bx-money-withdraw"
+            }
+        ]
+    }
+]
