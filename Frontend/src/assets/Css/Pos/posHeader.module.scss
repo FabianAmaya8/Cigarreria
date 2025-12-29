@@ -1,0 +1,237 @@
+/* ===============================
+   HEADER POS
+================================ */
+.header {
+    width: 100%;
+    background: var(--header-bg);
+    color: var(--texto);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+    position: relative;
+    border-bottom: 1px solid var(--pos-divider);
+}
+
+.logo {
+    width: 80px;
+    height: 80px;
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.title {
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.mesa {
+    opacity: 0.85;
+}
+
+/* ===============================
+   ESTADO MESA
+================================ */
+.estado {
+    padding: 0.2rem 0.55rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.abierta {
+    background: var(--success);
+    color: #fff;
+}
+
+.cerrada {
+    background: var(--danger);
+    color: #fff;
+}
+
+.teclas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    border: none;
+    background: var(--success);
+    cursor: pointer;
+    color: var(--texto);
+    padding: 0.2rem 0.55rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+/* ===============================
+   PERFIL
+================================ */
+.perfil {
+    display: flex;
+    text-decoration: none;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--card-bg);
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    i {
+        font-size: 80px;
+        color: var(--texto-muted);
+        text-align: center;
+    }
+}
+
+/* ===============================
+   TECLAS / ATAJOS
+================================ */
+.tecla {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    background: var(--glass);
+}
+
+.label {
+    opacity: 0.8;
+}
+
+.key {
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-weight: 700;
+    font-family: monospace;
+    background: var(--input-bg);
+    color: var(--texto);
+}
+
+/* ===============================
+   MODAL BACKDROP
+================================ */
+.backdrop {
+    position: fixed;
+    inset: 0;
+    background: #00000099;
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+}
+
+/* ===============================
+   MODAL
+================================ */
+.modal {
+    background: var(--card-bg);
+    color: var(--texto);
+    width: 95%;
+    max-width: 600px;
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-1);
+    animation: scaleIn 0.18s ease;
+    overflow-y: auto;
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.96);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ===============================
+   MODAL HEADER
+================================ */
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid var(--pos-divider);
+
+    h3 {
+        margin: 0;
+        font-size: 2rem;
+        font-weight: 600;
+    }
+}
+
+.closeBtn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--texto);
+}
+
+/* ===============================
+   MODAL BODY
+================================ */
+.modalBody {
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.5rem;
+}
+
+.teclaRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--fondo-Pos);
+    padding: 6px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 1.3rem;
+}
+
+/* ===============================
+   MODAL FOOTER
+================================ */
+.modalFooter {
+    padding: 0.75rem 1rem;
+    border-top: 1px solid var(--pos-divider);
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+        padding: 6px 12px;
+        border-radius: var(--radius-sm);
+        border: none;
+        cursor: pointer;
+        background: var(--btn-primary-bg);
+        color: var(--btn-primary-text);
+
+        &:hover {
+            background: var(--btn-primary-bg-hover);
+        }
+    }
+}

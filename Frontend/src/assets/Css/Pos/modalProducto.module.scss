@@ -1,0 +1,325 @@
+.backdrop {
+    position: fixed;
+    inset: 0;
+    background: #00000099;
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+    color: var(--texto);
+}
+
+/* ===============================
+   MODAL
+================================ */
+.modal {
+    background: var(--card-bg);
+    width: 920px;
+    max-width: 95%;
+    min-height: 540px;
+    max-height: 80%;
+    border-radius: var(--radius-xl);
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-1);
+    animation: scaleIn .18s ease-out;
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(.96);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ===============================
+   HEADER
+================================ */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .9rem 1.1rem;
+    border-bottom: 1px solid var(--pos-divider);
+
+    h3 {
+        display: flex;
+        align-items: center;
+        gap: .45rem;
+        margin: 0;
+        font-size: 1.05rem;
+        font-weight: 600;
+    }
+
+    button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        opacity: .6;
+        transition: opacity .15s;
+        color: var(--texto);
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+}
+
+/* ===============================
+   SEARCHES
+================================ */
+.searches {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .6rem;
+    padding: .7rem 1rem;
+}
+
+.inputIcon {
+    display: flex;
+    align-items: center;
+    gap: .55rem;
+    background: var(--input-bg);
+    padding: .55rem .65rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--input-border);
+    transition: border-color .15s, box-shadow .15s;
+
+    svg {
+        color: var(--placeholder);
+    }
+
+    &:focus-within {
+        border-color: var(--input-focus-border);
+        box-shadow: 0 0 0 2px var(--input-focus-shadow);
+    }
+
+    input {
+        border: none;
+        background: none;
+        outline: none;
+        width: 100%;
+        font-size: .95rem;
+        color: var(--input-text);
+    }
+}
+
+.barcode {
+    font-weight: 600;
+}
+
+/* ===============================
+   CONTENT
+================================ */
+.content {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    overflow: hidden;
+}
+
+/* ===============================
+   LISTA
+================================ */
+.lista {
+    border-right: 1px solid var(--pos-divider);
+    overflow-y: auto;
+
+    button {
+        width: 100%;
+        padding: .65rem .9rem;
+        text-align: left;
+        border: none;
+        background: none;
+        cursor: pointer;
+        font-size: .9rem;
+        transition: background .12s;
+        color: var(--texto);
+
+        &:hover {
+            background: var(--pos-item-hover);
+        }
+    }
+}
+
+.activo {
+    background: var(--pos-item-active);
+    font-weight: 600;
+}
+
+/* ===============================
+   DETALLE
+================================ */
+.detalle {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+.imagen {
+    width: 160px;
+    height: 160px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--card-border);
+    margin-right: 1rem;
+    font-size: 3rem;
+    color: var(--placeholder);
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: var(--radius-lg);
+    }
+
+    i {
+        font-size: 160px;
+    }
+}
+
+.topDetalle {
+    height: 165px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .8rem;
+}
+
+/* ===============================
+   BADGES
+================================ */
+.activoBadge,
+.inactivoBadge {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 50%;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.activoBadge {
+    background: var(--success-soft);
+    color: var(--success-text);
+}
+
+.inactivoBadge {
+    background: var(--danger-soft);
+    color: var(--danger-text);
+}
+
+/* ===============================
+   TEXTOS
+================================ */
+.nombreCodigo {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    p {
+        margin: 0;
+    }
+}
+
+.codigo,
+.descripcion {
+    display: flex;
+    align-items: center;
+    gap: .25rem;
+}
+
+.info {
+    display: flex;
+    justify-content: space-around;
+    font-weight: 600;
+}
+
+.compra {
+    color: var(--texto-muted);
+}
+
+/* ===============================
+   STOCK
+================================ */
+.stock {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 1.2rem;
+    font-size: 1rem;
+}
+
+.stockBajo {
+    color: var(--danger-text);
+    font-weight: 700;
+}
+
+/* ===============================
+   ALMACENES
+================================ */
+.almacenes {
+    margin-top: .6rem;
+
+    h5 {
+        margin-bottom: .4rem;
+        font-size: .85rem;
+        font-weight: 600;
+    }
+}
+
+.almacen {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .45rem .55rem;
+    border-radius: var(--radius-sm);
+    background: var(--fondo-Pos);
+    margin-bottom: .35rem;
+}
+
+.almacenInfo {
+    display: flex;
+    align-items: center;
+    gap: .45rem;
+}
+
+/* ===============================
+   META / PLACEHOLDER
+================================ */
+.meta {
+    display: flex;
+    flex-direction: column;
+    font-size: .85rem;
+    color: var(--texto-muted);
+    margin-top: .6rem;
+
+    span {
+        font-weight: 700;
+    }
+}
+
+.placeholder,
+.empty {
+    padding: 1rem;
+    color: var(--texto-muted);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .4rem;
+    text-align: center;
+}

@@ -24,9 +24,11 @@ export function BtnVolver(){
 
     return(
         <div className="volver">
-            <button onClick={() => navigate(-1)}>
-                <ArrowBigLeftDash size={25}/>
-            </button>
+            <div className="butnvolver">
+                <button onClick={() => navigate(-1)}>
+                    <ArrowBigLeftDash size={25}/>
+                </button>
+            </div>
         </div>
     )
 }

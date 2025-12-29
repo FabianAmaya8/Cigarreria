@@ -1,0 +1,26 @@
+import { useQuery } from "@tanstack/react-query";
+import { urlDB } from "../../urlDB";
+
+async function fetchUsuarios() {
+    const endpoint = `/api/usuarios/`;
+    const urlFetch = await urlDB(endpoint);
+    const token = localStorage.getItem("token");
+    const res = await fetch(urlFetch, {
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json",
+        },
+    });
+    if (!res.ok) throw new Error("Error en la respuesta");
+    const data = await res.json();
+    return data;
+}
+
+export function useUsuarios() {
+    return useQuery({
+        queryKey: ["usuarios"], 
+        queryFn: () => fetchUsuarios(),
+        staleTime: 1000 * 60 * 5,
+        cacheTime: 1000 * 60 * 10,
+    });
+}

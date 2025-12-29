@@ -1,10 +1,12 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import Swal from "sweetalert2";
+import { useQueryClient } from "@tanstack/react-query";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+    const queryClient = useQueryClient();
     const [token, setToken] = useState(() => localStorage.getItem("token"));
     const [user, setUser] = useState(() => {
         try {
@@ -40,6 +42,13 @@ export const AuthProvider = ({ children }) => {
         setUser(null);
         localStorage.removeItem("token");
         setIsAuthenticated(false);
+
+        // limpiar cache despues de 2 segundos
+        setTimeout(() => {
+            sessionStorage.clear();
+            queryClient.cancelQueries();
+            queryClient.clear();
+        }, 1000);
     };
 
     // Expiración automática
@@ -57,7 +66,7 @@ export const AuthProvider = ({ children }) => {
                         text: "Vuelve a iniciar sesión.",
                         icon: "warning",
                         confirmButtonText: "Aceptar",
-                        confirmButtonColor: "#03624c"
+                        confirmButtonColor: "#03624c",
                     });
                     logout();
                 }

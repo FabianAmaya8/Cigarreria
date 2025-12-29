@@ -23,6 +23,9 @@ import GestionInventario from "./Components/Vendedor/GestionInventario/GestionIn
 import ProductosView from "./Components/Vendedor/GestionInventario/CRUDsProductos/Productos";
 import MarcasView from "./Components/Vendedor/GestionInventario/CrudMarcas/MarcasView";
 import CategoriasView from "./Components/Vendedor/GestionInventario/CrudCategorias/CategoriasView";
+import AlmacenesView from "./Components/Vendedor/GestionInventario/CrudAlmacenes/AlmacenesView";
+import Pos from "./Components/Vendedor/ControlVentas/Pos";
+import POSLayout from "./modules/Pos/pages/PosLayout";
 
 const router = createBrowserRouter([
     {
@@ -57,6 +60,10 @@ const router = createBrowserRouter([
             { path: "/Gestion/Productos", element: <ProductosView />, },
             { path: "/Gestion/Marcas", element: <MarcasView />,},
             { path: "/Gestion/Categorias", element: <CategoriasView />,},
+            { path: "/Gestion/Almacenes", element: <AlmacenesView />,},
+
+            // Control de Ventas
+            { path: "/POS", element: <POSLayout />, },
         ],
     },
     {

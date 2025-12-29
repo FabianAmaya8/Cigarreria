@@ -9,7 +9,7 @@ class ProductoEstadistica(BaseModel):
     ingresos: float
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class ProductoStock(BaseModel):
     id_producto: int
@@ -19,4 +19,4 @@ class ProductoStock(BaseModel):
     stock_minimo: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True

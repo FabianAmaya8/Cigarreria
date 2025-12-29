@@ -5,6 +5,7 @@ from app.models.usuarios import Usuario
 from app.schemas.usuarios import UsuarioCreate, UsuarioUpdate, UsuarioOut, UsuarioImagenResponse
 from typing import List
 from app.utils.security import hash_password
+from app.core.security import get_current_user
 
 router = APIRouter(
     prefix="/api/usuarios",
@@ -36,7 +37,14 @@ def create_usuario(usuario: UsuarioCreate, db: Session = Depends(get_db)):
 
 # Listar todos los usuarios
 @router.get("/", response_model=List[UsuarioOut])
-def get_usuarios(db: Session = Depends(get_db)):
+def get_usuarios(
+    db: Session = Depends(get_db),
+    current_user: Usuario = Depends(get_current_user)
+):
+    # 🔒 Validación de permisos (roles Admin/Vendedor)
+    if current_user.rol not in [1, 2]:
+        raise HTTPException(status_code=403, detail="No autorizado para ver los usuarios")
+    
     return db.query(Usuario).all()
 
 # Obtener un usuario por ID

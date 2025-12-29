@@ -9,6 +9,15 @@ import { BtnVolver } from "../../Utils/Cargando";
 
 export default function LayoutPrivado({ requiredRole }) {
     const location = useLocation();
+
+    if (location.pathname === "/POS" || location.pathname === "/pos") {
+        return (
+            <PrivateRoute requiredRole={requiredRole} >
+                <Outlet key={location.pathname} />
+            </PrivateRoute>
+        )
+    }
+
     return (
         <PrivateRoute requiredRole={requiredRole} >
             <Header />

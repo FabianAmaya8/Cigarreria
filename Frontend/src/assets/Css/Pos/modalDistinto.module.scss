@@ -1,0 +1,128 @@
+.backdrop {
+    position: fixed;
+    inset: 0;
+    background: #00000073;
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+/* =========================
+   MODAL OSCURO
+========================= */
+.modal {
+    background: var(--modal-dark-bg);
+    width: 360px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-1);
+    animation: scaleIn 0.2s ease;
+    color: var(--modal-dark-text);
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* =========================
+   HEADER
+========================= */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--modal-dark-divider);
+
+    h3 {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+    button {
+        background: none;
+        border: none;
+        font-size: 1.2rem;
+        cursor: pointer;
+        opacity: 0.65;
+        color: var(--modal-dark-text);
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+}
+
+/* =========================
+   FIELD
+========================= */
+.field {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    label {
+        font-size: 0.85rem;
+        color: var(--texto-muted);
+    }
+
+    input {
+        padding: 10px 12px;
+        font-size: 1rem;
+        border-radius: var(--radius-sm);
+        border: 1px solid var(--input-border);
+        background: var(--input-bg);
+        color: var(--input-text);
+        outline: none;
+
+        &:focus {
+            border-color: var(--input-focus-border);
+        }
+    }
+}
+
+/* =========================
+   FOOTER
+========================= */
+.footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 14px 18px;
+    border-top: 1px solid var(--modal-dark-divider);
+
+    button {
+        padding: 8px 14px;
+        border-radius: var(--radius-sm);
+        border: none;
+        cursor: pointer;
+        font-weight: 500;
+    }
+}
+
+/* =========================
+   CONFIRM BUTTON
+========================= */
+.confirm {
+    background: var(--btn-terciario-bg);
+    color: var(--btn-terciario-text);
+
+    &:hover:not(:disabled) {
+        background: var(--btn-terciario-bg-hover);
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}

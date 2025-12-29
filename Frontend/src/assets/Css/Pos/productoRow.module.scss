@@ -1,0 +1,146 @@
+/* ===============================
+   PRODUCTO ROW
+================================ */
+.row {
+    display: grid;
+    grid-template-columns: 1fr 150px 90px 100px 50px;
+    gap: 1rem;
+    align-items: center;
+    padding: 0.5rem 0;
+
+    border-bottom: 1px solid var(--pos-divider);
+}
+
+/* ===============================
+   HEADER ROW
+================================ */
+.titulo {
+    font-weight: bold;
+    background: var(--pos-row-header);
+    color: var(--texto);
+    justify-items: center;
+}
+
+/* ===============================
+   TEXTOS
+================================ */
+.nombre {
+    font-size: 0.9rem;
+}
+
+/* ===============================
+   CONTROLES
+================================ */
+.controles {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    input {
+        min-width: 50px;
+        max-width: 100px;
+        width: min-content;
+        font-size: 1.3rem;
+        text-align: center;
+
+        border: 1px solid var(--pos-divider);
+        border-radius: 4px;
+    }
+
+    button {
+        padding: 0.5rem;
+        background: var(--azul-100);
+        border-radius: 4px;
+        border: none;
+        color: #111;
+        cursor: pointer;
+        transition: background 0.15s ease;
+
+        &:hover {
+            background: var(--azul-200);
+        }
+
+        &:active {
+            transform: scale(0.95);
+        }
+    }
+}
+
+/* ===============================
+   SUBTOTALES
+================================ */
+.subtotal {
+    text-align: right;
+    font-weight: bold;
+}
+
+.subtotalGrande {
+    grid-area: 1 / 3 / 2 / 5;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* ===============================
+   REMOVE
+================================ */
+.remove {
+    padding: 0.5rem;
+    background: var(--azul-100);
+    border-radius: 4px;
+    border: none;
+    color: #dc2626;
+    cursor: pointer;
+    transition: background 0.15s ease;
+
+    &:hover {
+        background: var(--azul-200);
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+}
+
+/* ===============================
+   INPUT ESCÁNER
+================================ */
+.input {
+    width: 100%;
+    height: 45px;
+    font-size: 1rem;
+    padding: 0 1rem;
+
+    border: 2px solid var(--pos-divider);
+    border-radius: 4px;
+
+    grid-area: 1 / 1 / 2 / 2;
+}
+
+/* ===============================
+   FORM ESCÁNER
+================================ */
+.form {
+    display: flex;
+    gap: 0.5rem;
+    grid-area: 2 / 1 / 3 / 2;
+}
+
+.select {
+    grid-area: 1 / 2 / 3 / 3;
+}
+
+/* ===============================
+   LISTA
+================================ */
+.lista {
+    max-height: calc(100vh - 220px);
+}
+
+/* ===============================
+   EMPTY
+================================ */
+.empty {
+    text-align: center;
+    padding: 2rem;
+    opacity: 0.5;
+}

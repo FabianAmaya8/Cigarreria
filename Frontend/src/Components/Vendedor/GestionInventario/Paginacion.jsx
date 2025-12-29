@@ -32,7 +32,7 @@ export default function Paginacion({
                 onChange={handleChangeRowsPerPage}
                 className="form-control"
             >
-                {[5, 10, 25].map((n) => (
+                {[5, 10, 15, 20, 25].map((n) => (
                     <option key={n} value={n}>{n} por página</option>
                 ))}
             </select>

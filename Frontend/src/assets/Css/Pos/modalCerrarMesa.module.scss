@@ -1,0 +1,284 @@
+.backdrop {
+    position: fixed;
+    inset: 0;
+    background: #00000099;
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+}
+
+/* =========================
+   MODAL
+========================= */
+.modal {
+    background: var(--card-bg);
+    color: var(--texto);
+    width: 95%;
+    height: 95%;
+    max-width: 600px;
+    max-height: 60vh;
+    min-height: 500px;
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-1);
+    animation: scaleIn 0.18s ease;
+    overflow-y: auto;
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.96);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* =========================
+   HEADER
+========================= */
+.modal header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.9rem 1.1rem;
+    border-bottom: 1px solid var(--pos-divider);
+    background: var(--fondo-elevado);
+
+    h3 {
+        margin: 0;
+        font-size: 1.05rem;
+        font-weight: 600;
+    }
+
+    button {
+        background: none;
+        border: none;
+        font-size: 1.2rem;
+        cursor: pointer;
+        opacity: 0.6;
+        color: var(--texto);
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+}
+
+/* =========================
+   TOTAL
+========================= */
+.total {
+    padding: 0.9rem 1.1rem;
+    font-size: 1.05rem;
+    font-weight: bold;
+    background: var(--pos-total-bg);
+    color: var(--pos-total-text);
+    border-bottom: 1px solid var(--pos-divider);
+}
+
+/* =========================
+   PAGOS
+========================= */
+.pagos {
+    padding: 0.9rem 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+
+    > div {
+        display: grid;
+        align-items: center;
+        grid-template-columns: 1fr 120px;
+        gap: 0.5rem;
+    }
+
+    select,
+    input {
+        padding: 0.5rem 0.6rem;
+        border-radius: var(--radius-sm);
+        border: 1px solid var(--input-border);
+        background: var(--input-bg);
+        color: var(--input-text);
+        font-size: 0.9rem;
+        outline: none;
+
+        &:focus {
+            border-color: var(--input-focus-border);
+        }
+    }
+
+    strong {
+        margin-top: 0.4rem;
+        font-size: 0.95rem;
+        text-align: right;
+    }
+}
+
+/* =========================
+   INPUT CLIENTE DEUDA
+========================= */
+.modal input[type="number"] {
+    margin: 0.8rem 1.1rem;
+    padding: 0.55rem 0.6rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--input-border);
+    background: var(--input-bg);
+    color: var(--input-text);
+    outline: none;
+
+    &:focus {
+        border-color: var(--input-focus-border);
+    }
+}
+
+/* =========================
+   OBSERVACIONES
+========================= */
+.modal textarea {
+    flex: 1;
+    margin: 0 1.1rem 0.9rem;
+    padding: 0.6rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--input-border);
+    background: var(--input-bg);
+    color: var(--input-text);
+    min-height: 80px;
+    resize: none;
+    font-size: 0.9rem;
+    outline: none;
+
+    &:focus {
+        border-color: var(--input-focus-border);
+    }
+}
+
+/* =========================
+   FOOTER
+========================= */
+.modal footer {
+    display: flex;
+    gap: 0.6rem;
+    padding: 0.9rem 1.1rem;
+    border-top: 1px solid var(--pos-divider);
+    background: var(--fondo-elevado);
+
+    button {
+        flex: 1;
+        padding: 0.55rem;
+        border-radius: var(--radius-md);
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+
+    button:first-child {
+        background: var(--btn-disabled-bg);
+        color: var(--btn-disabled-text);
+
+        &:hover {
+            background: var(--card-border);
+        }
+    }
+
+    button:last-child {
+        background: var(--btn-terciario-bg);
+        color: var(--btn-terciario-text);
+
+        &:hover {
+            background: var(--btn-terciario-bg-hover);
+        }
+    }
+}
+
+/* =========================
+   REACT SELECT – CLIENTES
+========================= */
+
+.react-select__control {
+    border-radius: var(--radius-md);
+    border: 1px solid var(--input-border);
+    height: 65px;
+    background: var(--input-bg);
+    box-shadow: none;
+    font-size: 0.9rem;
+
+    &:hover {
+        border-color: var(--input-focus-border);
+    }
+}
+
+.react-select__control--is-focused {
+    border-color: var(--input-focus-border);
+    box-shadow: 0 0 0 1px var(--input-focus-border);
+}
+
+.react-select__placeholder {
+    color: var(--placeholder);
+}
+
+.react-select__menu {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-1);
+    z-index: 4000;
+}
+
+.react-select__option {
+    padding: 0.55rem 0.7rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.react-select__option--is-focused {
+    background: var(--pos-item-hover);
+}
+
+.react-select__option--is-selected {
+    background: var(--btn-terciario-bg);
+    color: var(--btn-terciario-text);
+}
+
+/* =========================
+   USUARIO CON AVATAR
+========================= */
+.optionUser {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+
+    img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+        background: var(--card-border);
+    }
+
+    span {
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+}
+
+/* =========================
+   CLEAR INDICATOR
+========================= */
+.react-select__clear-indicator {
+    cursor: pointer;
+    color: var(--texto-muted);
+
+    &:hover {
+        color: var(--texto);
+    }
+}
+
+.react-select__indicator-separator {
+    display: none;
+}

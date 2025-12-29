@@ -1,8 +1,8 @@
 import styles from "../../../assets/Css/index.module.scss";
 import stylesDeuda from "../../../assets/Css/deuda.module.scss";
-import { Hourglass } from "ldrs/react";
 import useDetallesDeudas from "../../../Hooks/Vendedor/Deudas/useDetallesDeudas";
 import { Loading, Error } from "../../../Utils/Cargando";
+import { useParams } from "react-router-dom";
 
 export default function DetallesDeuda() {
     const { id } = useParams();
@@ -78,6 +78,7 @@ export default function DetallesDeuda() {
                                         <img
                                             src={detalle.producto.imagen}
                                             alt={detalle.producto.nombre}
+                                            loading="lazy"
                                         />
                                     ) : (
                                         <i className="bx bx-image"></i>

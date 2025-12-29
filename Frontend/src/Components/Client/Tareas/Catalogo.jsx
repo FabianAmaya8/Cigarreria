@@ -3,14 +3,17 @@ import stylesFiltro from "../../../assets/Css/deuda.module.scss";
 import stylesCatalogo from "../../../assets/Css/catalogo.module.scss";
 import stylesBoton from "../../../assets/Css/crud.module.scss";
 import { Loading, Error } from "../../../Utils/Cargando";
-import useCatalogo from "../../../Hooks/Client/useCatalogo";
-import { useMemo, useState } from "react";
+import { useCatalogo, useProductosSinFiltro } from "../../../Hooks/Client/useCatalogo";
+import { useEffect, useMemo, useState } from "react";
 import Filtro from "../../Vendedor/GestionInventario/Filtro";
 import Paginacion from "../../Vendedor/GestionInventario/Paginacion";
 import { useAuthContext } from "../../../Pages/Context/AuthContext";
 
 export default function Catalogo() {
-    const { data: Productos, isLoading, error } = useCatalogo();
+    const { user } = useAuthContext();
+    const { data: ProductosNomales, isLoading, error } = useCatalogo();
+    const { data: ProductosSinFiltro, isLoading: isLoadingSinFiltro, error: errorSinFiltro } = useProductosSinFiltro();
+    const [Productos, setProductos] = useState(ProductosNomales);
 
     const [categoria, setCategoria] = useState("");
     const [marca, setMarca] = useState("");
@@ -42,8 +45,6 @@ export default function Catalogo() {
         if (!Productos) return [];
 
         let filtrados = Productos.filter((p) => {
-            if (!estado && p.activo === false) return false;
-
             const coincideCategoria = categoria ? p.marca.categoria.nombre === categoria : true;
             const coincideMarca = marca ? p.marca.nombre === marca : true;
 
@@ -94,6 +95,15 @@ export default function Catalogo() {
         error?.response?.status === 403
             ? "No autorizado para ver este catálogo"
             : "Ocurrió un error al cargar los productos";
+
+    useEffect(() => {
+        user?.rol === 1 || user?.rol === 2 ?
+            (
+                setProductos(ProductosSinFiltro)
+            ):(
+                setProductos(ProductosNomales)
+            )
+    }, [ProductosNomales, ProductosSinFiltro]);
 
     return (
         <main className={`${styles.Container} ${stylesFiltro.Container}`}>
@@ -157,7 +167,7 @@ export function CartProducto({ Producto }) {
     return (
         <div key={id_producto} className={stylesCatalogo.cartProductoItem}>
             <div className={stylesCatalogo.ImagenProducto}>
-                {imagen ? <img src={imagen} alt={nombre} /> : <i className="bx bx-image"></i>}
+                {imagen ? <img src={imagen} alt={nombre} loading="lazy"/> : <i className="bx bx-image"></i>}
             </div>
 
             {!activo && 

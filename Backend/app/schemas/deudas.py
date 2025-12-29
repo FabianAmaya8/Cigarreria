@@ -43,14 +43,6 @@ class DeudaBase(BaseModel):
     estado: Literal["pendiente", "pagada", "parcial"] = "pendiente"
     observaciones: Optional[str] = None
 
-class DeudaCreate(DeudaBase):
-    pass
-
-class DeudaUpdate(BaseModel):
-    total: Optional[float] = None
-    estado: Optional[Literal["pendiente", "pagada", "parcial"]] = None
-    observaciones: Optional[str] = None
-
 class DeudaResponse(DeudaBase):
     id_deuda: int
     fecha: datetime
@@ -61,3 +53,17 @@ class DeudaResponse(DeudaBase):
 class DeudaResponseWithUser(DeudaResponse):
     usuario_nombre: str
     usuario_usuario: str
+
+class PagoDeudaCreate(BaseModel):
+    monto: float
+    id_metodo: int
+    observaciones: Optional[str] = None
+
+
+class PagoDeudaResponse(BaseModel):
+    id_deuda: int
+    monto_pagado: float
+    saldo_restante: float
+    estado: Literal["pendiente", "parcial", "pagada"]
+    fecha_pago: datetime
+    vueltas: float = 0

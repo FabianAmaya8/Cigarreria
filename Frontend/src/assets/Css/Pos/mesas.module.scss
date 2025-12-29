@@ -1,0 +1,144 @@
+.panel {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+/* =========================
+   BOTÓN DE MESA
+========================= */
+.mesa {
+    display: flex;
+    gap: 1rem;
+    min-width: 80px;
+    padding: 0.6rem 0.8rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--pos-divider);
+    background-color: var(--pos-mesa-inactiva-bg);
+    color: var(--texto);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.mesa:hover {
+    background-color: var(--pos-item-hover);
+}
+
+/* =========================
+   NUEVA MESA
+========================= */
+.nuevaMesa {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    background: transparent;
+    color: var(--success);
+    border: 2px dashed var(--success);
+    padding: 10px;
+    font-size: 1.1rem;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: var(--transition-fast);
+
+    &:hover {
+        background: var(--success);
+        color: var(--texto-negro);
+    }
+
+    span {
+        display: flex;
+        gap: 1rem;
+    }
+}
+
+/* =========================
+   MESA ACTIVA
+========================= */
+.activa {
+    @extend .mesa;
+    background-color: var(--pos-mesa-activa-bg);
+    border-color: var(--pos-mesa-activa-bg);
+    color: var(--btn-primary-text);
+}
+
+/* =========================
+   MESA RÁPIDA
+========================= */
+.rapida {
+    background-color: var(--info);
+    border-color: var(--info);
+    color: #fff;
+}
+
+/* =========================
+   ACCIONES DE MESA
+========================= */
+.acciones {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+
+    button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.75rem;
+        border-radius: var(--radius-sm);
+        border: none;
+        font-weight: 600;
+        cursor: pointer;
+        background-color: var(--card-bg);
+        color: var(--texto);
+        transition: background-color 0.15s ease, transform 0.05s ease;
+
+        &:hover {
+            background-color: var(--pos-item-hover);
+        }
+
+        &:active {
+            transform: scale(0.97);
+        }
+    }
+
+    hr {
+        margin: 0.6rem 0;
+        border: none;
+        border-top: 1px solid var(--pos-divider);
+    }
+}
+
+/* =========================
+   BOTONES ESPECIALES
+========================= */
+.venta {
+    background-color: var(--success);
+    color: #fff;
+
+    &:hover {
+        background-color: #1e8f50;
+    }
+}
+
+.deuda {
+    background-color: var(--warning);
+    color: #000;
+
+    &:hover {
+        background-color: #e0a800;
+    }
+}
+
+/* =========================
+   HOTKEY
+========================= */
+.hotkey {
+    margin-left: auto;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background-color: var(--pos-badge-bg);
+    color: var(--pos-badge-text);
+    font-family: monospace;
+    border: 1px solid var(--pos-divider);
+}

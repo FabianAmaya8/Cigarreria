@@ -2,8 +2,10 @@
     /* -------------------- BASE / SUPERFICIES -------------------- */
     --fondo: linear-gradient(var(--rojo-900) 0%, var(--azul-900) 100%);
     --fondo-elevado: #121012;
+    --fondo-Pos: #75757568;
     --superficie: #372525;
-    --glass: #ffffff05;
+    --glass: #ffffff08;
+
 
     /* -------------------- PALETA ROJOS (principal) -------------------- */
     --rojo-900: #2b0000;
@@ -29,6 +31,7 @@
 
     /* -------------------- SEMÁNTICOS / TIPOGRAFÍA -------------------- */
     --texto: #f5f3f3;
+    --texto-negro: #333;
     --texto-sec: #cfc9c9;
     --texto-muted: #9b8f8f;
     --placeholder: #7e7373;
@@ -43,10 +46,10 @@
     --btn-primary-bg-active: var(--rojo-700);
     --btn-primary-text: #ffffff;
 
-    --btn-secondary-bg: #3f2626;
-    --btn-secondary-bg-hover: #5b3333;
-    --btn-secondary-bg-active: #2f1c1c;
-    --btn-secondary-text: var(--texto);
+    --btn-secondary-bg: var(--azul-600);
+    --btn-secondary-bg-hover: var(--azul-500);
+    --btn-secondary-bg-active: var(--azul-700);
+    --btn-secondary-text: #ffffff;
 
     --btn-disabled-bg: #221818;
     --btn-disabled-text: #6b6161;
@@ -106,6 +109,39 @@
     /* Nuevo: asignación opcional para usar azul como "info-alt" */
     --bs-purple: var(--azul-600);
     --bs-purple-rgb: 106, 13, 173;
+
+    /* -------------------- POS -------------------- */
+    --pos-item-bg: var(--card-bg);
+    --pos-item-hover: var(--glass);
+    --pos-item-active: var(--rojo-700);
+
+    --pos-total-bg: var(--rojo-800);
+    --pos-total-text: var(--texto);
+
+    --pos-mesa-activa-bg: var(--rojo-600);
+    --pos-mesa-inactiva-bg: var(--azul-700);
+
+    --pos-badge-bg: var(--azul-600);
+    --pos-badge-text: #fff;
+
+    --pos-divider: var(--card-border);
+    
+    --modal-dark-bg: var(--fondo-elevado);
+    --modal-dark-text: var(--texto);
+    --modal-dark-divider: var(--pos-divider);
+
+    --pos-item-hover: color-mix(in srgb, var(--glass) 70%, transparent);
+    --pos-item-active: var(--rojo-700);
+
+    --input-focus-shadow: 0 0 0 2px color-mix(in srgb, var(--rojo-500) 40%, transparent);
+
+    --success-soft: color-mix(in srgb, var(--success) 20%, transparent);
+    --success-text: var(--texto);
+
+    --danger-soft: color-mix(in srgb, var(--danger) 20%, transparent);
+    --danger-text: var(--texto);
+
+    --pos-row-header: var(--card-bg);
 }
 
 /* ---- EXTRA ---- */
@@ -188,6 +224,16 @@ body,
     color: var(--btn-primary-text) !important;
 }
 
+.btn-outline-secondary{
+    color: var(--btn-secondary-bg) !important;
+    border-color: var(--btn-secondary-bg) !important;
+}
+.btn-outline-secondary:hover{
+    background-color: var(--btn-secondary-bg-hover) !important;
+    border-color: var(--btn-secondary-bg-hover) !important;
+    color: var(--btn-secondary-text) !important;
+}
+
 .card {
     background-color: var(--card-bg) !important;
     border: 1px solid var(--card-border) !important;
@@ -238,11 +284,13 @@ main{
 
 
 .volver{
-    position: absolute;
-    top: 120px;
-    left: 20px;
+    width: 95%;
     z-index: 100;
 
+    .butnvolver{
+        position: fixed;
+        top: 120px;
+    }
     button{
         border-radius: var(--radius-md);
         padding: 10px;
@@ -250,6 +298,8 @@ main{
         border: none;
         color: var(--btn-terciario-text);
         cursor: pointer;
+        position: sticky;
+        top: 0 ;
     }
     button:hover{
         background-color: var(--btn-terciario-bg-hover);

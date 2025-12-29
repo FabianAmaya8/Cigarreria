@@ -1,10 +1,15 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.routers import (
-    usuarios , auth , estadisticas , 
-    deudas , ventas , productos , usuario_personal
+    usuarios , auth , estadisticas , pos ,
+    deudas , ventas , productos , usuario_personal, 
+    inventario
 )
 from scalar_fastapi import get_scalar_api_reference
+from app.core.redis import redis_pos
+import logging
+
+logging.basicConfig(level=logging.INFO)
 
 app = FastAPI(
     title="Cigarreria API",
@@ -12,6 +17,14 @@ app = FastAPI(
     docs_url="/docs",   # Swagger
     redoc_url="/redoc"  # ReDoc
 )
+
+@app.on_event("startup")
+async def startup_event():
+    try:
+        redis_pos.ping()
+        print("✅ Redis conectado correctamente")
+    except Exception as e:
+        print("❌ Error conectando a Redis:", e)
 
 # cors
 app.add_middleware(
@@ -29,6 +42,8 @@ app.include_router(deudas.router)
 app.include_router(ventas.router)
 app.include_router(productos.router)
 app.include_router(usuario_personal.router)
+app.include_router(inventario.router)
+app.include_router(pos.router)
 app.include_router(auth.router, tags=["Autenticación"])
 
 # Scalar

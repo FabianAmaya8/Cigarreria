@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, DECIMAL, ForeignKey
+from sqlalchemy import Column, Integer, DECIMAL, ForeignKey, Computed
 from app.database import Base
 
 class DetalleDeuda(Base):
@@ -9,4 +9,7 @@ class DetalleDeuda(Base):
     id_producto = Column(Integer, ForeignKey("productos.id_producto"))
     cantidad = Column(Integer, nullable=False)
     precio_unitario = Column(DECIMAL(12,2), nullable=False)
-    subtotal = Column(DECIMAL(12,2), nullable=False)
+    subtotal = Column(
+        DECIMAL(12,2), 
+        Computed("cantidad * precio_unitario")
+    )

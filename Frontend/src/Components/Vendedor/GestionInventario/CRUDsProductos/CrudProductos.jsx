@@ -46,7 +46,7 @@ export default function ProductoForm({ open, onClose, onSubmit, modoEdicion, pro
                 descripcion: "",
                 precio_compra: "",
                 precio_venta: "",
-                stock_actual: "",
+                stock_actual: 0,
                 stock_minimo: "",
                 unidad_medida: "",
                 activo: true,
@@ -193,7 +193,7 @@ export default function ProductoForm({ open, onClose, onSubmit, modoEdicion, pro
                             Imagen del producto
                             {preview ? (
                                 <div className={styles.ImagenPreview}>
-                                    <img src={preview} alt="Vista previa" />
+                                    <img src={preview} alt="Vista previa" loading="lazy"/>
                                 </div>
                             ) : (
                                 <div className={styles.ImagenPreview}>
@@ -231,15 +231,6 @@ export default function ProductoForm({ open, onClose, onSubmit, modoEdicion, pro
                     </div>
 
                     <div className={styles.FilaInputs}>
-                        <label>Stock Actual
-                            <input
-                                type="number"
-                                name="stock_actual"
-                                value={form.stock_actual}
-                                onChange={handleChange}
-                            />
-                        </label>
-
                         <label>Stock Mínimo
                             <input
                                 type="number"
@@ -248,15 +239,16 @@ export default function ProductoForm({ open, onClose, onSubmit, modoEdicion, pro
                                 onChange={handleChange}
                             />
                         </label>
+                        
+                        <label>Unidad de Medida
+                            <input
+                                name="unidad_medida"
+                                value={form.unidad_medida}
+                                onChange={handleChange}
+                            />
+                        </label>
                     </div>
 
-                    <label>Unidad de Medida
-                        <input
-                            name="unidad_medida"
-                            value={form.unidad_medida}
-                            onChange={handleChange}
-                        />
-                    </label>
 
                     <label className={styles.SwitchLabel}>
                         <input

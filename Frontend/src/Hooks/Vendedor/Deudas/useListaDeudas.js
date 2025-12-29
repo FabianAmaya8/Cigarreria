@@ -4,7 +4,13 @@ import { urlDB } from "../../../urlDB";
 async function fetchListaDeudas() {
     const endpoint = `/api/deudas/`;
     const urlFetch = await urlDB(endpoint);
-    const res = await fetch(urlFetch);
+    const token = localStorage.getItem("token");
+    const res = await fetch(urlFetch, {
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json",
+        },
+    });
     if (!res.ok) throw new Error("Error en la respuesta");
     const data = await res.json();
     return data;

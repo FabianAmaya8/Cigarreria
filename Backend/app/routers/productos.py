@@ -7,6 +7,8 @@ from app.database import get_db
 from app.models.productos import Producto
 from app.models.marcas import Marca
 from app.models.categorias import Categoria
+from app.models.inventario import Inventario
+from app.models.almacenes import Almacen
 from app.schemas.productos import (
     ProductoResponse, ProductoCreate, ProductoUpdate,
     MarcaResponse, MarcaCreate, MarcaUpdate,
@@ -27,10 +29,67 @@ def listar_productos(db: Session = Depends(get_db)):
     productos = (
         db.query(Producto)
         .options(joinedload(Producto.marca).joinedload(Marca.categoria))
+        .filter(Producto.activo == True,
+                Producto.stock_actual > 0)
         .all()
     )
     return productos
 
+@router.get("/sin_filtro")
+def listar_productos_sin_filtro(db: Session = Depends(get_db)):
+    productos = (
+        db.query(Producto)
+        .options(
+            joinedload(Producto.marca).joinedload(Marca.categoria)
+        )
+        .all()
+    )
+
+    inventarios = (
+        db.query(Inventario)
+        .join(Almacen, Inventario.id_almacen == Almacen.id_almacen)
+        .all()
+    )
+
+    inventario_por_producto = {}
+
+    for inv in inventarios:
+        inventario_por_producto.setdefault(inv.id_producto, []).append({
+            "id_inventario": inv.id_inventario,
+            "id_almacen": inv.id_almacen,
+            "nombre_almacen": inv.almacen.nombre,
+            "stock": inv.stock
+        })
+
+    resultado = []
+
+    for producto in productos:
+        resultado.append({
+            "id_producto": producto.id_producto,
+            "codigo_barras": producto.codigo_barras,
+            "nombre": producto.nombre,
+            "imagen": producto.imagen,
+            "descripcion": producto.descripcion,
+            "precio_compra": float(producto.precio_compra),
+            "precio_venta": float(producto.precio_venta),
+            "stock_actual": producto.stock_actual,
+            "stock_minimo": producto.stock_minimo,
+            "unidad_medida": producto.unidad_medida,
+            "activo": producto.activo,
+            "id_marca": producto.id_marca,
+            "marca": {
+                "id_marca": producto.marca.id_marca,
+                "nombre": producto.marca.nombre,
+                "categoria": {
+                    "id_categoria": producto.marca.categoria.id_categoria,
+                    "nombre": producto.marca.categoria.nombre,
+                    "descripcion": producto.marca.categoria.descripcion
+                }
+            },
+            "detalle_por_almacen": inventario_por_producto.get(producto.id_producto, [])
+        })
+
+    return resultado
 
 # ===========================
 # 🟢 Obtener producto por código
