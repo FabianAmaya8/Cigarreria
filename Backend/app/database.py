@@ -7,11 +7,11 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Variables de Entorno
-USER_SQL = os.getenv("User-Sql")
-PASS_SQL = os.getenv("Pass-Sql")
-HOST_SQL = os.getenv("Host-Sql")
-PUERTO_SQL = os.getenv("Puerto-Sql")
-DATABASE_SQL = os.getenv("Database-Sql")
+USER_SQL = os.getenv("User_Sql")
+PASS_SQL = os.getenv("Pass_Sql")
+HOST_SQL = os.getenv("Host_Sql")
+PUERTO_SQL = os.getenv("Puerto_Sql")
+DATABASE_SQL = os.getenv("Database_Sql")
 
 # Conexión a MySQL
 DATABASE_URL = f"mysql+pymysql://{USER_SQL}:{PASS_SQL}@{HOST_SQL}:{PUERTO_SQL}/{DATABASE_SQL}"

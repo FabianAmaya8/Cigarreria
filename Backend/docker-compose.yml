@@ -20,8 +20,8 @@ services:
     container_name: cigarreria_mysql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: ${Pass-Sql}
-      MYSQL_DATABASE: ${Database-Sql}
+      MYSQL_ROOT_PASSWORD: ${Pass_Sql}
+      MYSQL_DATABASE: ${Database_Sql}
     ports:
       - "3307:3306"
     volumes:

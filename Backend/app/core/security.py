@@ -12,8 +12,8 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-Secret_Key_Env = os.getenv("Secret-Key")
-Time_Env = os.getenv("Tiempo-Token")
+Secret_Key_Env = os.getenv("Secret_Key")
+Time_Env = os.getenv("Tiempo_Token")
 Time_Env = int(Time_Env)
 
 SECRET_KEY = Secret_Key_Env
