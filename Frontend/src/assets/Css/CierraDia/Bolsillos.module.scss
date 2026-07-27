@@ -1,0 +1,716 @@
+﻿.panel {
+    background: var(--card-bg);
+    color: var(--texto);
+    border-radius: 1.25rem;
+    padding: 1rem;
+    display: grid;
+    gap: 1rem;
+    border: 1px solid var(--card-border);
+    box-shadow: var(--shadow-1);
+}
+
+.panelHeader,
+.sectionHeader,
+.progressHeader,
+.cardFooter,
+.modalHeader,
+.modalFooter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+}
+
+.panelHeader {
+    align-items: flex-start;
+}
+
+.panelLead,
+.bolsilloDesc,
+.summaryNote,
+.fieldHint,
+.metaLabel,
+.timelineBody p,
+.moneyMeta {
+    color: var(--texto-sec);
+}
+
+.panelLead {
+    margin: 0;
+    max-width: 56rem;
+}
+
+.kicker {
+    display: block;
+    color: var(--texto-muted);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.summaryGrid,
+.listGrid,
+.colorGrid,
+.iconGrid,
+.timeline,
+.formGrid {
+    display: grid;
+    gap: 1rem;
+}
+
+.summaryGrid {
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+}
+
+.summaryCard {
+    border-radius: 1rem;
+    padding: 1rem;
+    border: 1px solid var(--card-border);
+    background: color-mix(in srgb, var(--card-bg) 90%, black);
+    display: grid;
+    gap: 0.55rem;
+    min-height: 125px;
+}
+
+.summaryLabel,
+.statLabel,
+.optionTitle,
+.fieldLabel,
+.previewTitle,
+.sectionKicker {
+    display: block;
+    font-size: 0.9rem;
+}
+
+.summaryLabel,
+.statLabel {
+    color: var(--texto-sec);
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.summaryLabel i,
+.statLabel i {
+    color: var(--azul-200);
+}
+
+.summaryValue,
+.moneyMain,
+.previewBox strong,
+.bolsilloName {
+    font-weight: 800;
+    letter-spacing: -0.03em;
+}
+
+.summaryValue {
+    font-size: clamp(1.4rem, 2vw, 2rem);
+}
+
+.summaryNote {
+    font-size: 0.85rem;
+}
+
+.progressWrap {
+    display: grid;
+    gap: 0.55rem;
+}
+
+.progressTrack,
+.cardProgress {
+    width: 100%;
+    height: 0.9rem;
+    border-radius: 999px;
+    overflow: hidden;
+    background: color-mix(in srgb, var(--card-border) 85%, black);
+    border: 1px solid var(--card-border);
+}
+
+.progressFill,
+.cardProgress span {
+    height: 100%;
+    border-radius: inherit;
+    display: block;
+    transition: width var(--transition-fast);
+}
+
+.progressFill {
+    background: linear-gradient(90deg, var(--rojo-500), var(--azul-400));
+}
+
+.progressFooter {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    color: var(--texto-sec);
+    font-size: 0.9rem;
+}
+
+.listGrid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.bolsilloCard {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.2rem;
+    padding: 1rem;
+    border: 1px solid var(--card-border);
+    background:
+        radial-gradient(circle at top right, color-mix(in srgb, var(--accent) 28%, transparent), transparent 34%),
+        color-mix(in srgb, var(--card-bg) 94%, black);
+    display: grid;
+    gap: 0.85rem;
+}
+
+.bolsilloCard:hover {
+    transform: scale(1.05);
+    transition: transform var(--transition-fast);
+    background:
+        radial-gradient(circle at top right, color-mix(in srgb, var(--accent) 80%, transparent), transparent 50%),
+        color-mix(in srgb, var(--card-bg) 94%, black);
+}
+
+.bolsilloAccent {
+    position: absolute;
+    inset: auto auto 0 0;
+    width: 100%;
+    height: 4px;
+    background: var(--accent);
+}
+
+.bolsilloHead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+}
+
+.bolsilloIdentity {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    min-width: 0;
+}
+
+.bolsilloAvatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 1rem;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    background: var(--accent);
+    color: #fff;
+
+    i {
+        font-size: 1.8rem;
+    }
+}
+
+.bolsilloInfo {
+    min-width: 0;
+    display: grid;
+    gap: 0.35rem;
+}
+
+.bolsilloName {
+    font-size: 1rem;
+}
+
+.activitySection {
+    display: grid;
+    gap: 0.9rem;
+    padding-top: 0.25rem;
+}
+
+.bolsilloDesc {
+    font-size: 0.88rem;
+}
+
+.tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.45rem 0.8rem;
+    border-radius: 999px;
+    background: var(--success-soft);
+    color: var(--texto);
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.moneyRow {
+    display: grid;
+    gap: 0.15rem;
+}
+
+.moneyMain {
+    font-size: 1.45rem;
+}
+
+.moneyMeta {
+    font-size: 0.85rem;
+}
+
+.cardFooter {
+    align-items: flex-end;
+}
+
+.metaLabel {
+    color: var(--texto-muted);
+    margin-bottom: 0.15rem;
+}
+
+.cardActions {
+    width: 100%;
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+}
+.actionButton,
+.dangerButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.actionButton,
+.secondaryButton,
+.primaryButton,
+.dangerButton,
+.cancelButton,
+.saveButton,
+.modalClose,
+.buttons button,
+.colorSwatch,
+.iconOption {
+    border: 1px solid transparent;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: transform var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast), opacity var(--transition-fast);
+}
+
+.primaryButton,
+.secondaryButton,
+.saveButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    font-weight: 700;
+}
+
+.actionButton,
+.primaryButton,
+.saveButton {
+    background: linear-gradient(135deg, var(--rojo-600), var(--azul-600));
+    color: #fff;
+    padding: 0.75rem 1rem;
+}
+
+.secondaryButton,
+.cancelButton {
+    background: transparent;
+    color: var(--texto);
+    border-color: var(--card-border);
+    padding: 0.65rem 0.95rem;
+}
+
+.dangerButton {
+    background: color-mix(in srgb, var(--danger) 22%, transparent);
+    color: #ffdede;
+    border-color: color-mix(in srgb, var(--danger) 42%, transparent);
+    padding: 0.65rem 0.95rem;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+}
+
+.buttons button:hover,
+.primaryButton:hover,
+.secondaryButton:hover,
+.actionButton:hover,
+.dangerButton:hover,
+.cancelButton:hover,
+.saveButton:hover,
+.modalClose:hover,
+.colorSwatch:hover,
+.iconOption:hover {
+    transform: translateY(-1px);
+}
+
+.buttons button {
+    padding: 0.65rem 0.95rem;
+    background: transparent;
+    color: var(--texto);
+    border-color: var(--card-border);
+}
+
+.active {
+    background: linear-gradient(135deg, var(--rojo-600), var(--azul-600)) !important;
+    border-color: transparent !important;
+    color: #fff !important;
+}
+
+.emptyState {
+    border: 1px dashed var(--card-border);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    display: grid;
+    place-items: center;
+    gap: 0.65rem;
+    color: var(--texto-muted);
+    text-align: center;
+}
+
+.emptyState i {
+    font-size: 2.2rem;
+    color: var(--azul-200);
+}
+
+.activitySection {
+    display: grid;
+    gap: 0.9rem;
+    padding-top: 0.25rem;
+}
+
+.timeline {
+    gap: 0.85rem;
+}
+
+.timelineItem {
+    display: grid;
+    grid-template-columns: 15px repeat(auto-fill, minmax(250px, 1fr));
+    gap: var(--space-md);
+    border-bottom: 1px solid var(--card-border);
+    padding-bottom: 0.85rem;
+}
+
+.timelineDot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-top: 0.35rem;
+    background: var(--rojo-500);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--rojo-500) 18%, transparent);
+    flex-shrink: 0;
+}
+
+.timelineBody p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.modalBackdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(0, 0, 0, 0.65);
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+}
+
+.modal {
+    width: min(720px, 100%);
+    max-height: 92vh;
+    overflow-y: auto;
+    border-radius: 1.4rem;
+    padding: 1rem;
+    border: 1px solid var(--card-border);
+    background: linear-gradient(180deg, color-mix(in srgb, var(--card-bg) 94%, black), var(--fondo-elevado));
+    box-shadow: var(--shadow-1);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.modalTitle {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.modalClose {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    display: grid;
+    place-items: center;
+    background: transparent;
+    color: var(--texto);
+    border-color: var(--card-border);
+
+    i {
+        font-size: 1.2rem;
+    }
+}
+
+.formGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.field {
+    display: grid;
+    gap: 0.45rem;
+}
+
+.fieldFull {
+    grid-column: 1 / -1;
+}
+
+.fieldInput,
+.fieldTextarea {
+    width: 100%;
+    border: 1px solid var(--input-border);
+    background: var(--input-bg);
+    color: var(--input-text);
+    padding: 0.75rem 0.9rem;
+    border-radius: var(--radius-md);
+    outline: none;
+}
+
+.fieldInput:focus,
+.fieldTextarea:focus {
+    border-color: var(--input-focus-border);
+    box-shadow: var(--input-focus-shadow);
+}
+
+.fieldTextarea {
+    resize: vertical;
+    min-height: 88px;
+}
+
+.optionTitle {
+    color: var(--texto-sec);
+}
+
+.colorGrid,
+.iconGrid {
+    grid-template-columns: repeat(auto-fit, minmax(44px, 1fr));
+}
+
+.colorSwatch,
+.iconOption {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    background: var(--card-bg);
+    border-color: var(--card-border);
+}
+
+.colorSwatch i,
+.iconOption i {
+    font-size: 1.2rem;
+}
+
+.iconOption {
+    color: var(--texto);
+    background: color-mix(in srgb, var(--card-bg) 90%, black);
+}
+
+.isSelected {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--azul-200) 40%, transparent);
+}
+
+.acciones{
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--space-sm);
+}
+
+.previewBox {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+    padding: 1rem;
+    min-height: 150px;
+    display: grid;
+    gap: 0.35rem;
+    align-content: start;
+    background:
+        radial-gradient(circle at top right, color-mix(in srgb, var(--accent) 40%, transparent), transparent 45%),
+        color-mix(in srgb, var(--card-bg) 92%, black);
+    border: 1px solid var(--card-border);
+}
+
+.previewBox strong {
+    font-size: 1.2rem;
+}
+
+.previewBox i {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    font-size: 3rem;
+    color: color-mix(in srgb, var(--accent) 70%, white);
+    opacity: 0.9;
+}
+
+.alert {
+    grid-column: 1 / -1;
+    padding: 0.9rem 1rem;
+    border-radius: 0.9rem;
+    background: var(--danger-soft);
+    color: #ffdede;
+    border: 1px solid color-mix(in srgb, var(--danger) 45%, transparent);
+}
+
+.modalFooter {
+    grid-column: 1 / -1;
+}
+
+@media (max-width: 768px) {
+    .timelineItem {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+    .panel,
+    .modal {
+        padding: 0.95rem;
+    }
+
+    .formGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .cardFooter,
+    .modalFooter,
+    .progressFooter {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .cardActions {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .buttons button,
+    .primaryButton,
+    .secondaryButton,
+    .actionButton,
+    .dangerButton,
+    .cancelButton,
+    .saveButton {
+        width: 100%;
+    }
+}
+
+.sectionActions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.notice {
+    padding: 0.9rem 1rem;
+    border-radius: 0.9rem;
+    background: var(--success-soft);
+    color: var(--success);
+    border: 1px solid color-mix(in srgb, var(--success) 45%, transparent);
+}
+
+.success {
+    padding: 0.9rem 1rem;
+    border-radius: 0.9rem;
+    background: var(--success-soft);
+    color: var(--success);
+    border: 1px solid color-mix(in srgb, var(--success) 45%, transparent);
+}
+.summaryLabel svg,
+.statLabel svg,
+.emptyState svg,
+.modalClose svg,
+.actionButton svg,
+.primaryButton svg,
+.secondaryButton svg,
+.dangerButton svg,
+.cancelButton svg,
+.saveButton svg,
+.tag svg,
+.kicker svg {
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+}
+
+.iconPickerGrid {
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: repeat(auto-fit, minmax(112px, 1fr));
+}
+
+.iconPickerButton {
+    border: 1px solid var(--card-border);
+    border-radius: 1rem;
+    padding: 0.85rem 0.75rem;
+    background: color-mix(in srgb, var(--card-bg) 92%, black);
+    color: var(--texto);
+    display: grid;
+    gap: 0.4rem;
+    place-items: center;
+    min-height: 92px;
+}
+
+.iconPickerGlyph {
+    color: inherit;
+}
+
+.swatchCheck {
+    font-size: 1rem;
+    font-weight: 800;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.previewIcon {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    color: color-mix(in srgb, var(--accent) 70%, white);
+    opacity: 0.9;
+}
+
+.notice {
+    padding: 0.9rem 1rem;
+    border-radius: 0.9rem;
+    background: var(--success-soft);
+    color: var(--success);
+    border: 1px solid color-mix(in srgb, var(--success) 45%, transparent);
+}
+
+.timelineDotEntrada {
+    background: var(--success);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--success) 18%, transparent);
+}
+
+.timelineDotSalida {
+    background: var(--info);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--info) 18%, transparent);
+}
+
+.timelineDotPago {
+    background: var(--danger);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--danger) 18%, transparent);
+}
+
+@media (max-width: 768px) {
+    .iconPickerGrid {
+        grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
+    }
+}

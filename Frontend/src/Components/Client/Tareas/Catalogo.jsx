@@ -1,6 +1,6 @@
 import styles from "../../../assets/Css/index.module.scss";
 import stylesFiltro from "../../../assets/Css/deuda.module.scss";
-import stylesCatalogo from "../../../assets/Css/catalogo.module.scss";
+import stylesCatalogo from "../../../assets/Css/Catalogo.module.scss";
 import stylesBoton from "../../../assets/Css/crud.module.scss";
 import { Loading, Error } from "../../../Utils/Cargando";
 import { useCatalogo, useProductosSinFiltro } from "../../../Hooks/Client/useCatalogo";

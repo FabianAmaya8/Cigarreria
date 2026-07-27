@@ -18,14 +18,15 @@ import ListaDeudas from "./Components/Vendedor/Deudas/ListaDeudas";
 import DetallesDeuda from "./Components/Vendedor/Deudas/DetallesDeuda";
 import CrearDeuda from "./Components/Vendedor/Deudas/CrearDeuda";
 import Catalogo from "./Components/Client/Tareas/Catalogo";
-import Personal from "./Components/Client/Personal/personal";
+import Personal from "./Components/Client/Personal/Personal.jsx";
 import GestionInventario from "./Components/Vendedor/GestionInventario/GestionInventario";
 import ProductosView from "./Components/Vendedor/GestionInventario/CRUDsProductos/Productos";
 import MarcasView from "./Components/Vendedor/GestionInventario/CrudMarcas/MarcasView";
 import CategoriasView from "./Components/Vendedor/GestionInventario/CrudCategorias/CategoriasView";
 import AlmacenesView from "./Components/Vendedor/GestionInventario/CrudAlmacenes/AlmacenesView";
-import Pos from "./Components/Vendedor/ControlVentas/Pos";
 import POSLayout from "./modules/Pos/pages/PosLayout";
+import CierreDia from "./Components/Vendedor/CierreDia/CierreDia";
+import Bolsillos from "./Components/Vendedor/CierreDia/Bolsillos";
 
 const router = createBrowserRouter([
     {
@@ -61,6 +62,9 @@ const router = createBrowserRouter([
             { path: "/Gestion/Marcas", element: <MarcasView />,},
             { path: "/Gestion/Categorias", element: <CategoriasView />,},
             { path: "/Gestion/Almacenes", element: <AlmacenesView />,},
+
+            { path: "/CierreDia", element: <CierreDia />, },
+            { path: "/CierreDia/Bolsillos", element: <Bolsillos />, },
 
             // Control de Ventas
             { path: "/POS", element: <POSLayout />, },

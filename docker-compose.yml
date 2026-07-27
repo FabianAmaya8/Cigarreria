@@ -2,18 +2,16 @@ version: "3.9"
 
 services:
   api:
-    build: .
+    build: ./Backend
     container_name: cigarreria_api
     restart: always
     env_file:
-      - .env
+      - ./Backend/.env
     ports:
       - "8000:8000"
     depends_on:
       - mysql
       - redis
-    volumes:
-      - .:/app
 
   mysql:
     image: mysql:8.0
@@ -33,3 +31,11 @@ services:
     restart: always
     ports:
       - "6379:6379"
+
+  frontend:
+    build: ./Frontend
+    container_name: cigarreria_frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - api

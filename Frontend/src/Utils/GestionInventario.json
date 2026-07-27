@@ -38,10 +38,10 @@
                 "icono": "bx bxs-truck"
             },
             {
-                "ruta": "/Gestion/Cajas",
-                "nombre": "Gestión de Cajas",
-                "descripcion": "Módulo para gestionar las cajas registradoras, incluyendo la configuración y monitoreo de las mismas.",
-                "icono": "bx bx-money-withdraw"
+                "ruta": "/CierreDia",
+                "nombre": "Cierre de Día",
+                "descripcion": "Módulo para cerrar el inventario diario y realizar ajustes en el inventario.",
+                "icono": "bx bx-archive"
             },
             {
                 "ruta": "Registro",

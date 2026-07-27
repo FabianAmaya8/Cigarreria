@@ -266,6 +266,97 @@ CREATE TABLE arqueos_caja (
 );
 
 -- =======================================
+-- BOLSILLOS
+-- =======================================
+
+CREATE TABLE bolsillos (
+    id_bolsillo INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion TEXT,
+    saldo_actual DECIMAL(12,2) NOT NULL DEFAULT 0,
+    activo BOOLEAN DEFAULT TRUE,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- =======================================
+-- MOVIMIENTOS DE BOLSILLOS
+-- =======================================
+
+CREATE TABLE bolsillo_movimientos (
+    id_movimiento INT AUTO_INCREMENT PRIMARY KEY,
+
+    id_bolsillo INT NOT NULL,
+    id_caja INT NOT NULL,
+    id_usuario INT NOT NULL,
+
+    tipo ENUM('entrada','salida') NOT NULL,
+    monto DECIMAL(12,2) NOT NULL,
+    motivo VARCHAR(255),
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (id_bolsillo)
+        REFERENCES bolsillos(id_bolsillo)
+        ON DELETE CASCADE,
+
+    FOREIGN KEY (id_caja)
+        REFERENCES cajas(id_caja),
+
+    FOREIGN KEY (id_usuario)
+        REFERENCES usuarios(id_usuario)
+);
+
+-- =======================================
+-- CIERRES DE DÍA
+-- =======================================
+
+CREATE TABLE cierres_dia (
+    id_cierre INT AUTO_INCREMENT PRIMARY KEY,
+
+    fecha DATE NOT NULL,
+    id_caja INT NOT NULL,
+
+    total_ventas DECIMAL(12,2) NOT NULL,
+    saldo_caja DECIMAL(12,2) NOT NULL,
+
+    id_usuario INT NOT NULL,
+
+    fecha_cierre TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    observaciones TEXT,
+
+    FOREIGN KEY (id_caja)
+        REFERENCES cajas(id_caja),
+
+    FOREIGN KEY (id_usuario)
+        REFERENCES usuarios(id_usuario),
+
+    UNIQUE(fecha)
+);
+
+-- =======================================
+-- DETALLE DE MÉTODOS DE PAGO DEL CIERRE
+-- =======================================
+
+CREATE TABLE cierre_metodos_pago (
+    id_detalle INT AUTO_INCREMENT PRIMARY KEY,
+
+    id_cierre INT NOT NULL,
+    id_metodo_pago INT NOT NULL,
+
+    total DECIMAL(12,2) NOT NULL,
+
+    FOREIGN KEY (id_cierre)
+        REFERENCES cierres_dia(id_cierre)
+        ON DELETE CASCADE,
+
+    FOREIGN KEY (id_metodo_pago)
+        REFERENCES metodos_pago(id_metodo)
+);
+
+ALTER TABLE cierres_dia
+ADD COLUMN cantidad_a_dejar DECIMAL(12,2) NOT NULL DEFAULT 0 AFTER saldo_caja,
+ADD COLUMN total_enviado_bolsillos DECIMAL(12,2) NOT NULL DEFAULT 0 AFTER cantidad_a_dejar;
+
+-- =======================================
 -- INSERCIÓN DE DATOS BÁSICOS
 -- =======================================
 

@@ -172,6 +172,22 @@
     color: #fff;
 }
 
+/* =========================
+   SPACING SYSTEM
+   ========================= */
+
+:root {
+    --space-xxs: 4px;
+    --space-xs: 8px;
+    --space-sm: 12px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-2xl: 48px;
+    --space-3xl: 72px;
+    --space-4xl: 96px;
+}
+
 body,
 #root {
     width: 100%;
@@ -315,6 +331,9 @@ main{
         margin-top: 2rem;
     }
     .volver{
-        top: 90px;
+        .butnvolver{
+            position: fixed;
+            top: 80px;
+        }
     }
 }

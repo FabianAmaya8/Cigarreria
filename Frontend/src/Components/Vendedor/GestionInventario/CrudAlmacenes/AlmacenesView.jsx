@@ -5,7 +5,7 @@ import ModalActualizarStock from "./ModalActualizarStock";
 import ModalTransferirStock from "./ModalTransferirStock";
 import Paginacion from "../Paginacion";
 import styles from "../../../../assets/Css/crud.module.scss";
-import stylesInicio from "../../../../assets/Css/catalogo.module.scss";
+import stylesInicio from "../../../../assets/Css/Catalogo.module.scss";
 import stylesFiltro from "../../../../assets/Css/deuda.module.scss";
 import { Warehouse, ShoppingBasket } from "lucide-react";
 import { Error, Loading } from "../../../../Utils/Cargando";
