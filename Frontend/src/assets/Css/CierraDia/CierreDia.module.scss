@@ -1,336 +1,301 @@
 ﻿.container {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    padding: 1rem 0 2rem;
+    gap: var(--space-md);
+    padding: var(--space-md) 0 var(--space-2xl);
     color: var(--texto);
 }
 
 .hero {
     position: relative;
     overflow: hidden;
-    border-radius: 1.4rem;
-    padding: 1.25rem;
+    padding: var(--space-lg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-lg);
     background:
         radial-gradient(circle at top right, color-mix(in srgb, var(--azul-400) 24%, transparent), transparent 36%),
         linear-gradient(145deg, color-mix(in srgb, var(--card-bg) 92%, black), color-mix(in srgb, var(--azul-900) 25%, var(--card-bg)));
-    border: 1px solid var(--card-border);
-    box-shadow: var(--shadow-1);
 }
 
 .heroHeader,
-.panelHeader,
 .sectionHeader,
 .cardTopLine,
-.bolsilloHead,
-.progressHeader,
-.cardFooter,
 .modalHeader,
 .modalFooter {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 0.8rem;
+    gap: var(--space-sm);
     flex-wrap: wrap;
 }
 
 .heroTitle {
     display: grid;
-    gap: 0.35rem;
+    gap: var(--space-xs);
 
     h2 {
-        font-size: clamp(1.7rem, 2.5vw, 2.4rem);
         margin: 0;
+        font-size: clamp(1.7rem, 2.5vw, var(--font-4xl));
     }
 }
 
-.heroLead,
-.panelLead,
-.bolsilloDesc,
-.summaryNote,
-.statHint,
-.fieldHint,
-.metaLabel,
-.timelineBody p {
-    color: var(--texto-sec);
-}
-
-.heroLead,
-.panelLead {
+.heroLead {
     margin: 0;
     max-width: 56rem;
+    color: var(--texto-sec);
 }
 
 .kicker,
 .sectionKicker {
     display: block;
-    color: var(--texto-muted);
-    font-size: 0.78rem;
-    letter-spacing: 0.08em;
+    font-size: var(--font-xs);
+    letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
+    color: var(--texto-sec);
 }
 
-.heroBadge,
-.tag {
+.heroBadge {
     display: inline-flex;
     align-items: center;
-    gap: 0.45rem;
-    padding: 0.45rem 0.8rem;
-    border-radius: 999px;
-    background: var(--success-soft);
-    color: var(--texto);
-    font-size: 0.9rem;
+    gap: var(--space-xxs);
+    padding: var(--space-xs) var(--space-sm);
     white-space: nowrap;
+    font-size: var(--font-sm);
+    color: var(--texto);
+    background: var(--success-soft);
+    border-radius: var(--radius-full);
 }
 
 .badgePending {
-    background: color-mix(in srgb, var(--warning) 90%, white);
     color: #1e1300;
+    background: color-mix(in srgb, var(--warning) 90%, white);
 }
 
 .summaryGrid {
     display: grid;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
     grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-    gap: 0.9rem;
-    margin-top: 1.1rem;
 }
 
 .statCard,
 .summaryCard {
-    border-radius: 1rem;
-    padding: 1rem;
-    border: 1px solid var(--card-border);
-    background: color-mix(in srgb, var(--card-bg) 90%, black);
     display: grid;
-    gap: 0.55rem;
-    min-height: 125px;
+    gap: var(--space-xs);
+    min-height: 110px;
+    padding: var(--space-md);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    background: color-mix(in srgb, var(--card-bg) 90%, black);
 }
 
 .statLabel,
 .summaryLabel {
-    font-size: 0.9rem;
-    color: var(--texto-sec);
     display: flex;
     align-items: center;
-    gap: 0.45rem;
-}
+    gap: var(--space-xxs);
+    font-size: var(--font-sm);
+    color: var(--texto-sec);
 
-.statLabel i,
-.summaryLabel i {
-    color: var(--azul-200);
-}
-
-.statValue,
-.summaryValue,
-.moneyMain,
-.previewBox strong,
-.bolsilloName {
-    font-weight: 800;
-    letter-spacing: -0.03em;
+    svg {
+        color: var(--azul-200);
+    }
 }
 
 .statValue,
 .summaryValue {
-    font-size: clamp(1.4rem, 2vw, 2rem);
+    font-size: clamp(1.4rem, 2vw, var(--font-4xl));
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-tight);
 }
 
-.statHint,
-.summaryNote {
-    font-size: 0.85rem;
+.statHint {
+    font-size: var(--font-sm);
+    color: var(--texto-sec);
 }
 
-.progressSection,
-.progressWrap {
+.progressSection {
     display: grid;
-    gap: 0.55rem;
-    margin-top: 1rem;
+    gap: var(--space-xs);
+    margin-top: var(--space-md);
 }
 
-.progressTrack,
-.cardProgress {
+.progressTrack {
     width: 100%;
-    height: 0.9rem;
-    border-radius: 999px;
+    height: .9rem;
     overflow: hidden;
-    background: color-mix(in srgb, var(--card-border) 85%, black);
     border: 1px solid var(--card-border);
-}
-
-.progressFill,
-.cardProgress span {
-    height: 100%;
-    border-radius: inherit;
-    display: block;
-    transition: width var(--transition-fast);
+    border-radius: var(--radius-full);
+    background: color-mix(in srgb, var(--card-border) 85%, black);
 }
 
 .progressFill {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    transition: width var(--transition-fast);
     background: linear-gradient(90deg, var(--rojo-500), var(--azul-400));
 }
 
-.progressLegend,
-.progressFooter {
+.progressLegend {
     display: flex;
     justify-content: space-between;
-    gap: 0.75rem;
+    gap: var(--space-sm);
     flex-wrap: wrap;
+    font-size: var(--font-sm);
     color: var(--texto-sec);
-    font-size: 0.9rem;
 }
 
 .range {
     display: grid;
+    gap: var(--space-md);
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
 }
 
 .rangeItem,
-.field,
-.bolsilloInfo,
-.timelineBody {
+.field {
     display: grid;
-    gap: 0.45rem;
+    gap: var(--space-xs);
 }
 
 .rangeItem label,
-.fieldLabel,
-.optionTitle,
-.previewTitle,
-.metaLabel {
-    font-size: 0.9rem;
+.fieldLabel {
+    font-size: var(--font-sm);
 }
 
 .rangeItem input,
 .fieldInput,
 .fieldTextarea {
     width: 100%;
-    border: 1px solid var(--input-border);
+    padding: var(--space-sm) var(--space-md);
+    color: var(--texto);
     background: var(--input-bg);
-    color: var(--input-text);
-    padding: 0.75rem 0.9rem;
+    border: 1px solid var(--input-border);
     border-radius: var(--radius-md);
     outline: none;
+
+    &:focus {
+        border-color: var(--rojo-500);
+        box-shadow: var(--focus-ring);
+    }
 }
 
-.rangeItem input:focus,
-.fieldInput:focus,
-.fieldTextarea:focus {
-    border-color: var(--input-focus-border);
-    box-shadow: var(--input-focus-shadow);
+.fieldHint {
+    color: var(--texto-sec);
+}
+
+.fieldFull {
+    grid-column: 1 / -1;
 }
 
 .fieldTextarea {
-    resize: vertical;
     min-height: 88px;
+    resize: vertical;
 }
 
-.containerCart,
-.panel {
-    background: var(--card-bg);
-    color: var(--texto);
-    border-radius: 1.25rem;
-    padding: 1rem;
+.rangeActions {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.containerCart {
     display: grid;
-    gap: 1rem;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    color: var(--texto);
+    background: var(--card-bg);
     border: 1px solid var(--card-border);
-    box-shadow: var(--shadow-1);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+}
+
+.sectionActions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
 }
 
 .sectionTag {
-    padding: 0.45rem 0.75rem;
-    border-radius: 999px;
-    background: color-mix(in srgb, var(--azul-600) 22%, transparent);
+    padding: var(--space-xs) var(--space-sm);
+    font-size: var(--font-sm);
     color: var(--texto);
-    font-size: 0.85rem;
+    background: color-mix(in srgb, var(--azul-600) 22%, transparent);
+    border-radius: var(--radius-full);
 }
 
 .total {
-    font-weight: 700;
+    font-weight: var(--weight-bold);
     color: var(--success);
 }
 
-.buttons,
-.cardActions,
-.modalFooter {
+.buttons {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.65rem;
-}
+    gap: var(--space-sm);
 
-.buttons button,
-.primaryButton,
-.secondaryButton,
-.actionButton,
-.dangerButton,
-.cancelButton,
-.saveButton,
-.modalClose {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-xs);
-    padding: 0.75rem 1rem;
-    border: 1px solid transparent;
-    border-radius: 999px;
-    cursor: pointer;
-    transition: transform var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast), opacity var(--transition-fast);
-}
+    button {
+        padding: var(--space-xs) var(--space-sm);
+        color: var(--texto);
+        background: transparent;
+        border: 1px solid var(--card-border);
+        border-radius: var(--radius-full);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--space-xxs);
+        transition: transform var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast);
 
-.buttons button,
-.actionButton,
-.dangerButton,
-.cancelButton,
-.saveButton,
-.modalClose {
-    padding: 0.65rem 0.95rem;
-}
-
-.buttons button,
-.actionButton,
-.cancelButton {
-    background: transparent;
-    color: var(--texto);
-    border-color: var(--card-border);
-}
-
-.buttons button:hover,
-.actionButton:hover,
-.cancelButton:hover,
-.primaryButton:hover,
-.secondaryButton:hover,
-.dangerButton:hover,
-.saveButton:hover,
-.modalClose:hover {
-    transform: translateY(-1px);
+        &:hover {
+            transform: translateY(-1px);
+        }
+    }
 }
 
 .primaryButton,
 .secondaryButton,
-.saveButton {
+.cancelButton,
+.saveButton,
+.modalClose {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.45rem;
-    font-weight: 700;
+    gap: var(--space-xxs);
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: var(--radius-full);
+    transition: transform var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast);
+
+    &:hover {
+        transform: translateY(-1px);
+    }
 }
 
 .primaryButton,
 .saveButton {
-    background: linear-gradient(135deg, var(--rojo-600), var(--azul-600));
+    padding: var(--space-sm) var(--space-md);
     color: #fff;
+    font-weight: var(--weight-bold);
+    background: linear-gradient(135deg, var(--rojo-600), var(--azul-600));
 }
 
 .secondaryButton {
-    background: color-mix(in srgb, var(--azul-600) 22%, transparent);
+    padding: var(--space-sm) var(--space-md);
     color: var(--texto);
+    font-weight: var(--weight-bold);
+    background: color-mix(in srgb, var(--azul-600) 22%, transparent);
     border-color: color-mix(in srgb, var(--azul-600) 42%, transparent);
-    padding: 0.75rem 1rem;
 }
 
-.dangerButton {
-    background: color-mix(in srgb, var(--danger) 22%, transparent);
-    color: #ffdede;
-    border-color: color-mix(in srgb, var(--danger) 42%, transparent);
+.cancelButton {
+    padding: var(--space-xs) var(--space-sm);
+    color: var(--texto);
+    background: transparent;
+    border-color: var(--card-border);
 }
 
 .active {
@@ -340,13 +305,9 @@
 }
 
 .grid,
-.gridVentas,
-.listGrid,
-.colorGrid,
-.iconGrid,
-.timeline {
+.gridVentas {
     display: grid;
-    gap: 1rem;
+    gap: var(--space-md);
 }
 
 .grid {
@@ -357,72 +318,79 @@
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
-.listGrid {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-}
-
 .card {
-    border-radius: 1rem;
-    padding: 1rem;
+    display: grid;
+    gap: var(--space-xs);
+    padding: var(--space-md);
     border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
     background:
         radial-gradient(circle at top right, color-mix(in srgb, var(--azul-300) 12%, transparent), transparent 32%),
         color-mix(in srgb, var(--card-bg) 92%, black);
-    display: grid;
-    gap: 0.55rem;
 }
 
-.cardTopLine {
-    i {
-        color: var(--azul-200);
-        font-size: 1.35rem;
-    }
-}
-
-.emptyState {
-    border: 1px dashed var(--card-border);
-    border-radius: 1rem;
-    padding: 1.5rem;
-    display: grid;
-    place-items: center;
-    gap: 0.65rem;
-    color: var(--texto-muted);
-    text-align: center;
-}
-
-.emptyState i {
-    font-size: 2.2rem;
+.cardTopLine svg {
+    font-size: var(--font-xl);
     color: var(--azul-200);
 }
 
+.nombre {
+    font-weight: var(--weight-medium);
+}
+
+.saldo {
+    font-size: var(--font-xl);
+    font-weight: var(--weight-bold);
+}
+
+.helperText {
+    font-size: var(--font-xs);
+    color: var(--texto-sec);
+}
+
+.emptyState {
+    display: grid;
+    place-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-lg);
+    text-align: center;
+    color: var(--texto-sec);
+    border: 1px dashed var(--card-border);
+    border-radius: var(--radius-lg);
+
+    svg {
+        font-size: var(--font-3xl);
+        color: var(--azul-200);
+    }
+}
+
 .ventaCard {
-    border: 1px solid var(--card-border);
-    background: color-mix(in srgb, var(--card-bg) 94%, black);
-    border-radius: 1rem;
-    padding: 1rem;
     display: flex;
-    gap: 0.9rem;
     align-items: center;
+    gap: var(--space-sm);
     min-height: 128px;
+    padding: var(--space-md);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    background: color-mix(in srgb, var(--card-bg) 94%, black);
 }
 
 .ventaImageWrap,
-.ventaBadge,
-.bolsilloAvatar {
-    width: 72px;
-    height: 72px;
-    border-radius: 1rem;
-    overflow: hidden;
+.ventaBadge {
     display: grid;
     place-items: center;
     flex-shrink: 0;
+    width: 72px;
+    height: 72px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
 }
 
 .ventaImageWrap {
     background: color-mix(in srgb, var(--azul-600) 20%, transparent);
 
-    i {
-        font-size: 2.3rem;
+    svg {
+        font-size: var(--font-3xl);
         color: var(--azul-200);
     }
 }
@@ -436,8 +404,8 @@
 .ventaBadge {
     background: linear-gradient(135deg, color-mix(in srgb, var(--rojo-600) 32%, transparent), color-mix(in srgb, var(--azul-600) 28%, transparent));
 
-    i {
-        font-size: 2rem;
+    svg {
+        font-size: var(--font-2xl);
         color: var(--texto);
     }
 }
@@ -446,15 +414,15 @@
     flex: 1;
     min-width: 0;
     display: grid;
-    gap: 0.35rem;
+    gap: var(--space-xs);
 
     strong {
-        font-size: 1rem;
+        font-size: var(--font-md);
     }
 
     span {
+        font-size: var(--font-sm);
         color: var(--texto-sec);
-        font-size: 0.9rem;
     }
 }
 
@@ -462,254 +430,66 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 0.8rem;
+    gap: var(--space-sm);
     flex-wrap: wrap;
-    font-size: 0.92rem;
+    font-size: var(--font-sm);
     color: var(--texto-sec);
-}
-
-.panelHeader {
-    align-items: flex-start;
-}
-
-.summaryCard {
-    min-height: 110px;
-}
-
-.progressHeader strong,
-.previewBox span,
-.timelineBody strong,
-.bolsilloCard strong {
-    font-weight: 700;
-}
-
-.bolsilloCard {
-    position: relative;
-    overflow: hidden;
-    border-radius: 1.2rem;
-    padding: 1rem;
-    border: 1px solid var(--card-border);
-    background:
-        radial-gradient(circle at top right, color-mix(in srgb, var(--accent) 28%, transparent), transparent 34%),
-        color-mix(in srgb, var(--card-bg) 94%, black);
-    display: grid;
-    gap: 0.85rem;
-}
-
-.bolsilloAccent {
-    position: absolute;
-    inset: auto auto 0 0;
-    width: 100%;
-    height: 4px;
-    background: var(--accent);
-}
-
-.bolsilloIdentity {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    min-width: 0;
-}
-
-.bolsilloAvatar {
-    background: var(--accent);
-    color: #fff;
-
-    i {
-        font-size: 1.8rem;
-    }
-}
-
-.bolsilloInfo {
-    min-width: 0;
-}
-
-.bolsilloName {
-    font-size: 1rem;
-}
-
-.bolsilloDesc {
-    font-size: 0.88rem;
-}
-
-.moneyRow {
-    display: grid;
-    gap: 0.15rem;
-}
-
-.moneyMain {
-    font-size: 1.45rem;
-}
-
-.moneyMeta {
-    font-size: 0.85rem;
-    color: var(--texto-muted);
-}
-
-.cardFooter {
-    align-items: flex-end;
-}
-
-.metaLabel {
-    display: block;
-    color: var(--texto-muted);
-    margin-bottom: 0.15rem;
-}
-
-.cardActions {
-    justify-content: flex-end;
-}
-
-.actionButton,
-.cancelButton {
-    background: transparent;
-    color: var(--texto);
-    border-color: var(--card-border);
-}
-
-.previewBox {
-    position: relative;
-    overflow: hidden;
-    border-radius: 1rem;
-    padding: 1rem;
-    min-height: 150px;
-    display: grid;
-    gap: 0.35rem;
-    align-content: start;
-    background:
-        radial-gradient(circle at top right, color-mix(in srgb, var(--accent) 40%, transparent), transparent 45%),
-        color-mix(in srgb, var(--card-bg) 92%, black);
-    border: 1px solid var(--card-border);
-}
-
-.previewBox i {
-    position: absolute;
-    right: 1rem;
-    bottom: 1rem;
-    font-size: 3rem;
-    color: color-mix(in srgb, var(--accent) 70%, white);
-    opacity: 0.9;
-}
-
-.formGrid {
-    display: grid;
-    gap: 1rem;
-}
-
-.fieldFull {
-    grid-column: 1 / -1;
-}
-
-.colorGrid,
-.iconGrid {
-    grid-template-columns: repeat(auto-fit, minmax(44px, 1fr));
-}
-
-.colorSwatch,
-.iconOption {
-    width: 44px;
-    height: 44px;
-    border-radius: 0.9rem;
-    border: 1px solid var(--card-border);
-    display: grid;
-    place-items: center;
-    color: #fff;
-    background: var(--card-bg);
-    cursor: pointer;
-}
-
-.colorSwatch i,
-.iconOption i {
-    font-size: 1.2rem;
-}
-
-.iconOption {
-    color: var(--texto);
-    background: color-mix(in srgb, var(--card-bg) 90%, black);
-}
-
-.isSelected {
-    transform: translateY(-2px) scale(1.03);
-    box-shadow: 0 0 0 2px color-mix(in srgb, var(--azul-200) 40%, transparent);
-}
-
-.alert {
-    padding: 0.9rem 1rem;
-    border-radius: 0.9rem;
-    background: var(--danger-soft);
-    color: #ffdede;
-    border: 1px solid color-mix(in srgb, var(--danger) 45%, transparent);
 }
 
 .modalBackdrop {
     position: fixed;
     inset: 0;
-    z-index: 2000;
-    background: rgba(0, 0, 0, 0.65);
+    z-index: var(--z-modal);
     display: grid;
     place-items: center;
-    padding: 1rem;
+    padding: var(--space-md);
+    background: var(--overlay);
+    backdrop-filter: blur(4px);
 }
 
 .modal {
     width: min(720px, 100%);
     max-height: 92vh;
     overflow-y: auto;
-    border-radius: 1.4rem;
-    padding: 1rem;
+    padding: var(--space-md);
     border: 1px solid var(--card-border);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-lg);
     background: linear-gradient(180deg, color-mix(in srgb, var(--card-bg) 94%, black), var(--fondo-elevado));
-    box-shadow: var(--shadow-1);
 }
 
 .modalTitle {
     margin: 0;
-    font-size: 1.25rem;
+    font-size: var(--font-xl);
 }
 
 .modalClose {
+    display: grid;
+    place-items: center;
     width: 44px;
     height: 44px;
     padding: 0;
-    display: grid;
-    place-items: center;
-    background: transparent;
     color: var(--texto);
+    background: transparent;
     border-color: var(--card-border);
 
-    i {
-        font-size: 1.2rem;
+    svg {
+        font-size: var(--font-xl);
     }
 }
 
-.timeline {
-    gap: 0.85rem;
+.formGrid {
+    display: grid;
+    gap: var(--space-md);
 }
 
-.timelineItem {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
+.alert {
+    padding: var(--space-sm) var(--space-md);
+    color: var(--rojo-100);
+    background: var(--danger-soft);
+    border: 1px solid color-mix(in srgb, var(--danger) 45%, transparent);
+    border-radius: var(--radius-lg);
 }
-
-.timelineDot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    margin-top: 0.35rem;
-    background: var(--rojo-500);
-    box-shadow: 0 0 0 4px color-mix(in srgb, var(--rojo-500) 18%, transparent);
-    flex-shrink: 0;
-}
-
-.timelineBody p {
-    margin: 0;
-    font-size: 0.9rem;
-}
-
-/* ===========================
-   Modal resultado cierre
-=========================== */
 
 .resultadoObservaciones {
     grid-column: 1 / -1;
@@ -719,57 +499,53 @@
 .resultadoTexto {
     display: flex;
     flex-direction: column;
-    gap: .45rem;
-
-    margin-top: .35rem;
-    padding: 1rem;
-
-    border-radius: .85rem;
+    gap: var(--space-xs);
+    margin-top: var(--space-xs);
+    padding: var(--space-md);
     border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
     background: color-mix(in srgb, var(--card-bg) 92%, black);
 }
 
 .resultadoLinea {
     margin: 0;
-    font-size: .95rem;
-    line-height: 1.5;
+    font-size: var(--font-sm);
+    line-height: var(--line-relaxed);
     color: var(--texto);
     word-break: break-word;
 }
 
 .resultadoLineaTitulo {
-    margin: .35rem 0 0;
-    font-weight: 700;
-    color: var(--azul-200);
+    margin: var(--space-xs) 0 0;
+    font-size: var(--font-xs);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
-    letter-spacing: .04em;
-    font-size: .85rem;
+    color: var(--azul-200);
 }
 
 .resultadoSeparador {
     height: 1px;
+    margin: var(--space-xxs) 0;
     background: var(--card-border);
-    margin: .25rem 0;
 }
 
 @media (max-width: 768px) {
     .container {
-        padding-top: 0.5rem;
+        padding-top: var(--space-sm);
     }
 
     .hero,
     .containerCart,
-    .panel,
     .modal {
-        padding: 0.95rem;
+        padding: var(--space-sm);
     }
 
     .range {
         grid-template-columns: 1fr;
     }
 
-    .gridVentas,
-    .listGrid {
+    .gridVentas {
         grid-template-columns: 1fr;
     }
 
@@ -777,68 +553,17 @@
         align-items: flex-start;
     }
 
-    .cardFooter,
     .modalFooter,
     .progressLegend {
         flex-direction: column;
         align-items: flex-start;
     }
 
-    .cardActions {
-        width: 100%;
-        justify-content: flex-start;
-    }
-
     .buttons button,
     .primaryButton,
     .secondaryButton,
-    .actionButton,
-    .dangerButton,
     .cancelButton,
     .saveButton {
         width: 100%;
     }
-}
-
-.sectionActions {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-}
-
-.rangeActions {
-    display: flex;
-    align-items: end;
-    justify-content: flex-end;
-}
-
-.success {
-    padding: 0.9rem 1rem;
-    border-radius: 0.9rem;
-    background: var(--success-soft);
-    color: var(--success);
-    border: 1px solid color-mix(in srgb, var(--success) 45%, transparent);
-}
-.heroBadge svg,
-.statLabel svg,
-.summaryLabel svg,
-.emptyState svg,
-.modalClose svg,
-.buttons button svg,
-.primaryButton svg,
-.secondaryButton svg,
-.actionButton svg,
-.dangerButton svg,
-.cancelButton svg,
-.saveButton svg,
-.sectionTag svg,
-.total svg,
-.cardTopLine svg,
-.ventaBadge svg,
-.ventaImageWrap svg {
-    width: 1em;
-    height: 1em;
-    flex-shrink: 0;
 }

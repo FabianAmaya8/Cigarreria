@@ -1,0 +1,65 @@
+﻿body[data-theme="claro"] {
+    --rojo-900: #3d0e0e;
+    --rojo-800: #5b1d1d;
+    --rojo-700: #7b2323;
+    --rojo-600: #c62828;
+    --rojo-500: #e53935;
+    --rojo-400: #f44336;
+    --rojo-300: #f57373;
+    --rojo-200: #ffcaca;
+    --rojo-100: #fff0f0;
+
+    --azul-900: #1a3a52;
+    --azul-800: #22465f;
+    --azul-700: #2d5975;
+    --azul-600: #3d7ca6;
+    --azul-500: #5197c0;
+    --azul-400: #6eadd3;
+    --azul-300: #91c5e0;
+    --azul-200: #c5dff0;
+    --azul-100: #e8f4fb;
+
+    --fondo: linear-gradient(135deg, #f5f2f2 0%, #f0f7fb 100%);
+    --fondo-elevado: #ffffff;
+    --superficie: #fafafa;
+    --texto: #1a1616;
+    --texto-negro: #1a1616;
+    --texto-sec: #4a4040;
+    --placeholder: #9a8f8f;
+    --input-bg: #ffffff;
+    --input-border: #d4c9c9;
+    --card-bg: #fefefe;
+    --card-border: #e0d6d6;
+    --header-bg: #dfb0b0;
+    --footer-bg: #b5bbcf;
+    --btn-primary-bg: #c62828;
+    --btn-primary-bg-hover: #e53935;
+    --btn-primary-bg-active: #a02020;
+    --btn-secondary-bg: #2d5975;
+    --btn-secondary-bg-hover: #3d7ca6;
+    --btn-secondary-bg-active: #1a3a52;
+    --focus-ring:
+        0 0 0 2px rgba(255, 255, 255, 0.95),
+        0 0 0 4px rgba(198, 40, 40, 0.35);
+    --scrollbar-track: #f0f0f0;
+    --scrollbar-thumb: #c62828;
+    --scrollbar-thumb-hover: #9b1f1f;
+    --glass-bg: rgba(255, 255, 255, 0.70);
+    --glass-border: rgba(0, 0, 0, 0.10);
+    --glass-hover: rgba(255, 255, 255, 0.90);
+    --overlay: rgba(0, 0, 0, 0.50);
+    --overlay-soft: rgba(0, 0, 0, 0.25);
+    --pos-item-bg: var(--card-bg);
+    --pos-item-hover: rgba(198, 40, 40, 0.322);
+    --pos-item-active: var(--rojo-600);
+    --pos-divider: var(--card-border);
+    --pos-total-bg: #fff3f3;
+    --pos-total-text: var(--texto);
+    --pos-badge-bg: var(--azul-600);
+    --pos-mesa-activa-bg: var(--rojo-600);
+    --pos-mesa-inactiva-bg: var(--azul-700);
+    --pos-row-header: #fafafa;
+    --modal-dark-bg: var(--fondo-elevado);
+    --modal-dark-text: var(--texto);
+    --modal-dark-divider: var(--card-border);
+}

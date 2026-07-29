@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../../../Hooks/Client/useAuth";
-import styles from "../../../assets/Css/index.module.scss";
+import styles from "../../../assets/Css/Principales/Auth.module.scss";
 
 const Register = () => {
     const { 
@@ -26,127 +26,163 @@ const Register = () => {
     };
 
     return (
-        <main className={styles.Container + " justify-content-center"}>
-            <div className="card w-75 p-3">
-                <h3 className="card-title text-center">Register</h3>
-                <form onSubmit={handleSubmit}>
-                    <div className="mb-3 mt-3">
-                        <label htmlFor="imgProfileInput" className="form-label d-flex justify-content-center w-100" style={{cursor: 'pointer'}}>
-                            {registerForm.fotoPreview ? (
-                                <img
-                                id="imagen"
-                                src={registerForm.fotoPreview}
-                                alt="Profile Picture"
-                                className="rounded-circle border"
-                                style={{width: '150px', height: '150px', objectFit: 'cover'}}
+        <main className={styles.authMain}>
+            <div className={styles.authContainer}>
+                <div className={styles.authCard}>
+                    <h1 className={styles.authTitle}>Registro</h1>
+
+                    {error && (
+                        <div className={styles.errorAlert}>
+                            <i className="bx bx-exclamation-circle"></i>
+                            <span>{error}</span>
+                        </div>
+                    )}
+
+                    <form onSubmit={handleSubmit} className={styles.authForm}>
+                        <div className={styles.profileUploadGroup}>
+                            <label htmlFor="imgProfileInput" className={styles.profileUploadLabel}>
+                                {registerForm.fotoPreview ? (
+                                    <img
+                                        src={registerForm.fotoPreview}
+                                        alt="Foto de perfil"
+                                        className={styles.profileImage}
+                                    />
+                                ) : (
+                                    <div className={styles.profilePlaceholder}>
+                                        <i className="bx bx-image-add"></i>
+                                        <p>Subir Foto</p>
+                                    </div>
+                                )}
+                            </label>
+                            <input
+                                type="file"
+                                id="imgProfileInput"
+                                className={styles.profileFileInput}
+                                name="imagen"
+                                accept="image/*"
+                                onChange={handleFileChange}
+                            />
+                        </div>
+
+                        <div className={styles.formGroup}>
+                            <label htmlFor="nombre" className={styles.formLabel}>
+                                <i className="bx bx-user"></i>
+                                Nombre y Apellido
+                            </label>
+                            <input
+                                type="text"
+                                id="nombre"
+                                className={styles.formInput}
+                                placeholder="Tu nombre completo"
+                                value={registerForm.nombre}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+
+                        <div className={styles.formGroup}>
+                            <label htmlFor="usuario" className={styles.formLabel}>
+                                <i className="bx bx-id-card"></i>
+                                Usuario Visible
+                            </label>
+                            <input
+                                type="text"
+                                id="usuario"
+                                className={styles.formInput}
+                                placeholder="Tu nombre de usuario"
+                                value={registerForm.usuario}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+
+                        <div className={styles.formGroup}>
+                            <label htmlFor="correo" className={styles.formLabel}>
+                                <i className="bx bx-envelope"></i>
+                                Correo Electrónico
+                            </label>
+                            <input
+                                type="email"
+                                id="correo"
+                                className={styles.formInput}
+                                placeholder="Tu correo electrónico"
+                                value={registerForm.correo}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+
+                        <div className={styles.formGroup}>
+                            <label htmlFor="contrasena" className={styles.formLabel}>
+                                <i className="bx bx-lock-alt"></i>
+                                Contraseña
+                            </label>
+                            <div className={styles.inputGroup}>
+                                <input
+                                    type={showPassword ? "text" : "password"}
+                                    id="contrasena"
+                                    className={styles.formInputPassword}
+                                    placeholder="Crea una contraseña segura"
+                                    value={registerForm.contrasena}
+                                    onChange={handleChange}
+                                    required
                                 />
+                                <button
+                                    type="button"
+                                    className={styles.togglePasswordBtn}
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    title={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+                                >
+                                    <i className={`bx ${showPassword ? "bxs-hide" : "bxs-show"}`}></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className={styles.formGroup}>
+                            <label htmlFor="confirmPassword" className={styles.formLabel}>
+                                <i className="bx bx-lock-alt"></i>
+                                Confirmar Contraseña
+                            </label>
+                            <div className={styles.inputGroup}>
+                                <input
+                                    type={showConfirmPassword ? "text" : "password"}
+                                    id="confirmPassword"
+                                    className={styles.formInputPassword}
+                                    placeholder="Repite tu contraseña"
+                                    value={registerForm.confirmPassword}
+                                    onChange={handleChange}
+                                    required
+                                />
+                                <button
+                                    type="button"
+                                    className={styles.togglePasswordBtn}
+                                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                    title={showConfirmPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+                                >
+                                    <i className={`bx ${showConfirmPassword ? "bxs-hide" : "bxs-show"}`}></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <button
+                            type="submit"
+                            className={styles.submitBtn}
+                            disabled={loading}
+                        >
+                            {loading ? (
+                                <>
+                                    <i className="bx bx-loader-alt bx-spin"></i>
+                                    Cargando...
+                                </>
                             ) : (
-                                <div className="d-flex flex-column text-center">
-                                    <i className="bx bx-image-add fs-1"></i> 
-                                    <p>Subir Foto</p>
-                                </div>
+                                <>
+                                    <i className="bx bx-user-plus"></i>
+                                    Crear Cuenta
+                                </>
                             )}
-                        </label>
-                        <input
-                            type="file"
-                            className="d-none"
-                            id="imgProfileInput"
-                            name="imagen"
-                            accept="image/*"
-                            onChange={handleFileChange}
-                        />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="nombre" className="form-label">
-                            <i className="bx bx-user"></i> Nombre y Apellido
-                        </label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="nombre"
-                            value={registerForm.nombre}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="usuario" className="form-label">
-                            <i className="bx bx-id-card"></i> Usuario Visible
-                        </label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="usuario"
-                            value={registerForm.usuario}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="correo" className="form-label">
-                            <i className="bx bx-envelope"></i> Correo
-                        </label>
-                        <input
-                            type="email"
-                            className="form-control"
-                            id="correo"
-                            value={registerForm.correo}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-                    <div className="mb-3 position-relative">
-                        <label htmlFor="contrasena" className="form-label">
-                            <i className="bx bx-lock-alt"></i> Contraseña
-                        </label>
-                        <input
-                            type={showPassword ? "text" : "password"}
-                            className="form-control"
-                            id="contrasena"
-                            value={registerForm.contrasena}
-                            onChange={handleChange}
-                            required
-                        />
-                        <i 
-                            className={`bx ${showPassword ? 'bxs-show' : 'bxs-hide'}`}
-                            style={{
-                                position: 'absolute',
-                                right: '10px',
-                                top: '38px',
-                                cursor: 'pointer'
-                            }}
-                            onClick={() => setShowPassword(!showPassword)}
-                        ></i>
-                    </div>
-                    <div className="mb-3 position-relative">
-                        <label htmlFor="confirmPassword" className="form-label">
-                            <i className="bx bx-lock-alt"></i> Confirmar Contraseña
-                        </label>
-                        <input
-                            type={showConfirmPassword ? "text" : "password"}
-                            className="form-control"
-                            id="confirmPassword"
-                            value={registerForm.confirmPassword}
-                            onChange={handleChange}
-                            required
-                        />
-                        <i 
-                            className={`bx ${showConfirmPassword ? 'bxs-show' : 'bxs-hide'}`}
-                            style={{
-                                position: 'absolute',
-                                right: '10px',
-                                top: '38px',
-                                cursor: 'pointer'
-                            }}
-                            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                        ></i>
-                    </div>
-                    <div className="d-grid">
-                        <button type="submit" className="btn btn-primary" disabled={loading}>
-                            {loading ? "Cargando..." : "Register"}
                         </button>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </main>
     );

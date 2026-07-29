@@ -1,10 +1,9 @@
-import styles from "../../../assets/Css/index.module.scss";
 import stylesDeuda from "../../../assets/Css/deuda.module.scss";
 import { HandCoins, Coins  } from 'lucide-react';
 import { useAuthContext } from "../../../Pages/Context/AuthContext";
 import { NavLink } from "react-router-dom";
 import useDeudasUsuario from "../../../Hooks/Vendedor/Deudas/useDeudasUsuario";
-import { Loading, Error  } from "../../../Utils/Cargando";
+import { Loading, Error  } from "../../../Utils/Components/Cargando";
 
 export default function Deudas() {
     const { user } = useAuthContext();
@@ -17,7 +16,7 @@ export default function Deudas() {
     ]
 
     return (
-        <main className={`${styles.Container} ${stylesDeuda.Container}`} >
+        <main className={`${stylesDeuda.Container}`} >
             
             <h2>Historial de deudas</h2>
             {user?.rol === 1 || user?.rol === 2 ?

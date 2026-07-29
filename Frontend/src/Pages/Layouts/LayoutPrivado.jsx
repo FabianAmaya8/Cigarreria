@@ -5,7 +5,7 @@ import Header from '../../Components/Client/Fijos/Header';
 import Footer from '../../Components/Client/Fijos/Footer';
 import { Outlet } from "react-router-dom";
 import "../../assets/Css/Transiciones.scss";
-import { BtnVolver } from "../../Utils/Cargando";
+import { BtnVolver } from "../../Utils/Components/Cargando";
 
 export default function LayoutPrivado({ requiredRole }) {
     const location = useLocation();
@@ -19,9 +19,10 @@ export default function LayoutPrivado({ requiredRole }) {
     }
 
     return (
-        <PrivateRoute requiredRole={requiredRole} >
+        <PrivateRoute requiredRole={requiredRole}>
             <Header />
-            <BtnVolver/>
+            <BtnVolver />
+
             <Outlet key={location.pathname} />
 
             {/* Capa flotante que anima cada cambio de ruta */}
@@ -37,5 +38,5 @@ export default function LayoutPrivado({ requiredRole }) {
             </AnimatePresence>
             <Footer />
         </PrivateRoute>
-    )
+    );
 }

@@ -1,0 +1,344 @@
+/* ======================================================
+   MAIN CONTENT
+   ====================================================== */
+
+.inicioMain {
+    width: 100%;
+    padding: var(--space-lg) var(--space-md);
+    gap: var(--space-xl);
+}
+
+.authenticatedSection,
+.inventarioContent {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg);
+}
+
+.pageTitle {
+    width: 100%;
+    font-size: var(--font-2xl);
+    font-weight: var(--weight-semibold);
+    text-align: center;
+    color: var(--texto);
+    padding-bottom: var(--space-md);
+    border-bottom: var(--border-width) solid var(--card-border);
+}
+
+/* ======================================================
+   TAREAS SECTION
+   ====================================================== */
+
+.tareasSection {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg);
+}
+
+.sectionTitle {
+    width: 100%;
+    font-size: var(--font-xl);
+    font-weight: var(--weight-medium);
+    text-align: center;
+    color: var(--texto);
+    padding: var(--space-lg) 0 var(--space-md) 0;
+    border-bottom: var(--border-width) solid var(--card-border);
+    margin-top: var(--space-md);
+}
+
+.tareasGrid {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    gap: var(--space-lg);
+}
+
+/* ======================================================
+   TAREA CARD
+   ====================================================== */
+
+.tareaCard {
+    flex: 0 1 250px;
+    background: var(--card-bg);
+    border: var(--border-width) solid var(--card-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    position: relative;
+    overflow: hidden;
+    transition: 
+        transform var(--transition-base),
+        border-color var(--transition-base);
+    cursor: pointer;
+    z-index: 1;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 100%;
+        background: linear-gradient(135deg, var(--rojo-700), var(--azul-800));
+        border-radius: var(--radius-md);
+        transition: width var(--transition-base);
+        z-index: -1;
+    }
+
+    &:hover {
+        transform: translateY(-4px);
+        border-color: var(--rojo-500);
+        box-shadow: var(--shadow-md);
+
+        &::before {
+            width: 100%;
+        }
+
+        .tareaTitle {
+            color: #fff;
+        }
+
+        .tareaDescription {
+            color: rgba(255, 255, 255, 0.9);
+        }
+    }
+}
+
+.tareaLink {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    color: var(--texto);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.tareaIconWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radius-md);
+    background: rgba(43, 111, 163, 0.15);
+    transition: 
+        background var(--transition-fast),
+        transform var(--transition-fast);
+
+    i {
+        font-size: var(--font-3xl);
+        color: var(--azul-400);
+        transition: color var(--transition-fast);
+    }
+}
+
+.tareaCard:hover .tareaIconWrapper {
+    background: rgba(198, 40, 40, 0.2);
+    transform: scale(1.1);
+
+    i {
+        color: #fff;
+    }
+}
+
+.tareaTitle {
+    font-size: var(--font-lg);
+    font-weight: var(--weight-semibold);
+    color: var(--texto);
+    text-align: center;
+    transition: color var(--transition-fast);
+}
+
+.tareaDescription {
+    font-size: var(--font-sm);
+    color: var(--texto-sec);
+    text-align: center;
+    flex-grow: 1;
+    transition: color var(--transition-fast);
+    line-height: var(--line-normal);
+}
+
+/* ======================================================
+   UNAUTHENTICATED STATE
+   ====================================================== */
+
+.ItemContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: var(--space-xl);
+    padding: var(--space-2xl) var(--space-md);
+    min-height: 60vh;
+
+    h2 {
+        width: 100%;
+        font-size: var(--font-3xl);
+        font-weight: var(--weight-semibold);
+        color: var(--texto);
+        text-align: center;
+        padding-bottom: var(--space-md);
+        border-bottom: var(--border-width) solid var(--card-border);
+    }
+
+    p {
+        font-size: var(--font-md);
+        color: var(--texto-sec);
+        max-width: 500px;
+        line-height: var(--line-relaxed);
+    }
+}
+
+.GrupoIconos {
+    display: flex;
+    gap: var(--space-2xl);
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.GrupoBotones {
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: var(--space-lg) var(--space-2xl);
+    background: linear-gradient(135deg, var(--rojo-700), var(--azul-800));
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+
+    a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-sm);
+        text-align: center;
+        color: #fff;
+        text-decoration: none;
+        padding: var(--space-md) var(--space-lg);
+        border-radius: var(--radius-sm);
+        transition: 
+            background var(--transition-fast),
+            transform var(--transition-fast);
+        font-weight: var(--weight-medium);
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        i {
+            font-size: var(--font-2xl);
+        }
+    }
+}
+
+/* ======================================================
+   RESPONSIVE DESIGN
+   ====================================================== */
+
+@media (max-width: 768px) {
+    .inicioMain {
+        padding: var(--space-md) var(--space-sm);
+        gap: var(--space-lg);
+    }
+
+    .pageTitle,
+    .sectionTitle {
+        font-size: var(--font-xl);
+    }
+
+    .tareasGrid {
+        gap: var(--space-md);
+    }
+
+    .tareaCard {
+        flex: 0 1 calc(50% - var(--space-sm));
+    }
+
+    .GrupoBotones {
+        flex-direction: column;
+        padding: var(--space-md) var(--space-lg);
+
+        a {
+            width: 100%;
+        }
+    }
+
+    .ItemContainer {
+        min-height: 50vh;
+        padding: var(--space-lg) var(--space-md);
+
+        h2 {
+            font-size: var(--font-2xl);
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    .inicioMain {
+        padding: var(--space-md) var(--space-sm);
+    }
+
+    .pageTitle,
+    .sectionTitle {
+        font-size: var(--font-lg);
+    }
+
+    .tareasGrid {
+        justify-content: stretch;
+    }
+
+    .tareaCard {
+        flex: 0 1 100%;
+        max-width: 100%;
+    }
+
+    .GrupoIconos {
+        flex-direction: column;
+        gap: var(--space-lg);
+    }
+
+    .tareaIconWrapper {
+        width: 50px;
+        height: 50px;
+
+        i {
+            font-size: var(--font-2xl);
+        }
+    }
+
+    .tareaTitle {
+        font-size: var(--font-md);
+    }
+
+    .tareaDescription {
+        font-size: var(--font-sm);
+    }
+
+    .GrupoBotones {
+        padding: var(--space-md);
+        gap: var(--space-sm);
+
+        a {
+            padding: var(--space-sm) var(--space-md);
+            font-size: var(--font-sm);
+
+            i {
+                font-size: var(--font-lg);
+            }
+        }
+    }
+}

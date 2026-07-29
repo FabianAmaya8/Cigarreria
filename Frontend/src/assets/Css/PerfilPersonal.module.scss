@@ -1,130 +1,141 @@
-.PerfilContainer {
+.perfil-container {
     display: flex;
     justify-content: center;
     align-items: center;
     animation: fadeIn var(--transition-fast);
 }
 
-.ImagenSection {
-    padding: 15px 30px;
+.container {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.title {
+    color: var(--texto);
+    font-size: var(--font-2xl);
+    font-weight: var(--weight-bold);
+}
+
+.imagen-section {
     width: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-xl);
 
-    i{
+    i {
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
     i,
-    .ImagenPerfil {
-        font-size: 100px;
+    .imagen-perfil {
         width: 120px;
         height: 120px;
-        border-radius: 50%;
-        border: 3px solid var(--rojo-500);
-        object-fit: cover;
-        box-shadow: var(--shadow-2);
-        transition: transform var(--transition-fast);
-        overflow: hidden;
+        font-size: 100px;
         color: var(--rojo-500);
+        border: var(--border-width-lg) solid var(--rojo-500);
+        border-radius: var(--radius-full);
+        object-fit: cover;
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
+        transition: transform var(--transition-fast);
     }
 
-    .BtnSubir {
+    .btn-subir {
         position: relative;
         overflow: hidden;
         border-radius: var(--radius-md);
+        font-weight: var(--weight-medium);
         cursor: pointer;
         transition: background-color var(--transition-fast);
-        font-weight: 500;
 
         &:hover {
-            background-color: var(--btn-terciario-bg-hover);
+            background-color: var(--btn-secondary-bg-hover);
         }
 
         input {
             position: absolute;
-            top: 0;
-            left: 0;
+            inset: 0;
             opacity: 0;
-            width: 100%;
-            height: 100%;
             cursor: pointer;
         }
     }
 }
 
-.Datos,
-.PasswordSection {
-    padding: 15px 30px;
+.datos,
+.password-section {
     width: 90%;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-xl);
 
     h3 {
-        font-size: 20px;
-        color: var(--rojo-200);
-    }
-
-    .Grupo {
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-
-        label {
-            font-size: 14px;
-            color: var(--texto-sec);
-        }
-
-        input {
-            background-color: var(--input-bg);
-            border: 1px solid var(--input-border);
-            color: var(--input-text);
-            border-radius: var(--radius-sm);
-            padding: 10px;
-            outline: none;
-            transition: border-color var(--transition-fast);
-
-            &:focus {
-                border-color: var(--input-focus-border);
-            }
-        }
+        color: var(--texto);
+        font-size: var(--font-xl);
     }
 
     button {
         align-self: flex-end;
-        margin-top: 10px;
+        margin-top: var(--space-sm);
     }
 }
 
-.InputPassword {
+.grupo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+
+    label {
+        color: var(--texto-sec);
+        font-size: var(--font-sm);
+    }
+
+    input {
+        padding: var(--space-sm);
+        color: var(--texto);
+        background-color: var(--input-bg);
+        border: var(--border-width) solid var(--input-border);
+        border-radius: var(--radius-sm);
+        outline: none;
+        transition: border-color var(--transition-fast);
+
+        &:focus {
+            border-color: var(--rojo-500);
+        }
+    }
+}
+
+.input-password {
     position: relative;
     display: flex;
     align-items: center;
 
     input {
         width: 100%;
-        padding-right: 2.5rem;
+        padding-right: var(--space-2xl);
     }
 
     i {
         position: absolute;
-        right: 10px;
-        cursor: pointer;
+        right: var(--space-sm);
         color: var(--texto);
-        font-size: 1.3rem;
-        transition: 0.2s;
+        font-size: var(--font-xl);
+        cursor: pointer;
+        transition: color var(--transition-fast);
 
         &:hover {
-            color: var(--primario);
+            color: var(--rojo-400);
         }
     }
 }
-
 
 @keyframes fadeIn {
     from { opacity: 0; }

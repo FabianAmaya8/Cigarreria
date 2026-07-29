@@ -1,0 +1,270 @@
+/* ======================================================
+   FILTRO - CONTENEDOR PRINCIPAL
+   ====================================================== */
+
+.Item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    width: 100%;
+}
+
+/* ======================================================
+   FILTROS - SECCIÓN PRINCIPAL
+   ====================================================== */
+
+.Filtros {
+    position: sticky;
+    top: 120px;
+    width: 100%;
+    max-height: max-content;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    background: var(--card-bg);
+    border: var(--border-width) solid var(--card-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    backdrop-filter: blur(8px);
+    z-index: var(--z-sticky);
+    animation: slideDown var(--transition-base) ease;
+}
+
+/* ======================================================
+   LABEL - CAMPO DE FILTRO
+   ====================================================== */
+
+.Filtros label {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    flex: 1;
+    min-width: 180px;
+    font-size: var(--font-xs);
+    font-weight: var(--weight-semibold);
+    color: var(--texto);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+}
+
+/* ======================================================
+   INPUTS Y SELECTS EN FILTRO
+   ====================================================== */
+
+.Filtros input,
+.Filtros select {
+    width: 100%;
+    padding: var(--space-md) var(--space-md);
+    background: var(--input-bg);
+    color: var(--texto);
+    border: var(--border-width) solid var(--input-border);
+    border-radius: var(--radius-md);
+    font-size: var(--font-md);
+    font-family: inherit;
+    transition:
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast),
+        background var(--transition-fast);
+
+    &::placeholder {
+        color: var(--placeholder);
+    }
+
+    &:hover {
+        border-color: var(--rojo-700);
+    }
+
+    &:focus {
+        outline: none;
+        border-color: var(--rojo-500);
+        box-shadow: var(--focus-ring);
+        background: rgba(198, 40, 40, 0.05);
+    }
+}
+
+.Filtros select {
+    cursor: pointer;
+
+    option {
+        background: var(--fondo-elevado);
+        color: var(--texto);
+    }
+}
+
+/* ======================================================
+   REACT-SELECT PERSONALIZADO EN FILTRO
+   ====================================================== */
+
+.Filtros :global(.react-select__control) {
+    background: var(--input-bg);
+    border-color: var(--input-border);
+    border-radius: var(--radius-md);
+    padding: 0.2rem;
+    min-height: 42px;
+    transition:
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast);
+
+    &:hover {
+        border-color: var(--rojo-700);
+    }
+
+    &:is(.react-select__control--is-focused) {
+        border-color: var(--rojo-500);
+        box-shadow: var(--focus-ring);
+    }
+}
+
+.Filtros :global(.react-select__menu) {
+    background: var(--input-bg);
+    border: var(--border-width) solid var(--input-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    z-index: 100;
+}
+
+.Filtros :global(.react-select__option) {
+    background: var(--input-bg);
+    color: var(--texto);
+    cursor: pointer;
+    transition: background var(--transition-fast);
+
+    &:is(.react-select__option--is-focused) {
+        background: rgba(198, 40, 40, 0.15);
+    }
+
+    &:is(.react-select__option--is-selected) {
+        background: linear-gradient(135deg, var(--rojo-600), var(--azul-600));
+        color: #fff;
+    }
+}
+
+.Filtros :global(.react-select__single-value) {
+    color: var(--texto);
+}
+
+.Filtros :global(.react-select__placeholder) {
+    color: var(--placeholder);
+}
+
+.Filtros :global(.react-select__input-container) {
+    color: var(--texto);
+}
+
+.Filtros :global(.react-select__dropdown-indicator) {
+    color: var(--texto-sec);
+    transition: color var(--transition-fast);
+
+    &:hover {
+        color: var(--rojo-500);
+    }
+}
+
+.Filtros :global(.react-select__clear-indicator) {
+    color: var(--texto-sec);
+    transition: color var(--transition-fast);
+
+    &:hover {
+        color: var(--rojo-500);
+    }
+}
+
+/* ======================================================
+   CONTENEDOR DE PAGINACIÓN Y BOTONES
+   ====================================================== */
+
+.Filtros > * {
+    flex: 1;
+    min-width: 100%;
+}
+
+/* ======================================================
+   ANIMACIONES
+   ====================================================== */
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ======================================================
+   RESPONSIVE - TABLET
+   ====================================================== */
+
+@media (max-width: 1024px) {
+    .Filtros {
+        position: static;
+        gap: var(--space-md);
+    }
+
+    .Filtros label {
+        flex: 1 1 calc(50% - var(--space-md));
+        min-width: 150px;
+    }
+}
+
+/* ======================================================
+   RESPONSIVE - MÓVIL
+   ====================================================== */
+
+@media (max-width: 768px) {
+    .Filtros {
+        flex-direction: column;
+        padding: var(--space-md);
+        gap: var(--space-md);
+    }
+
+    .Filtros label {
+        flex: 1 1 100%;
+        min-width: unset;
+    }
+
+    .Filtros input,
+    .Filtros select {
+        padding: var(--space-md);
+        font-size: var(--font-sm);
+    }
+
+    .Filtros > * {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .Filtros {
+        padding: var(--space-md);
+        gap: var(--space-sm);
+    }
+
+    .Filtros label {
+        font-size: var(--font-xs);
+    }
+
+    .Filtros input,
+    .Filtros select {
+        padding: var(--space-sm) var(--space-md);
+        font-size: var(--font-sm);
+    }
+}
+
+/* ======================================================
+   ACCESIBILIDAD
+   ====================================================== */
+
+.Filtros input:disabled,
+.Filtros select:disabled {
+    opacity: var(--opacity-disabled);
+    cursor: not-allowed;
+}
+
+.Filtros label:has(input:invalid),
+.Filtros label:has(select:invalid) {
+    --input-border: var(--danger);
+}

@@ -36,29 +36,37 @@ export default function CategoriaForm({ open, onClose, onSubmit, modoEdicion, ca
                 <h3>{modoEdicion ? "Editar Categoría" : "Nueva Categoría"}</h3>
 
                 <div className={styles.ModalContent}>
-                    <label>Nombre de la categoría
+                    <label>
+                        Nombre de la categoría
                         <input
+                            type="text"
                             name="nombre"
                             value={form.nombre}
                             onChange={handleChange}
                             placeholder="Ej: Bebidas"
+                            required
                         />
                     </label>
 
-                    <label>Descripción
+                    <label>
+                        Descripción
                         <textarea
                             name="descripcion"
                             value={form.descripcion}
                             onChange={handleChange}
                             placeholder="Describe esta categoría..."
-                            rows="3"
+                            rows="4"
                         />
                     </label>
                 </div>
 
                 <div className={styles.ModalActions}>
-                    <button className="btn-secondary" onClick={onClose}>Cancelar</button>
-                    <button className="btn-primary" onClick={handleSubmit}>
+                    <button className={`${styles.ModalActions} btn-secondary`} onClick={onClose}>
+                        <i className="bx bx-x"></i>
+                        Cancelar
+                    </button>
+                    <button className={`${styles.ModalActions} btn-primary`} onClick={handleSubmit}>
+                        <i className={`bx ${modoEdicion ? "bx-check" : "bx-plus"}`}></i>
                         {modoEdicion ? "Actualizar" : "Guardar"}
                     </button>
                 </div>

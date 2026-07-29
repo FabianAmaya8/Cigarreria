@@ -1,5 +1,5 @@
 import Select from "react-select";
-import stylesFiltro from "../../../assets/Css/deuda.module.scss";
+import stylesFiltro from "../../../assets/Css/Dependencias/filtro.module.scss";
 import { useAuthContext } from "../../../Pages/Context/AuthContext";
 
 export default function Filtro({
@@ -21,7 +21,6 @@ export default function Filtro({
 }) {
     const { user } = useAuthContext();
 
-    // 🔧 Convertimos las listas en opciones para react-select
     const opcionesCategorias = [
         { value: "", label: "Todas las categorías" },
         ...categorias.map((c) => ({ value: c, label: c })),
@@ -36,39 +35,33 @@ export default function Filtro({
         option: (provided, state) => ({
             ...provided,
             backgroundColor: state.isSelected
-                ? "var(--rojo-500)"
+                ? "linear-gradient(135deg, var(--rojo-600), var(--azul-600))"
                 : state.isFocused
-                ? "rgba(255, 0, 0, 0.15)"
-                : "#fff",
-            color: state.isSelected
-                ? "#fff"
-                : "var(--texto-negro)",
+                ? "rgba(198, 40, 40, 0.15)"
+                : "var(--input-bg)",
+            color: state.isSelected ? "#fff" : "var(--texto)",
             cursor: "pointer",
-            transition: "background-color 0.2s ease-in-out, color 0.2s ease-in-out",
+            transition: "background-color var(--transition-fast)",
         }),
         control: (provided, state) => ({
             ...provided,
-            backgroundColor: "#fff",
-            borderColor: state.isFocused
-                ? "var(--rojo-500)"
-                : "var(--glass)",
-            borderRadius: "8px",
-            padding: "0.1rem",
-            boxShadow: state.isFocused
-                ? "0 0 0 3px rgba(255, 0, 0, 0.2)"
-                : "none",
-            transition: "all 0.2s ease-in-out",
+            backgroundColor: "var(--input-bg)",
+            borderColor: state.isFocused ? "var(--rojo-500)" : "var(--input-border)",
+            borderRadius: "var(--radius-md)",
+            padding: "0.2rem",
+            boxShadow: state.isFocused ? "var(--focus-ring)" : "none",
+            transition: "all var(--transition-fast)",
             "&:hover": {
-                borderColor: "var(--rojo-500)",
+                borderColor: "var(--rojo-700)",
             },
         }),
         menu: (provided) => ({
             ...provided,
-            backgroundColor: "#fff",
-            border: "1px solid var(--glass)",
-            borderRadius: "8px",
-            boxShadow: "0 2px 6px rgba(0, 0, 0, 0.2)",
-            zIndex: 20,
+            backgroundColor: "var(--input-bg)",
+            border: "1px solid var(--input-border)",
+            borderRadius: "var(--radius-md)",
+            boxShadow: "var(--shadow-md)",
+            zIndex: 100,
         }),
         menuList: (provided) => ({
             ...provided,
@@ -76,7 +69,7 @@ export default function Filtro({
         }),
         singleValue: (provided) => ({
             ...provided,
-            color: "var(--texto-negro)",
+            color: "var(--texto)",
         }),
         placeholder: (provided) => ({
             ...provided,
@@ -84,23 +77,19 @@ export default function Filtro({
         }),
         input: (provided) => ({
             ...provided,
-            color: "var(--texto-negro)",
+            color: "var(--texto)",
         }),
         dropdownIndicator: (provided, state) => ({
             ...provided,
-            color: state.isFocused
-                ? "var(--rojo-500)"
-                : "var(--texto-negro)",
-            transition: "color 0.2s ease-in-out",
-            "&:hover": {
-                color: "var(--rojo-400)",
-            },
+            color: state.isFocused ? "var(--rojo-500)" : "var(--texto-sec)",
+            transition: "color var(--transition-fast)",
         }),
         clearIndicator: (provided) => ({
             ...provided,
-            color: "var(--texto-negro)",
+            color: "var(--texto-sec)",
+            transition: "color var(--transition-fast)",
             "&:hover": {
-                color: "var(--rojo-400)",
+                color: "var(--rojo-500)",
             },
         }),
     };
@@ -123,7 +112,7 @@ export default function Filtro({
             {/* 🧾 Código de barras */}
             {mostrarCodigo && (user?.rol === 1 || user?.rol === 2) && (
                 <label>
-                    Buscar por código de barras
+                    Código de Barras
                     <input
                         type="text"
                         placeholder="Ej: 770200100001"
@@ -135,17 +124,20 @@ export default function Filtro({
 
             {/* 🗂️ Categoría */}
             {mostrarCategoria && (
-                <label style={{ width: "100%" }}>
+                <label>
                     Categoría
                     <Select
                         options={opcionesCategorias}
-                        value={opcionesCategorias.find((opt) => opt.value === categoria) || opcionesCategorias[0]}
+                        value={
+                            opcionesCategorias.find((opt) => opt.value === categoria) ||
+                            opcionesCategorias[0]
+                        }
                         onChange={(selected) => {
                             setCategoria(selected.value);
                             if (setMarca) setMarca("");
                         }}
                         isClearable
-                        placeholder="Seleccionar categoría..."
+                        placeholder="Seleccionar..."
                         classNamePrefix="react-select"
                         styles={customStyles}
                     />
@@ -154,22 +146,25 @@ export default function Filtro({
 
             {/* 🏷️ Marca */}
             {mostrarMarca && (
-                <label style={{ width: "100%" }}>
+                <label>
                     Marca
                     <Select
                         options={opcionesMarcas}
-                        value={opcionesMarcas.find((opt) => opt.value === marca) || opcionesMarcas[0]}
+                        value={
+                            opcionesMarcas.find((opt) => opt.value === marca) ||
+                            opcionesMarcas[0]
+                        }
                         onChange={(selected) => setMarca(selected.value)}
                         isClearable
-                        placeholder="Seleccionar marca..."
+                        placeholder="Seleccionar..."
                         classNamePrefix="react-select"
                         styles={customStyles}
                     />
                 </label>
             )}
 
+            {/* Paginación o botones adicionales */}
             {children}
         </div>
     );
 }
-

@@ -15,7 +15,7 @@
     border-radius: var(--radius-sm);
     border: 1px solid var(--pos-divider);
     background-color: var(--pos-mesa-inactiva-bg);
-    color: var(--texto);
+    color: var(--azul-100);
     font-weight: 600;
     cursor: pointer;
     transition: var(--transition-fast);
@@ -23,6 +23,7 @@
 
 .mesa:hover {
     background-color: var(--pos-item-hover);
+    color: var(--texto);
 }
 
 /* =========================
@@ -59,7 +60,7 @@
     @extend .mesa;
     background-color: var(--pos-mesa-activa-bg);
     border-color: var(--pos-mesa-activa-bg);
-    color: var(--btn-primary-text);
+    color: var(--azul-100);
 }
 
 /* =========================
@@ -95,6 +96,7 @@
 
         &:hover {
             background-color: var(--pos-item-hover);
+            color: var(--texto);
         }
 
         &:active {

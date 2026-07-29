@@ -1,7 +1,6 @@
-import styles from "../../../assets/Css/index.module.scss";
 import stylesDeuda from "../../../assets/Css/deuda.module.scss";
 import useDetallesDeudas from "../../../Hooks/Vendedor/Deudas/useDetallesDeudas";
-import { Loading, Error } from "../../../Utils/Cargando";
+import { Loading, Error } from "../../../Utils/Components/Cargando";
 import { useParams } from "react-router-dom";
 
 export default function DetallesDeuda() {
@@ -13,7 +12,7 @@ export default function DetallesDeuda() {
                         : "Ocurrió un error al cargar los detalles"
 
     return (
-        <main className={`${styles.Container} ${stylesDeuda.Container}`}>
+        <main className={`${stylesDeuda.Container}`}>
 
             <h2>Detalles de deuda</h2>
 

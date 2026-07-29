@@ -1,0 +1,71 @@
+﻿/* ======================================================
+   THEME TOKENS
+   ====================================================== */
+
+:root,
+body:not([data-theme]),
+body[data-theme="oscuro"]{
+    --rojo-900:#2b0000;
+    --rojo-800:#420a0a;
+    --rojo-700:#6d1414;
+    --rojo-600:#9b1f1f;
+    --rojo-500:#c62828;
+    --rojo-400:#e53935;
+    --rojo-300:#f57373;
+    --rojo-200:#ffabab;
+    --rojo-100:#ffdede;
+
+    --azul-900:#0a1a26;
+    --azul-800:#0f2536;
+    --azul-700:#15354c;
+    --azul-600:#1e4a6a;
+    --azul-500:#2b6fa3;
+    --azul-400:#3d8bbd;
+    --azul-300:#5fa8d3;
+    --azul-200:#91c9e8;
+    --azul-100:#cfeaf7;
+
+    --fondo:linear-gradient(var(--rojo-900),var(--azul-900));
+    --fondo-elevado:#121012;
+    --superficie:#372525;
+    --texto:#f5f3f3;
+    --texto-negro: #1a1616;
+    --texto-sec:#cfc9c9;
+    --placeholder:#7e7373;
+    --header-bg:var(--rojo-800);
+    --footer-bg:var(--azul-800);
+    --btn-primary-bg:var(--rojo-600);
+    --btn-primary-bg-hover:var(--rojo-500);
+    --btn-primary-bg-active:var(--rojo-700);
+    --btn-secondary-bg:var(--azul-600);
+    --btn-secondary-bg-hover:var(--azul-500);
+    --btn-secondary-bg-active:var(--azul-700);
+    --input-bg:#110e0e;
+    --input-border:#2a1f1f;
+    --card-bg:var(--superficie);
+    --card-border:#201515;
+    --focus-ring:
+        0 0 0 2px rgba(18,16,18,.9),
+        0 0 0 4px rgba(198,40,40,.45);
+    --scrollbar-track:#140d0d;
+    --scrollbar-thumb:#5b1d1d;
+    --scrollbar-thumb-hover:#8f2626;
+    --glass-bg:rgba(255,255,255,.04);
+    --glass-border:rgba(255,255,255,.08);
+    --glass-hover:rgba(255,255,255,.08);
+    --overlay:rgba(0,0,0,.65);
+    --overlay-soft:rgba(0,0,0,.35);
+    --pos-item-bg:var(--card-bg);
+    --pos-item-hover:rgba(0,0,0,.04);
+    --pos-item-active:var(--rojo-600);
+    --pos-divider:var(--card-border);
+    --pos-total-bg:var(--rojo-100);
+    --pos-total-text:var(--texto);
+    --pos-badge-bg:var(--azul-600);
+    --pos-mesa-activa-bg:var(--rojo-600);
+    --pos-mesa-inactiva-bg:var(--azul-700);
+    --pos-row-header:var(--card-bg);
+    --modal-dark-bg:var(--fondo-elevado);
+    --modal-dark-text:var(--texto);
+    --modal-dark-divider:var(--card-border);
+}

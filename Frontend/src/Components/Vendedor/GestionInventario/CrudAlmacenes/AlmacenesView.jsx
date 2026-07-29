@@ -5,12 +5,11 @@ import ModalActualizarStock from "./ModalActualizarStock";
 import ModalTransferirStock from "./ModalTransferirStock";
 import Paginacion from "../Paginacion";
 import styles from "../../../../assets/Css/crud.module.scss";
-import stylesInicio from "../../../../assets/Css/Catalogo.module.scss";
-import stylesFiltro from "../../../../assets/Css/deuda.module.scss";
 import { Warehouse, ShoppingBasket } from "lucide-react";
-import { Error, Loading } from "../../../../Utils/Cargando";
+import { Error, Loading } from "../../../../Utils/Components/Cargando";
 import { useAuthContext } from "../../../../Pages/Context/AuthContext";
 import Swal from "sweetalert2";
+import ImagePreview from "../../../../Utils/Components/ImagePreview";
 
 export default function AlmacenesView() {
     const {user} = useAuthContext();
@@ -148,7 +147,7 @@ export default function AlmacenesView() {
     if (errorInventario) return <Error msg={errorInventario.message} />;
 
     return (
-        <main className={`${styles.Contenedor} ${stylesFiltro.Container}`}>
+        <main className={`${styles.Contenedor}`}>
             <h2>Gestión de Inventario</h2>
 
             <Filtro
@@ -169,17 +168,17 @@ export default function AlmacenesView() {
                 />
             </Filtro>
 
-            <section className={stylesInicio.cartProducto}>
+            <section className={styles.inventarioGrid}>
                 {inventarioAgrupado
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((item) => {
-                        return <div className={stylesInicio.cartProductoItem} key={item.id_producto}>
-                            <div className={stylesInicio.ImagenProducto}>
-                                {item.imagen ? (
-                                    <img src={item.imagen} alt={item.nombre_producto} loading="lazy"/>
-                                ) : (
-                                    <i className="bx bx-image"></i>
-                                )}
+                        return <div className={styles.inventarioCard} key={item.id_producto}>
+                            <div className={styles.inventarioImagen}>
+                                <ImagePreview
+                                    src={item.imagen}
+                                    alt={item.nombre_producto}
+                                    loading="lazy"
+                                />
                             </div>
 
                             <h3>{item.nombre_producto}</h3>
@@ -187,7 +186,7 @@ export default function AlmacenesView() {
                             <p><b>Codigo</b> {item.codigo_barras}</p>
 
                             {item.almacenes.map((a) => (
-                                <div key={a.id_almacen} className={stylesInicio.InfoProducto}>
+                                <div key={a.id_almacen} className={styles.inventarioAlmacenRow}>
                                     {a.id_almacen === 1 ? (
                                         <Warehouse size={40} color="var(--azul-500)" />
                                     ) : (
@@ -203,17 +202,17 @@ export default function AlmacenesView() {
                                 <b>Stock Total</b> {item.stock_total}
                             </p>
 
-                            <div className={stylesInicio.BotonesProducto + " btn-group"}>
+                            <div className={styles.inventarioAcciones}>
                                 {user.rol === 1 ? 
                                     <button
-                                        className="btn btn-outline-primary"
+                                        className={styles.btnOutlinePrimary}
                                         onClick={() => handleActualizarStock(item)}
                                     >
                                         Actualizar
                                     </button>
                                 :null}
                                 <button
-                                    className="btn btn-outline-secondary"
+                                    className={styles.btnOutlineSecondary}
                                     onClick={() => handleTransferirStock(item)}
                                 >
                                     Transferir

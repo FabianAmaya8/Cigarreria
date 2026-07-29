@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../../../Hooks/Client/useAuth";
-import styles from "../../../assets/Css/index.module.scss";
+import styles from "../../../assets/Css/Principales/Auth.module.scss";
 
 const Login = () => {
     const { login, loading, error, loginForm, handleLoginChange } = useAuth();
@@ -14,55 +14,80 @@ const Login = () => {
     };
 
     return (
-        <main className={styles.Container + " justify-content-center"}>
-            <div className="card w-75 p-3">
-                <h3 className="card-title text-center">Login</h3>
-                <form onSubmit={handleSubmit}>
-                    <div className="mb-3">
-                        <label htmlFor="identifier" className="form-label">
-                            <i className="bx bx-user"></i> Usuario o Correo
-                        </label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            id="identifier"
-                            value={loginForm.identifier}
-                            onChange={handleLoginChange}
-                            required
-                        />
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="password" className="form-label">
-                            <i className="bx bx-lock-alt"></i> Contraseña
-                        </label>
-                        <div className="input-group">
+        <main className={styles.authMain}>
+            <div className={styles.authContainer}>
+                <div className={styles.authCard}>
+                    <h1 className={styles.authTitle}>Login</h1>
+
+                    {error && (
+                        <div className={styles.errorAlert}>
+                            <i className="bx bx-exclamation-circle"></i>
+                            <span>{error}</span>
+                        </div>
+                    )}
+
+                    <form onSubmit={handleSubmit} className={styles.authForm}>
+                        <div className={styles.formGroup}>
+                            <label htmlFor="identifier" className={styles.formLabel}>
+                                <i className="bx bx-user"></i>
+                                Usuario o Correo
+                            </label>
                             <input
-                                type={showPassword ? "text" : "password"}
-                                className="form-control"
-                                id="password"
-                                value={loginForm.password}
+                                type="text"
+                                id="identifier"
+                                className={styles.formInput}
+                                placeholder="Tu usuario o correo electrónico"
+                                value={loginForm.identifier}
                                 onChange={handleLoginChange}
                                 required
                             />
-                            <button
-                                className="btn btn-outline-secondary"
-                                type="button"
-                                onClick={() => setShowPassword(!showPassword)}
-                            >
-                                <i
-                                    className={`bx ${
-                                        showPassword ? "bx-hide" : "bx-show"
-                                    }`}
-                                ></i>
-                            </button>
                         </div>
-                    </div>
-                    <div className="d-grid">
-                        <button type="submit" className="btn btn-primary" disabled={loading}>
-                            {loading ? "Cargando..." : "Login"}
+
+                        <div className={styles.formGroup}>
+                            <label htmlFor="password" className={styles.formLabel}>
+                                <i className="bx bx-lock-alt"></i>
+                                Contraseña
+                            </label>
+                            <div className={styles.inputGroup}>
+                                <input
+                                    type={showPassword ? "text" : "password"}
+                                    id="password"
+                                    className={styles.formInputPassword}
+                                    placeholder="Tu contraseña"
+                                    value={loginForm.password}
+                                    onChange={handleLoginChange}
+                                    required
+                                />
+                                <button
+                                    type="button"
+                                    className={styles.togglePasswordBtn}
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    title={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+                                >
+                                    <i className={`bx ${showPassword ? "bx-hide" : "bx-show"}`}></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <button
+                            type="submit"
+                            className={styles.submitBtn}
+                            disabled={loading}
+                        >
+                            {loading ? (
+                                <>
+                                    <i className="bx bx-loader-alt bx-spin"></i>
+                                    Cargando...
+                                </>
+                            ) : (
+                                <>
+                                    <i className="bx bx-log-in"></i>
+                                    Iniciar Sesión
+                                </>
+                            )}
                         </button>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </main>
     );

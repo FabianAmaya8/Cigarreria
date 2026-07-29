@@ -1,0 +1,260 @@
+/* ======================================================
+   PAGINACIÓN - CONTENEDOR PRINCIPAL
+   ====================================================== */
+
+.Paginacion {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    width: 100%;
+    padding: var(--space-lg);
+    background: linear-gradient(135deg, rgba(198, 40, 40, 0.05), rgba(43, 111, 163, 0.05));
+    border: var(--border-width) solid var(--card-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+/* ======================================================
+   TÍTULO DE PAGINACIÓN
+   ====================================================== */
+
+.Paginacion h6 {
+    margin: 0;
+    font-size: var(--font-md);
+    font-weight: var(--weight-semibold);
+    color: var(--texto);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    text-align: center;
+}
+
+/* ======================================================
+   CONTENEDOR DE BOTONES
+   ====================================================== */
+
+.PaginacionBotones {
+    display: flex;
+    gap: var(--space-md);
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* ======================================================
+   BOTONES DE NAVEGACIÓN
+   ====================================================== */
+
+.Paginacion button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    background: var(--btn-secondary-bg);
+    color: #fff;
+    border: var(--border-width) solid var(--btn-secondary-bg);
+    border-radius: var(--radius-md);
+    font-size: var(--font-md);
+    font-weight: var(--weight-semibold);
+    cursor: pointer;
+    transition:
+        background var(--transition-fast),
+        border-color var(--transition-fast),
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast);
+    box-shadow: var(--shadow-sm);
+
+    i {
+        font-size: var(--font-lg);
+    }
+
+    &:hover:not(:disabled) {
+        background: var(--btn-secondary-bg-hover);
+        border-color: var(--btn-secondary-bg-hover);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+    }
+
+    &:active:not(:disabled) {
+        transform: translateY(0);
+    }
+
+    &:disabled {
+        background: var(--card-border);
+        border-color: var(--card-border);
+        color: var(--texto-sec);
+        opacity: var(--opacity-disabled);
+        cursor: not-allowed;
+        box-shadow: none;
+    }
+
+    &:focus {
+        outline: none;
+        box-shadow: var(--focus-ring);
+    }
+}
+
+/* ======================================================
+   TEXTO DE PAGINACIÓN
+   ====================================================== */
+
+.PaginacionBotones span {
+    font-size: var(--font-md);
+    font-weight: var(--weight-semibold);
+    color: var(--texto);
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(198, 40, 40, 0.08);
+    border-radius: var(--radius-md);
+    border: var(--border-width) solid var(--card-border);
+    min-width: 90px;
+    text-align: center;
+}
+
+/* ======================================================
+   SELECT DE FILAS POR PÁGINA
+   ====================================================== */
+
+.Paginacion select {
+    width: 100%;
+    padding: var(--space-md);
+    background: var(--input-bg);
+    color: var(--texto);
+    border: var(--border-width) solid var(--input-border);
+    border-radius: var(--radius-md);
+    font-size: var(--font-md);
+    font-weight: var(--weight-medium);
+    font-family: inherit;
+    cursor: pointer;
+    transition:
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast),
+        background var(--transition-fast);
+
+    &:hover {
+        border-color: var(--rojo-700);
+    }
+
+    &:focus {
+        outline: none;
+        border-color: var(--rojo-500);
+        box-shadow: var(--focus-ring);
+        background: rgba(198, 40, 40, 0.05);
+    }
+
+    option {
+        background: var(--fondo-elevado);
+        color: var(--texto);
+        padding: var(--space-md);
+    }
+}
+
+/* ======================================================
+   RESPONSIVE - TABLET
+   ====================================================== */
+
+@media (max-width: 768px) {
+    .Paginacion {
+        padding: var(--space-md);
+        gap: var(--space-md);
+    }
+
+    .Paginacion h6 {
+        font-size: var(--font-sm);
+    }
+
+    .PaginacionBotones {
+        gap: var(--space-sm);
+    }
+
+    .Paginacion button {
+        width: 36px;
+        height: 36px;
+        font-size: var(--font-md);
+
+        i {
+            font-size: var(--font-md);
+        }
+    }
+
+    .PaginacionBotones span {
+        font-size: var(--font-sm);
+        padding: var(--space-sm);
+        min-width: 80px;
+    }
+
+    .Paginacion select {
+        max-width: 100%;
+        font-size: var(--font-sm);
+        padding: var(--space-sm) var(--space-md);
+    }
+}
+
+/* ======================================================
+   RESPONSIVE - MÓVIL
+   ====================================================== */
+
+@media (max-width: 576px) {
+    .Paginacion {
+        padding: var(--space-md);
+        gap: var(--space-md);
+    }
+
+    .PaginacionBotones {
+        gap: var(--space-xs);
+        width: 100%;
+    }
+
+    .Paginacion button {
+        width: 32px;
+        height: 32px;
+        font-size: var(--font-sm);
+
+        i {
+            font-size: var(--font-sm);
+        }
+    }
+
+    .PaginacionBotones span {
+        font-size: var(--font-xs);
+        padding: var(--space-xs) var(--space-sm);
+        min-width: 70px;
+    }
+
+    .Paginacion select {
+        width: 100%;
+        max-width: unset;
+        font-size: var(--font-sm);
+    }
+
+    .Paginacion h6 {
+        font-size: var(--font-xs);
+    }
+}
+
+/* ======================================================
+   ESTADO DESHABILITADO
+   ====================================================== */
+
+.Paginacion button:disabled {
+    cursor: not-allowed;
+
+    &:hover {
+        transform: none;
+    }
+}
+
+/* ======================================================
+   ACCESIBILIDAD
+   ====================================================== */
+
+.Paginacion button:focus-visible,
+.Paginacion select:focus-visible {
+    outline: 2px solid var(--rojo-500);
+    outline-offset: 2px;
+}
+
+.Paginacion select:disabled {
+    opacity: var(--opacity-disabled);
+    cursor: not-allowed;
+}

@@ -36,6 +36,6 @@ services:
     build: ./Frontend
     container_name: cigarreria_frontend
     ports:
-      - "5173:80"
+      - "80:80"
     depends_on:
       - api

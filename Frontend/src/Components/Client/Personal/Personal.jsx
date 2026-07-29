@@ -2,9 +2,8 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useAuthContext } from "../../../Pages/Context/AuthContext";
 import useInfoPersonal from "../../../Hooks/Client/useInfoPersonal";
-import styles from "../../../assets/Css/index.module.scss";
 import stylesPersonal from "../../../assets/Css/PerfilPersonal.module.scss";
-import { Loading, Error } from "../../../Utils/Cargando";
+import { Loading, Error } from "../../../Utils/Components/Cargando";
 
 export default function Personal() {
     const { user } = useAuthContext();
@@ -83,34 +82,34 @@ export default function Personal() {
 
     return (
         <motion.main
-            className={stylesPersonal.PerfilContainer}
+            className={stylesPersonal["perfil-container"]}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
         >
             <motion.div
-                className={`${styles.Container}`}
+                className={stylesPersonal.container}
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ delay: 0.3 }}
             >
-                <h2 className={stylesPersonal.Title}>Mi Perfil</h2>
+                <h2 className={stylesPersonal.title}>Mi Perfil</h2>
 
                 {/* Imagen de perfil */}
-                <section className={stylesPersonal.ImagenSection + " card"}>
+                <section className={`${stylesPersonal["imagen-section"]} card`}>
                     {perfil?.imagen === null ? (
                         <i className="bx bx-user"></i>
                     ) : (
                         <motion.img
                             src={perfil?.imagen || "/default-user.png"}
                             alt="perfil"
-                            className={stylesPersonal.ImagenPerfil}
+                            className={stylesPersonal["imagen-perfil"]}
                             whileHover={{ scale: 1.05 }}
                         />
                     )}
                     <label
                         htmlFor="imagen"
-                        className={stylesPersonal.BtnSubir + " btn btn-primary"}
+                        className={`${stylesPersonal["btn-subir"]} btn btn-primary`}
                     >
                         Cambiar imagen
                         <input
@@ -124,9 +123,10 @@ export default function Personal() {
                 </section>
 
                 {/* Datos personales */}
-                <section className={stylesPersonal.Datos + " card"}>
+                <section className={`${stylesPersonal.datos} card`}>
                     <h3>Información Personal</h3>
-                    <div className={stylesPersonal.Grupo}>
+
+                    <div className={stylesPersonal.grupo}>
                         <label>Nombre</label>
                         <input
                             name="nombre"
@@ -135,7 +135,8 @@ export default function Personal() {
                             placeholder="Tu nombre"
                         />
                     </div>
-                    <div className={stylesPersonal.Grupo}>
+
+                    <div className={stylesPersonal.grupo}>
                         <label>Correo</label>
                         <input
                             name="correo"
@@ -144,7 +145,8 @@ export default function Personal() {
                             placeholder="correo@ejemplo.com"
                         />
                     </div>
-                    <div className={stylesPersonal.Grupo}>
+
+                    <div className={stylesPersonal.grupo}>
                         <label>Usuario</label>
                         <input
                             name="usuario"
@@ -153,6 +155,7 @@ export default function Personal() {
                             placeholder="Usuario"
                         />
                     </div>
+
                     <button
                         className="btn btn-primary"
                         onClick={handleGuardar}
@@ -164,7 +167,7 @@ export default function Personal() {
 
                 {/* Cambio de contraseña */}
                 <motion.section
-                    className={stylesPersonal.PasswordSection + " card"}
+                    className={`${stylesPersonal["password-section"]} card`}
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     transition={{ delay: 0.5 }}
@@ -172,9 +175,9 @@ export default function Personal() {
                     <h3>Cambiar Contraseña</h3>
 
                     {/* Contraseña actual */}
-                    <div className={stylesPersonal.Grupo}>
+                    <div className={stylesPersonal.grupo}>
                         <label>Contraseña actual</label>
-                        <div className={stylesPersonal.InputPassword}>
+                        <div className={stylesPersonal["input-password"]}>
                             <input
                                 type={showPassword.actual ? "text" : "password"}
                                 value={passwords.actual}
@@ -187,18 +190,16 @@ export default function Personal() {
                                 placeholder="Contraseña actual"
                             />
                             <i
-                                className={`bx ${
-                                    showPassword.actual ? "bx-show" : "bx-hide"
-                                }`}
+                                className={`bx ${showPassword.actual ? "bx-show" : "bx-hide"}`}
                                 onClick={() => toggleVisibility("actual")}
                             ></i>
                         </div>
                     </div>
 
                     {/* Nueva contraseña */}
-                    <div className={stylesPersonal.Grupo}>
+                    <div className={stylesPersonal.grupo}>
                         <label>Nueva contraseña</label>
-                        <div className={stylesPersonal.InputPassword}>
+                        <div className={stylesPersonal["input-password"]}>
                             <input
                                 type={showPassword.nueva ? "text" : "password"}
                                 value={passwords.nueva}
@@ -211,18 +212,16 @@ export default function Personal() {
                                 placeholder="Nueva contraseña"
                             />
                             <i
-                                className={`bx ${
-                                    showPassword.nueva ? "bx-show" : "bx-hide"
-                                }`}
+                                className={`bx ${showPassword.nueva ? "bx-show" : "bx-hide"}`}
                                 onClick={() => toggleVisibility("nueva")}
                             ></i>
                         </div>
                     </div>
 
                     {/* Confirmar contraseña */}
-                    <div className={stylesPersonal.Grupo}>
+                    <div className={stylesPersonal.grupo}>
                         <label>Confirmar contraseña</label>
-                        <div className={stylesPersonal.InputPassword}>
+                        <div className={stylesPersonal["input-password"]}>
                             <input
                                 type={showPassword.confirmar ? "text" : "password"}
                                 value={passwords.confirmar}
@@ -235,9 +234,7 @@ export default function Personal() {
                                 placeholder="Confirmar nueva contraseña"
                             />
                             <i
-                                className={`bx ${
-                                    showPassword.confirmar ? "bx-show" : "bx-hide"
-                                }`}
+                                className={`bx ${showPassword.confirmar ? "bx-show" : "bx-hide"}`}
                                 onClick={() => toggleVisibility("confirmar")}
                             ></i>
                         </div>

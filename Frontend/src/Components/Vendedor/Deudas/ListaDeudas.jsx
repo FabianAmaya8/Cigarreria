@@ -1,4 +1,3 @@
-import styles from "../../../assets/Css/index.module.scss";
 import stylesDeuda from "../../../assets/Css/deuda.module.scss";
 import { Hourglass } from "ldrs/react";
 import { useNavigate, NavLink } from "react-router-dom";
@@ -31,7 +30,7 @@ export default function ListaDeudas() {
         });
 
     return (
-        <main className={`${styles.Container} ${stylesDeuda.Container}`}>
+        <main className={`${stylesDeuda.Container}`}>
 
             <h2>Lista de deudas</h2>
 

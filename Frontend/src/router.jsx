@@ -27,6 +27,7 @@ import AlmacenesView from "./Components/Vendedor/GestionInventario/CrudAlmacenes
 import POSLayout from "./modules/Pos/pages/PosLayout";
 import CierreDia from "./Components/Vendedor/CierreDia/CierreDia";
 import Bolsillos from "./Components/Vendedor/CierreDia/Bolsillos";
+import DashboardAdmin from "./Components/Admin/DashboardAdmin";
 
 const router = createBrowserRouter([
     {
@@ -73,7 +74,7 @@ const router = createBrowserRouter([
     {
         element: <LayoutPrivado requiredRole={1} />,
         children: [
-            { path: "/Administrador", element: <h1>Administrador</h1>, },
+            { path: "/Administrador", element: <DashboardAdmin />, },
         ],
     },
 ]);

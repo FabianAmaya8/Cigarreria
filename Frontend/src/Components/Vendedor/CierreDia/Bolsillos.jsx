@@ -5,7 +5,7 @@ import HeroCierre from "./Cierre/HeroCierre";
 import ResumenGeneral from "./Cierre/ResumenGeneral";
 import ProgressResumen from "./Cierre/ProgressResumen";
 import ListaBolsillos from "./Bolsillos/ListaBolsillos";
-import { Loading, Error } from "../../../Utils/Cargando";
+import { Loading, Error } from "../../../Utils/Components/Cargando";
 import { detactarEstadoCierre } from "./cierreDia.utils";
 
 export default function Bolsillos() {

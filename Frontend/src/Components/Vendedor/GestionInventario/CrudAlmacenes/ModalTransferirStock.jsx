@@ -158,10 +158,10 @@ export default function ModalTransferirStock({ open, onClose, onSubmit, item }) 
                 </div>
 
                 <div className={styles.ModalActions}>
-                    <button className="btn-secondary" onClick={onClose}>
+                    <button className={styles.btn_secondary} onClick={onClose}>
                         Cancelar
                     </button>
-                    <button className="btn-primary" onClick={handleSubmit}>
+                    <button className={styles.btn_primary} onClick={handleSubmit}>
                         Transferir
                     </button>
                 </div>

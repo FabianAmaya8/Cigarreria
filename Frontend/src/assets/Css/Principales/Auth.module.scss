@@ -1,0 +1,404 @@
+/* ======================================================
+   AUTH FORMS (Login & Register)
+   ====================================================== */
+
+.authMain {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-lg) var(--space-md);
+    animation: fadeIn var(--transition-base) ease;
+}
+
+.authContainer {
+    width: 100%;
+    max-width: 450px;
+}
+
+.authCard {
+    background: var(--card-bg);
+    border: var(--border-width) solid var(--card-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-2xl) var(--space-lg);
+    box-shadow: var(--shadow-lg);
+    animation: fadeUp var(--transition-base) ease;
+}
+
+.authTitle {
+    font-size: var(--font-2xl);
+    font-weight: var(--weight-bold);
+    text-align: center;
+    color: var(--texto);
+    margin-bottom: var(--space-2xl);
+    text-transform: capitalize;
+}
+
+.authForm {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+/* ======================================================
+   FORM GROUPS
+   ====================================================== */
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.formLabel {
+    font-size: var(--font-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--texto);
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    cursor: default;
+
+    i {
+        font-size: var(--font-md);
+        color: var(--rojo-500);
+    }
+}
+
+.formInput,
+.formInputPassword {
+    width: 100%;
+    padding: var(--space-md) var(--space-md);
+    background: var(--input-bg);
+    color: var(--texto);
+    border: var(--border-width) solid var(--input-border);
+    border-radius: var(--radius-md);
+    font-size: var(--font-md);
+    font-family: inherit;
+    transition:
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast),
+        background var(--transition-fast);
+
+    &::placeholder {
+        color: var(--placeholder);
+    }
+
+    &:hover {
+        border-color: var(--rojo-700);
+    }
+
+    &:focus {
+        outline: none;
+        border-color: var(--rojo-500);
+        box-shadow: var(--focus-ring);
+        background: rgba(198, 40, 40, 0.05);
+    }
+
+    &:disabled {
+        opacity: var(--opacity-disabled);
+        cursor: not-allowed;
+    }
+}
+
+.inputGroup {
+    display: flex;
+    gap: 0;
+    align-items: center;
+}
+
+.inputGroup .formInputPassword {
+    border-radius: var(--radius-md) 0 0 var(--radius-md);
+    margin-bottom: 0;
+}
+
+.togglePasswordBtn {
+    padding: var(--space-md);
+    background: var(--input-bg);
+    border: var(--border-width) solid var(--input-border);
+    border-left: none;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    color: var(--texto);
+    cursor: pointer;
+    transition:
+        border-color var(--transition-fast),
+        background var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    i {
+        font-size: var(--font-md);
+    }
+
+    &:hover {
+        border-color: var(--rojo-700);
+        background: rgba(198, 40, 40, 0.05);
+    }
+
+    &:focus {
+        outline: none;
+        border-color: var(--rojo-500);
+    }
+}
+
+/* ======================================================
+   PROFILE PICTURE UPLOAD
+   ====================================================== */
+
+.profileUploadGroup {
+    display: flex;
+    justify-content: center;
+    margin-bottom: var(--space-lg);
+}
+
+.profileUploadLabel {
+    cursor: pointer;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-full);
+    border: 2px dashed var(--card-border);
+    transition:
+        border-color var(--transition-fast),
+        background var(--transition-fast),
+        transform var(--transition-fast);
+    background: rgba(198, 40, 40, 0.05);
+
+    &:hover {
+        border-color: var(--rojo-500);
+        background: rgba(198, 40, 40, 0.1);
+        transform: scale(1.05);
+    }
+}
+
+.profileImage {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: var(--radius-full);
+    border: 3px solid var(--rojo-500);
+    box-shadow: var(--shadow-md);
+}
+
+.profilePlaceholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    color: var(--texto-sec);
+    text-align: center;
+
+    i {
+        font-size: var(--font-3xl);
+        color: var(--azul-400);
+    }
+
+    p {
+        font-size: var(--font-sm);
+        font-weight: var(--weight-medium);
+        margin: 0;
+    }
+}
+
+.profileFileInput {
+    display: none;
+}
+
+/* ======================================================
+   SUBMIT BUTTON
+   ====================================================== */
+
+.submitBtn {
+    width: 100%;
+    padding: var(--space-md) var(--space-lg);
+    background: linear-gradient(135deg, var(--rojo-600), var(--azul-600));
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: var(--font-md);
+    font-weight: var(--weight-semibold);
+    cursor: pointer;
+    transition:
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast),
+        opacity var(--transition-fast);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+
+    &:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+    }
+
+    &:active:not(:disabled) {
+        transform: translateY(0);
+    }
+
+    &:disabled {
+        opacity: var(--opacity-disabled);
+        cursor: not-allowed;
+    }
+
+    i {
+        margin-right: var(--space-xs);
+    }
+}
+
+/* ======================================================
+   ERROR MESSAGES
+   ====================================================== */
+
+.errorAlert {
+    padding: var(--space-md);
+    background: rgba(198, 40, 40, 0.1);
+    border: var(--border-width) solid var(--danger);
+    border-radius: var(--radius-md);
+    color: var(--danger);
+    font-size: var(--font-sm);
+    font-weight: var(--weight-medium);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+    animation: slideDown var(--transition-base) ease;
+
+    i {
+        font-size: var(--font-md);
+        flex-shrink: 0;
+    }
+}
+
+/* ======================================================
+   ANIMATIONS
+   ====================================================== */
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* ======================================================
+   RESPONSIVE DESIGN
+   ====================================================== */
+
+@media (max-width: 768px) {
+    .authCard {
+        padding: var(--space-xl) var(--space-lg);
+    }
+
+    .authTitle {
+        font-size: var(--font-xl);
+        margin-bottom: var(--space-lg);
+    }
+
+    .authForm {
+        gap: var(--space-md);
+    }
+
+    .formGroup {
+        gap: var(--space-xs);
+    }
+
+    .profileUploadLabel {
+        width: 120px;
+        height: 120px;
+    }
+
+    .profileImage {
+        width: 120px;
+        height: 120px;
+        border-width: 2px;
+    }
+
+    .profilePlaceholder i {
+        font-size: var(--font-2xl);
+    }
+}
+
+@media (max-width: 576px) {
+    .authMain {
+        padding: var(--space-md) var(--space-sm);
+        min-height: auto;
+    }
+
+    .authCard {
+        padding: var(--space-lg) var(--space-md);
+        border-radius: var(--radius-md);
+    }
+
+    .authTitle {
+        font-size: var(--font-lg);
+        margin-bottom: var(--space-lg);
+    }
+
+    .authForm {
+        gap: var(--space-md);
+    }
+
+    .formLabel {
+        font-size: var(--font-xs);
+    }
+
+    .formInput,
+    .formInputPassword {
+        padding: var(--space-sm) var(--space-md);
+        font-size: var(--font-sm);
+    }
+
+    .togglePasswordBtn {
+        padding: var(--space-sm);
+    }
+
+    .submitBtn {
+        padding: var(--space-md) var(--space-md);
+        font-size: var(--font-sm);
+    }
+
+    .profileUploadLabel {
+        width: 100px;
+        height: 100px;
+    }
+
+    .profileImage {
+        width: 100px;
+        height: 100px;
+    }
+
+    .profilePlaceholder i {
+        font-size: var(--font-xl);
+    }
+
+    .profilePlaceholder p {
+        font-size: var(--font-xs);
+    }
+}

@@ -7,8 +7,8 @@ import ProductoForm from "./CrudProductos";
 import Filtro from "../Filtro";
 import Paginacion from "../Paginacion";
 import styles from "../../../../assets/Css/crud.module.scss";
-import stylesFiltro from "../../../../assets/Css/deuda.module.scss";
-import { Error, Loading } from "../../../../Utils/Cargando";
+import { Error, Loading } from "../../../../Utils/Components/Cargando";
+import ImagePreview from "../../../../Utils/Components/ImagePreview";
 import ModalCrearStock from "../CrudAlmacenes/ModalCrearStock";
 
 export default function ProductosView() {
@@ -17,8 +17,6 @@ export default function ProductosView() {
     const { crearInventario, isCreando } = useInventario();
 
     // 🧠 Estados
-    const [imgGrande, setImgGrande] = useState(false);
-    const [imgGrandeSrc, setImgGrandeSrc] = useState("");
     const [open, setOpen] = useState(false);
     const [modoEdicion, setModoEdicion] = useState(false);
     const [productoSeleccionado, setProductoSeleccionado] = useState(null);
@@ -95,13 +93,6 @@ export default function ProductosView() {
     };
     const handleClose = () => setOpen(false);
 
-    // 🖼️ Imagen ampliada
-    const handleImgGrande = (producto = null) => {
-        setImgGrande(true);
-        setImgGrandeSrc(producto);
-    };
-    const handleCloseImgGrande = () => setImgGrande(false);
-
     // 💾 Guardar producto
     const handleGuardar = async (form) => {
         try {
@@ -126,10 +117,9 @@ export default function ProductosView() {
     if (errorProductos) return <Error msg={errorProductos.message} />;
 
     return (
-        <main className={`${styles.Contenedor} ${stylesFiltro.Container}`}>
+        <main className={styles.Contenedor}>
             <h2>Gestión de Productos</h2>
 
-            {/* 🔸 Filtros */}
             <Filtro
                 busqueda={busqueda}
                 setBusqueda={setBusqueda}
@@ -155,75 +145,91 @@ export default function ProductosView() {
                 />
             </Filtro>
 
-            {/* 🔸 Tabla de productos */}
             <section className={styles.TablaSection}>
                 <div className={styles.Header}>
-                    <button className="btn-primary" onClick={() => handleOpen()}>
-                        + Nuevo Producto
+                    <button onClick={() => handleOpen()}>
+                        <i className="bx bx-plus"></i>
+                        Nuevo Producto
                     </button>
                 </div>
 
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Imagen</th>
-                            <th>Nombre</th>
-                            <th>Marca</th>
-                            <th>Categoría</th>
-                            <th>Precio Venta</th>
-                            <th>Stock Actual</th>
-                            <th>Stock Mínimo</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {productosPaginados.map((prod) => (
-                            <tr key={prod.id_producto}>
-                                <td>
-                                    <img
-                                        src={prod.imagen}
-                                        alt={prod.nombre}
-                                        className={styles.ImagenProducto}
-                                        onClick={() => handleImgGrande(prod)}
-                                        loading="lazy"
-                                    />
-                                </td>
-                                <td>{prod.nombre}</td>
-                                <td>{prod.marca?.nombre}</td>
-                                <td>{prod.marca?.categoria?.nombre}</td>
-                                <td>{formatPrice(prod.precio_venta)}</td>
-                                <td>
-                                    {prod.stock_actual === 0 ? (
-                                        <button
-                                            className="btn-outline-primary"
-                                            onClick={() => {
-                                                setProductoSeleccionado(prod);
-                                                setOpenCrear(true);
-                                            }}
-                                        >
-                                            <SquarePlus />
-                                            Stock
-                                        </button>
-                                    ) : (
-                                        prod.stock_actual
-                                    )}
-                                </td>
-                                <td>{prod.stock_minimo}</td>
-                                <td>
-                                    <button
-                                        className="btn-outline-primary"
-                                        onClick={() => handleOpen(prod)}
-                                    >
-                                        Editar
-                                    </button>
-                                </td>
+                <div className={styles.tablaWrapper}>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Imagen</th>
+                                <th>Nombre</th>
+                                <th>Marca</th>
+                                <th>Categoría</th>
+                                <th>Precio Venta</th>
+                                <th>Stock Actual</th>
+                                <th>Stock Mín.</th>
+                                <th>Visibilidad</th>
+                                <th>Acciones</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {productosPaginados.map((prod) => (
+                                <tr key={prod.id_producto}>
+                                    <td data-label="Imagen">
+                                        <ImagePreview
+                                            src={prod.imagen}
+                                            alt={prod.nombre}
+                                            className={styles.ImagenProducto}
+                                        />
+                                    </td>
+                                    <td data-label="Nombre">{prod.nombre}</td>
+                                    <td data-label="Marca">{prod.marca?.nombre || "—"}</td>
+                                    <td data-label="Categoría">{prod.marca?.categoria?.nombre || "—"}</td>
+                                    <td data-label="Precio Venta">{formatPrice(prod.precio_venta)}</td>
+                                    <td data-label="Stock">
+                                        {prod.stock_actual === 0 ? (
+                                            <button
+                                                className={styles.tablaAccionesBtn}
+                                                onClick={() => {
+                                                    setProductoSeleccionado(prod);
+                                                    setOpenCrear(true);
+                                                }}
+                                            >
+                                                <i className="bx bx-plus-circle"></i>
+                                            </button>
+                                        ) : (
+                                            <span style={{ fontWeight: "600", color: "var(--texto)" }}>
+                                                {prod.stock_actual}
+                                            </span>
+                                        )}
+                                    </td>
+                                    <td data-label="Stock Mín.">{prod.stock_minimo}</td>
+                                    <td data-label="Visibilidad">
+                                        <div className={styles.visibilityToggle}>
+                                            <button
+                                                className={`${styles.toggleSwitch} ${prod.activo ? styles.active : ""}`}
+                                                onClick={() => handleOpen(prod)}
+                                                title={prod.activo ? "Desactivar" : "Activar"}
+                                            />
+                                            <span className={styles.toggleLabel}>
+                                                {prod.activo ? "Activo" : "Inactivo"}
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td data-label="Acciones">
+                                        <div className={styles.acciones}>
+                                            <button
+                                                className={styles.tablaAccionesBtn}
+                                                onClick={() => handleOpen(prod)}
+                                            >
+                                                <i className="bx bx-edit"></i>
+                                                Editar
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </section>
 
-            {/* 🔸 Modal producto */}
             {open && (
                 <ProductoForm
                     open={open}
@@ -234,7 +240,6 @@ export default function ProductosView() {
                 />
             )}
 
-            {/* 🔸 Modal crear stock */}
             {openCrear && (
                 <ModalCrearStock
                     open={openCrear}
@@ -258,20 +263,6 @@ export default function ProductosView() {
                         { id_almacen: 2, nombre_almacen: "Vitrinas" },
                     ]}
                 />
-            )}
-
-            {/* 🔸 Imagen grande */}
-            {imgGrande && (
-                <div className={styles.ImgGrande} onClick={handleCloseImgGrande}>
-                    {imgGrandeSrc.imagen ? (
-                        <img src={imgGrandeSrc.imagen} alt={imgGrandeSrc.nombre} loading="lazy"/>
-                    ) : (
-                        <div className="d-flex flex-column gap-3 justify-content-center align-items-center">
-                            <i className="bx bxs-image-alt"></i>
-                            <h5>{imgGrandeSrc.nombre}</h5>
-                        </div>
-                    )}
-                </div>
             )}
         </main>
     );

@@ -1,12 +1,11 @@
 import { useState, useMemo } from "react";
 import Swal from "sweetalert2";
-import { Error, Loading } from "../../../../Utils/Cargando";
+import { Error, Loading } from "../../../../Utils/Components/Cargando";
 import useCrudCategorias from "../../../../Hooks/Vendedor/GestionInventario/useCrudCategorias";
 import MarcaForm from "./CrudMarcas";
 import Filtro from "../Filtro";
 import Paginacion from "../Paginacion";
 import styles from "../../../../assets/Css/crud.module.scss";
-import stylesFiltro from "../../../../assets/Css/deuda.module.scss";
 
 export default function MarcasView() {
     const { marcas, categorias, isLoadingMarcas, errorMarcas, crearMarca, actualizarMarca } = useCrudCategorias();
@@ -75,10 +74,9 @@ export default function MarcasView() {
     const categoriasUnicas = categorias.map((c) => c.nombre);
 
     return (
-        <main className={`${styles.Contenedor} ${stylesFiltro.Container}`}>
+        <main className={styles.Contenedor}>
             <h2>Gestión de Marcas</h2>
 
-            {/* 🔸 Filtro con paginación */}
             <Filtro
                 busqueda={busqueda}
                 setBusqueda={setBusqueda}
@@ -97,44 +95,46 @@ export default function MarcasView() {
                 />
             </Filtro>
 
-            {/* 🔸 Tabla */}
             <section className={styles.TablaSection}>
                 <div className={styles.Header}>
-                    <button className="btn-primary" onClick={() => handleOpen()}>
-                        + Nueva Marca
+                    <button onClick={() => handleOpen()}>
+                        <i className="bx bx-plus"></i>
+                        Nueva Marca
                     </button>
                 </div>
 
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Categoría</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {marcasPaginadas.map((m) => (
-                            <tr key={m.id_marca}>
-                                <td>{m.id_marca}</td>
-                                <td>{m.nombre}</td>
-                                <td>{m.categoria?.nombre}</td>
-                                <td>
-                                    <button
-                                        className="btn-outline-primary"
-                                        onClick={() => handleOpen(m)}
-                                    >
-                                        Editar
-                                    </button>
-                                </td>
+                <div className={styles.tablaWrapper}>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Categoría</th>
+                                <th>Acciones</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {marcasPaginadas.map((m) => (
+                                <tr key={m.id_marca}>
+                                    <td data-label="Nombre">{m.nombre}</td>
+                                    <td data-label="Categoría">{m.categoria?.nombre || "—"}</td>
+                                    <td data-label="Acciones">
+                                        <div className={styles.acciones}>
+                                            <button
+                                                className={styles.tablaAccionesBtn}
+                                                onClick={() => handleOpen(m)}
+                                            >
+                                                <i className="bx bx-edit"></i>
+                                                Editar
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </section>
 
-            {/* 🔸 Modal */}
             {open && (
                 <MarcaForm
                     open={open}

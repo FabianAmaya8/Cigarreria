@@ -1,12 +1,11 @@
 import { useState, useMemo } from "react";
 import Swal from "sweetalert2";
-import { Error, Loading } from "../../../../Utils/Cargando";
+import { Error, Loading } from "../../../../Utils/Components/Cargando";
 import useCrudCategorias from "../../../../Hooks/Vendedor/GestionInventario/useCrudCategorias";
 import CategoriaForm from "./CrudCategorias";
 import Filtro from "../Filtro";
 import Paginacion from "../Paginacion";
 import styles from "../../../../assets/Css/crud.module.scss";
-import stylesFiltro from "../../../../assets/Css/deuda.module.scss";
 
 export default function CategoriasView() {
     const { categorias, isLoadingCategorias, errorCategorias, crearCategoria, actualizarCategoria } =
@@ -70,10 +69,9 @@ export default function CategoriasView() {
     if (errorCategorias) return <Error msg={errorCategorias.message} />;
 
     return (
-        <main className={`${styles.Contenedor} ${stylesFiltro.Container}`}>
+        <main className={styles.Contenedor}>
             <h2>Gestión de Categorías</h2>
 
-            {/* 🔸 Filtro */}
             <Filtro
                 busqueda={busqueda}
                 setBusqueda={setBusqueda}
@@ -87,44 +85,46 @@ export default function CategoriasView() {
                 />
             </Filtro>
 
-            {/* 🔸 Tabla */}
             <section className={styles.TablaSection}>
                 <div className={styles.Header}>
-                    <button className="btn-primary" onClick={() => handleOpen()}>
-                        + Nueva Categoría
+                    <button onClick={() => handleOpen()}>
+                        <i className="bx bx-plus"></i>
+                        Nueva Categoría
                     </button>
                 </div>
 
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Descripción</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {categoriasPaginadas.map((c) => (
-                            <tr key={c.id_categoria}>
-                                <td>{c.id_categoria}</td>
-                                <td>{c.nombre}</td>
-                                <td>{c.descripcion}</td>
-                                <td>
-                                    <button
-                                        className="btn-outline-primary"
-                                        onClick={() => handleOpen(c)}
-                                    >
-                                        Editar
-                                    </button>
-                                </td>
+                <div className={styles.tablaWrapper}>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>Acciones</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {categoriasPaginadas.map((c) => (
+                                <tr key={c.id_categoria}>
+                                    <td data-label="Nombre">{c.nombre}</td>
+                                    <td data-label="Descripción">{c.descripcion || "—"}</td>
+                                    <td data-label="Acciones">
+                                        <div className={styles.acciones}>
+                                            <button
+                                                className={styles.tablaAccionesBtn}
+                                                onClick={() => handleOpen(c)}
+                                            >
+                                                <i className="bx bx-edit"></i>
+                                                Editar
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </section>
 
-            {/* 🔸 Modal */}
             {open && (
                 <CategoriaForm
                     open={open}

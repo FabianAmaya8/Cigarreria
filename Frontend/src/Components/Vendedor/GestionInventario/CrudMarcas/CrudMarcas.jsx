@@ -62,71 +62,80 @@ export default function MarcaForm({ open, onClose, onSubmit, modoEdicion, marca 
                 <h3>{modoEdicion ? "Editar Marca" : "Nueva Marca"}</h3>
 
                 <div className={styles.ModalContent}>
-                    <label>Nombre de la marca
+                    <label>
+                        Nombre de la marca
                         <input
+                            type="text"
                             name="nombre"
                             value={form.nombre}
                             onChange={handleChange}
                             placeholder="Ej: Coca-Cola"
+                            required
                         />
                     </label>
 
-                    <label>Categoría</label>
-                    {isLoadingCategorias ? (
-                        <p>Cargando categorías...</p>
-                    ) : (
-                        <Select
-                            options={optionsCategorias}
-                            value={categoriaSeleccionada}
-                            onChange={handleCategoriaChange}
-                            placeholder="Selecciona una categoría..."
-                            isClearable
-                            className={styles.SelectCategoria}
-                            styles={{
-                                control: (base, state) => ({
-                                    ...base,
-                                    backgroundColor: "var(--input-bg)",
-                                    borderColor: state.isFocused
-                                        ? "var(--input-focus-border)"
-                                        : "var(--input-border)",
-                                    color: "var(--input-text)",
-                                    borderRadius: "var(--radius-sm)",
-                                    padding: "0.2rem 0.3rem",
-                                    boxShadow: "none",
-                                    "&:hover": {
-                                        borderColor: "var(--input-focus-border)",
-                                    },
-                                }),
-                                menu: (base) => ({
-                                    ...base,
-                                    backgroundColor: "var(--input-bg)",
-                                    color: "var(--input-text)",
-                                    borderRadius: "var(--radius-sm)",
-                                    border: "1px solid var(--input-border)",
-                                }),
-                                option: (base, state) => ({
-                                    ...base,
-                                    backgroundColor: state.isFocused
-                                        ? "var(--input-focus-border)"
-                                        : "var(--input-bg)",
-                                    color: "var(--input-text)",
-                                }),
-                                singleValue: (base) => ({
-                                    ...base,
-                                    color: "var(--input-text)",
-                                }),
-                                placeholder: (base) => ({
-                                    ...base,
-                                    color: "var(--input-placeholder)",
-                                }),
-                            }}
-                        />
-                    )}
+                    <label>
+                        Categoría
+                        {isLoadingCategorias ? (
+                            <div style={{ padding: "10px", color: "var(--texto-sec)" }}>
+                                Cargando categorías...
+                            </div>
+                        ) : (
+                            <Select
+                                options={optionsCategorias}
+                                value={categoriaSeleccionada}
+                                onChange={handleCategoriaChange}
+                                placeholder="Selecciona una categoría..."
+                                isClearable
+                                className={styles.SelectCategoria}
+                                styles={{
+                                    control: (base, state) => ({
+                                        ...base,
+                                        backgroundColor: "var(--input-bg)",
+                                        borderColor: state.isFocused ? "var(--rojo-500)" : "var(--input-border)",
+                                        color: "var(--input-text)",
+                                        borderRadius: "var(--radius-md)",
+                                        padding: "0.2rem",
+                                        boxShadow: state.isFocused ? "var(--focus-ring)" : "none",
+                                        "&:hover": {
+                                            borderColor: "var(--rojo-700)",
+                                        },
+                                    }),
+                                    menu: (base) => ({
+                                        ...base,
+                                        backgroundColor: "var(--input-bg)",
+                                        color: "var(--input-text)",
+                                        borderRadius: "var(--radius-md)",
+                                        border: "1px solid var(--input-border)",
+                                        zIndex: 100,
+                                    }),
+                                    option: (base, state) => ({
+                                        ...base,
+                                        backgroundColor: state.isFocused ? "rgba(198, 40, 40, 0.15)" : "var(--input-bg)",
+                                        color: "var(--input-text)",
+                                        cursor: "pointer",
+                                    }),
+                                    singleValue: (base) => ({
+                                        ...base,
+                                        color: "var(--input-text)",
+                                    }),
+                                    placeholder: (base) => ({
+                                        ...base,
+                                        color: "var(--placeholder)",
+                                    }),
+                                }}
+                            />
+                        )}
+                    </label>
                 </div>
 
                 <div className={styles.ModalActions}>
-                    <button className="btn-secondary" onClick={onClose}>Cancelar</button>
-                    <button className="btn-primary" onClick={handleSubmit}>
+                    <button className={`${styles.ModalActions} btn-secondary`} onClick={onClose}>
+                        <i className="bx bx-x"></i>
+                        Cancelar
+                    </button>
+                    <button className={`${styles.ModalActions} btn-primary`} onClick={handleSubmit}>
+                        <i className={`bx ${modoEdicion ? "bx-check" : "bx-plus"}`}></i>
                         {modoEdicion ? "Actualizar" : "Guardar"}
                     </button>
                 </div>

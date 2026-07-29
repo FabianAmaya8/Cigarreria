@@ -8,7 +8,7 @@ import RangoFechas from "./Cierre/RangoFechas";
 import ResumenCajas from "./Cierre/ResumenCajas";
 import ResumenVentas from "./Cierre/ResumenVentas";
 import ListaBolsillos from "./Bolsillos/ListaBolsillos";
-import { Loading, Error } from "../../../Utils/Cargando";
+import { Loading, Error } from "../../../Utils/Components/Cargando";
 import { detactarEstadoCierre } from "./cierreDia.utils";
 
 export default function CierreDia() {

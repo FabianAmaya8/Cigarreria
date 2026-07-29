@@ -1,5 +1,5 @@
 import navConfig from "../../../Utils/RutasNav.json";
-import styles from "../../../assets/Css/index.module.scss";
+import styles from "../../../assets/Css/Principales/index.module.scss";
 import { Hourglass } from 'ldrs/react'
 import { useAuthContext } from "../../../Pages/Context/AuthContext";
 import { NavLink } from "react-router-dom";
@@ -28,44 +28,45 @@ function Header() {
     });
 
     return (
-        <header className={styles.Header}>
-            <div className={styles["Header-container"]}>
+        <header className={styles.header}>
+            <div className={styles["header-container"]}>
                 {/* Logo SOLO en escritorio */}
-                <NavLink to="/" className={`${styles["Header-logo"]} ${styles["only-desktop"]}`}>
+                <NavLink to="/" className={`${styles["header-logo"]} ${styles["only-desktop"]}`}>
                     <img src={logo} alt="Logo" />
                 </NavLink>
 
                 {/* Título siempre visible */}
-                <h1 className={styles["Header-title"]}>Cigarrería JJ</h1>
+                <h1 className={styles["header-title"]}>Cigarrería JJ</h1>
 
                 {/* Nav SOLO en escritorio */}
-                <nav className={`${styles["Header-nav"]} ${styles["only-desktop"]}`}>
-                    <ul className={styles["Header-list"]}>
+                <nav className={`${styles["header-nav"]} ${styles["only-desktop"]}`}>
+                    <ul className={styles["header-list"]}>
                         {navBar.map((item, index) => (
-                            <li key={index} className={styles["Header-item"]}>
-                                <NavLink to={item.ruta} className={styles["Header-link"]}>
+                            <li key={index} className={styles["header-item"]}>
+                                <NavLink to={item.ruta} className={styles["header-link"]}>
                                     <i className={item.icon}></i>
-                                    {item.texto}
+                                    <span>{item.texto}</span>
                                 </NavLink>
                             </li>
                         ))}
                     </ul>
-                    {isAuthenticated ?
-                    (<NavLink to="/Personal" className={`${styles["HeaderUser"]} ${styles["only-desktop"]}`}>
-                        {loading ? (<Hourglass size={80} color="var(--texto)" />) : 
-                        imagen ? (
-                            <img src={imagen} alt="Imagen de Perfil" />
-                        ) : (
-                            <i className="bx bx-user "></i>
-                        )
-                        }
-                    </NavLink>
-                    ): null}
+
+                    {isAuthenticated ? (
+                        <NavLink to="/Personal" className={`${styles["header-user"]} ${styles["only-desktop"]}`}>
+                            {loading ? (
+                                <Hourglass size={80} color="var(--texto)" />
+                            ) : imagen ? (
+                                <img src={imagen} alt="Imagen de Perfil" />
+                            ) : (
+                                <i className="bx bx-user"></i>
+                            )}
+                        </NavLink>
+                    ) : null}
                 </nav>
 
                 {/* Botón Hamburguesa SOLO en móvil */}
                 <button
-                    className={`${styles["Header-burger"]} ${styles["only-mobile"]}`}
+                    className={`${styles["header-burger"]} ${styles["only-mobile"]}`}
                     onClick={() => setMenuOpen(!menuOpen)}
                 >
                     <i className={menuOpen ? "bx bx-x" : "bx bx-menu"}></i>
@@ -73,44 +74,42 @@ function Header() {
             </div>
 
             {/* Menú lateral con logo + opciones */}
-            <nav
-                className={`${styles["Header-overlay"]} ${
-                    menuOpen ? styles["is-open"] : ""
-                }`}
-            >
-                <div className={styles["Overlay-content"]}>
-                    <NavLink to="/" className={styles["Overlay-logo"]}>
-                        <img src= {logo} alt="Logo" />
+            <nav className={`${styles["header-overlay"]} ${menuOpen ? styles["is-open"] : ""}`}>
+                <div className={styles["overlay-content"]}>
+                    <NavLink to="/" className={styles["overlay-logo"]}>
+                        <img src={logo} alt="Logo" />
                     </NavLink>
-                    <ul className={styles["Header-list"]}>
+
+                    <ul className={styles["header-list"]}>
                         {navBar.map((item, index) => (
-                            <li key={index} className={styles["Header-item"]}>
+                            <li key={index} className={styles["header-item"]}>
                                 <NavLink
                                     to={item.ruta}
-                                    className={styles["Header-link"]}
+                                    className={styles["header-link"]}
                                     onClick={() => setMenuOpen(false)}
                                 >
                                     <i className={item.icon}></i>
-                                    {item.texto}
+                                    <span>{item.texto}</span>
                                 </NavLink>
                             </li>
                         ))}
                     </ul>
+
                     {isAuthenticated ? (
-                        <NavLink 
-                            to="/Personal" 
-                            className={`${styles["HeaderUser"]} ${styles["Overlay-logo"]}`}
+                        <NavLink
+                            to="/Personal"
+                            className={`${styles["header-user"]} ${styles["overlay-logo"]}`}
                             onClick={() => setMenuOpen(false)}
                         >
-                            {loading ? (<Hourglass size={80} color="var(--texto)" />) : 
-                            imagen ? (
+                            {loading ? (
+                                <Hourglass size={80} color="var(--texto)" />
+                            ) : imagen ? (
                                 <img src={imagen} alt="Imagen de Perfil" />
                             ) : (
-                                <i className="bx bx-user "></i>
-                            )
-                            }
+                                <i className="bx bx-user"></i>
+                            )}
                         </NavLink>
-                    ): null}
+                    ) : null}
                 </div>
             </nav>
         </header>

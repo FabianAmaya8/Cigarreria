@@ -2,8 +2,7 @@ import { useAuthContext } from "../../Pages/Context/AuthContext";
 import { RectangleEllipsis, KeySquare } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import navConfig from "../../Utils/RutasNav.json";
-import styles from "../../assets/Css/index.module.scss";
-import stylesInicio from "../../assets/Css/Inicio.module.scss";
+import stylesInicio from "../../assets/Css/Principales/Inicio.module.scss";
 import { TareaContainer } from "../Client/Tareas/ComponentsTareas";
 
 export default function Inicio() {
@@ -23,12 +22,12 @@ export default function Inicio() {
     });
 
     return (
-        <main className= {`${styles.Container} ${stylesInicio.ItemContainer}`}>
+        <main className={`${stylesInicio.inicioMain}`}>
             {isAuthenticated ? (
-                <div className={stylesInicio.ItemContainer}>
-                    <h2>¿Qué deseas hacer?</h2>
+                <section className={stylesInicio.authenticatedSection}>
+                    <h1 className={stylesInicio.pageTitle}>¿Qué deseas hacer?</h1>
                     <TareaContainer items={navBar} />
-                </div>
+                </section>
             ) : (
                 <InformacionSinLogin />
             )}

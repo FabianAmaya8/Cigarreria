@@ -1,58 +1,76 @@
+/* ======================================================
+   CONTENEDOR PRINCIPAL
+   ====================================================== */
+
 .Container {
     display: grid;
     grid-template-columns: 1fr 3fr;
     align-items: start;
-    gap: 1rem;
+    gap: var(--space-lg);
     color: var(--texto);
 
     h2 {
         text-align: center;
         grid-column: span 2 / span 2;
         text-transform: capitalize;
+        font-size: var(--font-2xl);
+        font-weight: var(--weight-bold);
+        padding-bottom: var(--space-md);
+        border-bottom: var(--border-width) solid var(--card-border);
     }
 }
 
-/* Opciones de navegación */
+/* ======================================================
+   OPCIONES DE NAVEGACIÓN
+   ====================================================== */
+
 .Item {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: var(--space-lg);
 }
 
 .Opciones {
     display: flex;
     flex-direction: column;
     background: var(--card-bg);
-    border: 1px solid var(--card-border);
+    border: var(--border-width) solid var(--card-border);
     border-radius: var(--radius-md);
-    box-shadow: var(--shadow-1);
+    box-shadow: var(--shadow-md);
     overflow: hidden;
     position: relative;
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    transition: 
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast);
 
     a {
         color: var(--texto);
         text-decoration: none;
         display: flex;
         align-items: center;
-        gap: 1rem;
-        padding: 1rem 1.5rem;
+        gap: var(--space-lg);
+        padding: var(--space-lg) var(--space-xl);
         border-radius: var(--radius-md);
         transition: color var(--transition-fast);
-        font-weight: 500;
+        font-weight: var(--weight-semibold);
     }
 
     i {
-        font-size: 2rem;
+        font-size: var(--font-3xl);
         color: var(--azul-400);
+        transition: color var(--transition-fast);
     }
 
     &:hover {
         transform: translateY(-4px);
-        box-shadow: var(--shadow-2);
+        box-shadow: var(--shadow-lg);
 
         a {
-            color: var( --rojo-900);
+            color: #fff;
+        }
+
+        i {
+            color: #fff;
         }
     }
 
@@ -64,7 +82,7 @@
         width: 0%;
         height: 100%;
         border-radius: var(--radius-md);
-        background: var(--gradient-primary);
+        background: linear-gradient(135deg, var(--rojo-600), var(--azul-600));
         transition: width var(--transition-fast);
         z-index: -1;
     }
@@ -74,219 +92,344 @@
     }
 }
 
-/* Listado de deudas */
+/* ======================================================
+   LISTADO DE DEUDAS
+   ====================================================== */
+
 .Deudas {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: var(--space-lg);
     width: 100%;
 }
 
-/* Card individual de deuda */
+/* ======================================================
+   CARD INDIVIDUAL DE DEUDA
+   ====================================================== */
+
 .Deuda {
     display: flex;
+    gap: var(--space-lg);
     background: var(--card-bg);
-    border: 1px solid var(--card-border);
+    border: var(--border-width) solid var(--card-border);
     border-radius: var(--radius-md);
-    padding: 1.2rem;
+    padding: var(--space-lg);
     color: var(--texto);
-    box-shadow: var(--shadow-1);
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    box-shadow: var(--shadow-md);
+    transition: 
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast),
+        border-color var(--transition-fast);
 
     p {
-        margin: 0.3rem 0;
-        font-size: 0.95rem;
+        margin: var(--space-sm) 0;
+        font-size: var(--font-sm);
         color: var(--texto-sec);
 
         b {
-            color: var(--rojo-300);
+            color: var(--rojo-400);
+            font-weight: var(--weight-semibold);
         }
     }
 
     &:hover {
         transform: translateY(-3px);
-        box-shadow: var(--shadow-2);
+        box-shadow: var(--shadow-lg);
         border-color: var(--azul-500);
     }
+}
 
-    .Imagen {
-        width: 150px;
-        height: 150px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: var(--radius-md);
-        overflow: hidden;
+/* ======================================================
+   IMAGEN DE DEUDA
+   ====================================================== */
 
-        img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            border-radius: var(--radius-sm);
-        }
+.Imagen {
+    width: 150px;
+    height: 150px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--fondo-elevado);
 
-        i {
-            font-size: 150px;
-            color: var(--texto-muted);
-        }
+    img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        border-radius: var(--radius-sm);
+    }
+
+    i {
+        font-size: 80px;
+        color: var(--texto-sec);
     }
 }
-.Detalles{
+
+/* ======================================================
+   DETALLES DE DEUDA
+   ====================================================== */
+
+.Detalles {
     flex: 1;
-}
-.Boton{
-    background: var(--card-bg);
-    box-shadow: var(--shadow-1);
-    color: var(--texto);
-    text-decoration: none;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    padding: 0.5rem;
-    gap: 0.5rem;
-    border-radius: var(--radius-md);
-    transition: color var(--transition-fast);
-
-    i{
-        font-size: 2rem;
-        color: var(--warning)
-    }
+    justify-content: space-between;
 }
-
 
 .Cabecera {
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    gap: var(--space-sm);
 
     p {
         margin: 0;
-        font-size: 0.95rem;
+        font-size: var(--font-sm);
         color: var(--texto-sec);
 
         b {
-        color: var(--rojo-300);
+            color: var(--rojo-400);
+            font-weight: var(--weight-semibold);
         }
     }
 }
 
-.Filtros {
-    position: sticky;
-    top: 120px;
+/* ======================================================
+   BOTÓN DE ACCIÓN
+   ====================================================== */
+
+.Boton {
+    background: linear-gradient(135deg, var(--rojo-600), var(--azul-600));
+    box-shadow: var(--shadow-md);
+    color: #fff;
+    text-decoration: none;
     display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-    padding: 1rem;
-    background: var(--superficie);
-    border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-md);
+    gap: var(--space-sm);
+    border-radius: var(--radius-md);
+    border: none;
+    cursor: pointer;
+    transition: 
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast);
+    font-weight: var(--weight-semibold);
 
-    label {
-        display: flex;
-        flex-direction: column;
-        gap: 0.4rem;
-        flex: 1;
-        min-width: 200px;
-        font-size: 0.9rem;
-        font-weight: 500;
-        color: var(--texto-sec);
-        text-transform: capitalize;
+    i {
+        font-size: var(--font-2xl);
+    }
 
-        input,
-        select {
-            padding: 0.6rem 1rem;
-            border: 1px solid var(--glass);
-            border-radius: 8px;
-            background-color: #fff;
-            font-size: 0.95rem;
-            transition: all 0.2s ease-in-out;
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+    }
 
-            &:focus {
-                outline: none;
-                border-color: var(--rojo-500);
-                box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.2);
-            }
-        }
+    &:active {
+        transform: translateY(0);
     }
 }
+
+/* ======================================================
+   FORMULARIO
+   ====================================================== */
 
 .Form {
     grid-column: span 2 / span 2;
     display: flex;
     flex-direction: column;
-    gap: 1.2rem;
+    gap: var(--space-lg);
     background: var(--card-bg);
-    padding: 2rem;
+    padding: var(--space-2xl);
     border-radius: var(--radius-md);
-    box-shadow: var(--shadow-1);
+    border: var(--border-width) solid var(--card-border);
+    box-shadow: var(--shadow-md);
 }
 
 .InputGroup {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: var(--space-sm);
 
     label {
-        font-weight: 600;
+        font-weight: var(--weight-semibold);
+        color: var(--texto);
+        font-size: var(--font-sm);
     }
 
     input,
     select,
     textarea {
-        padding: 0.7rem;
-        border: 1px solid var(--card-border);
-        border-radius: var(--radius-sm);
-        background: #fff;
-        font-size: 1rem;
+        width: 100%;
+        padding: var(--space-md);
+        border: var(--border-width) solid var(--input-border);
+        border-radius: var(--radius-md);
+        background: var(--input-bg);
+        color: var(--texto);
+        font-size: var(--font-md);
+        font-family: inherit;
+        transition:
+            border-color var(--transition-fast),
+            box-shadow var(--transition-fast);
+
+        &::placeholder {
+            color: var(--placeholder);
+        }
+
+        &:hover {
+            border-color: var(--rojo-700);
+        }
+
+        &:focus {
+            outline: none;
+            border-color: var(--rojo-500);
+            box-shadow: var(--focus-ring);
+        }
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 100px;
     }
 }
+
+/* ======================================================
+   BOTÓN SUBMIT
+   ====================================================== */
 
 .BotonSubmit {
-    padding: 0.8rem 1.5rem;
+    padding: var(--space-md) var(--space-xl);
     border: none;
     border-radius: var(--radius-md);
-    background: var(--azul-400);
+    background: linear-gradient(135deg, var(--rojo-600), var(--azul-600));
     color: #fff;
-    font-weight: bold;
+    font-weight: var(--weight-semibold);
+    font-size: var(--font-md);
     cursor: pointer;
-    transition: background var(--transition-fast);
+    transition: 
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast);
+    box-shadow: var(--shadow-md);
 
     &:hover {
-        background: var(--azul-500);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+
+    &:disabled {
+        opacity: var(--opacity-disabled);
+        cursor: not-allowed;
     }
 }
 
+/* ======================================================
+   MENSAJES
+   ====================================================== */
+
 .ErrorMsg {
-    color: var(--rojo-500);
-    margin-top: 1rem;
+    padding: var(--space-md);
+    color: var(--danger);
+    background: rgba(198, 40, 40, 0.1);
+    border: var(--border-width) solid var(--danger);
+    border-radius: var(--radius-md);
+    font-weight: var(--weight-medium);
+    margin-top: var(--space-lg);
 }
 
 .SuccessMsg {
-    color: var(--verde-500);
-    margin-top: 1rem;
+    padding: var(--space-md);
+    color: var(--success);
+    background: rgba(39, 174, 96, 0.1);
+    border: var(--border-width) solid var(--success);
+    border-radius: var(--radius-md);
+    font-weight: var(--weight-medium);
+    margin-top: var(--space-lg);
 }
 
+/* ======================================================
+   RESPONSIVE - TABLET
+   ====================================================== */
 
-/* media queries */
-@media screen and (max-width: 850px) {
+@media (max-width: 850px) {
     .Container {
         grid-template-columns: 1fr;
-        gap: 1rem;
+        gap: var(--space-lg);
 
         h2 {
             grid-column: span 1 / span 1;
         }
     }
-    .Relleno{
-        display: none;
+
+    .Imagen {
+        width: 120px;
+        height: 120px;
+
+        i {
+            font-size: 60px;
+        }
     }
-    .Imagen{
-        width: 80px;
-        height: 80px;
+
+    .Form {
+        grid-column: span 1 / span 1;
     }
-    .Filtros{
-        position: static;
+}
+
+/* ======================================================
+   RESPONSIVE - MÓVIL
+   ====================================================== */
+
+@media (max-width: 576px) {
+    .Container {
+        padding: var(--space-md);
+        gap: var(--space-md);
+    }
+
+    .Container h2 {
+        font-size: var(--font-xl);
+    }
+
+    .Deuda {
+        flex-direction: column;
+        gap: var(--space-md);
+        padding: var(--space-md);
+    }
+
+    .Imagen {
+        width: 100%;
+        height: auto;
+        max-height: 150px;
+
+        i {
+            font-size: 50px;
+        }
+    }
+
+    .Cabecera {
+        order: -1;
+    }
+
+    .Boton {
+        width: 100%;
+        padding: var(--space-md);
+    }
+
+    .Form {
+        padding: var(--space-lg) var(--space-md);
+    }
+
+    .InputGroup input,
+    .InputGroup select,
+    .InputGroup textarea {
+        font-size: 16px; /* Previene zoom en iOS */
+    }
+
+    .BotonSubmit {
+        width: 100%;
     }
 }

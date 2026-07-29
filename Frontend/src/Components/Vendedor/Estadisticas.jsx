@@ -1,5 +1,4 @@
 import { useEstadisticas } from "../../Hooks/Vendedor/useEstadisticas";
-import styles from "../../assets/Css/index.module.scss";
 import stylesEstadisticas from "../../assets/Css/Estadisticas.module.scss";
 import { Hourglass } from "ldrs/react";
 import { Bar, PolarArea } from "react-chartjs-2";
@@ -72,7 +71,7 @@ const Estadisticas = ({ limit = 15 }) => {
     };
 
     return (
-        <main className={`${styles.Container} ${stylesEstadisticas.estadisticas}`}>
+        <main className={`${stylesEstadisticas.estadisticas}`}>
             <h2>📊 Estadísticas</h2>
 
             {/* Gráfico más vendidos */}

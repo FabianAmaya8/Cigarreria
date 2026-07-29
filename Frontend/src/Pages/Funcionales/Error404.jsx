@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Skull } from "lucide-react";
-import styles from "../../assets/Css/Error404.module.scss";
+import styles from "../../assets/Css/Principales/Error404.module.scss";
 
 export default function Error404() {
     const navigate = useNavigate();

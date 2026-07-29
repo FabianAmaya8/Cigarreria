@@ -95,10 +95,10 @@ export default function ModalCrearStock({ open, onClose, onSubmit, productos, al
                 </div>
 
                 <div className={styles.ModalActions}>
-                    <button className="btn-secondary" onClick={onClose}>
+                    <button className={styles.btn_secondary} onClick={onClose}>
                         Cancelar
                     </button>
-                    <button className="btn-primary" onClick={handleSubmit}>
+                    <button className={styles.btn_primary} onClick={handleSubmit}>
                         Crear
                     </button>
                 </div>

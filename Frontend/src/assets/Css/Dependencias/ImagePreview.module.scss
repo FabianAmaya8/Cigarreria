@@ -1,0 +1,36 @@
+.overlay {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: var(--z-loader);
+    cursor: pointer;
+    animation: fadeIn var(--transition-base) ease;
+
+    img {
+        width: 90%;
+        height: 90%;
+        object-fit: contain;
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-xl);
+    }
+}
+
+i {
+    font-size: var(--font-3xl);
+    color: var(--azul-400);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

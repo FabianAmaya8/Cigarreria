@@ -113,77 +113,94 @@ export default function ProductoForm({ open, onClose, onSubmit, modoEdicion, pro
                 <h3>{modoEdicion ? "Editar Producto" : "Nuevo Producto"}</h3>
 
                 <div className={`${styles.ModalContent} ${styles.ScrollableContent}`}>
-                    <label>Código de Barras
-                        <input name="codigo_barras" value={form.codigo_barras} onChange={handleChange} />
-                    </label>
-
-                    <label>Nombre
-                        <input name="nombre" value={form.nombre} onChange={handleChange} />
-                    </label>
-
-                    <label>Marca</label>
-                    {isLoadingMarcas ? (
-                        <p>Cargando marcas...</p>
-                    ) : (
-                        <Select
-                            options={optionsMarcas}
-                            value={marcaSeleccionada}
-                            onChange={handleMarcaChange}
-                            placeholder="Buscar o seleccionar marca..."
-                            isClearable
-                            className={styles.SelectMarca}
-                            styles={{
-                                control: (base, state) => ({
-                                    ...base,
-                                    backgroundColor: "var(--input-bg)",
-                                    borderColor: state.isFocused
-                                        ? "var(--input-focus-border)"
-                                        : "var(--input-border)",
-                                    color: "var(--input-text)",
-                                    borderRadius: "var(--radius-sm)",
-                                    padding: "0.2rem 0.3rem",
-                                    boxShadow: "none",
-                                    "&:hover": {
-                                        borderColor: "var(--input-focus-border)",
-                                    },
-                                }),
-                                menu: (base) => ({
-                                    ...base,
-                                    backgroundColor: "var(--input-bg)",
-                                    color: "var(--input-text)",
-                                    borderRadius: "var(--radius-sm)",
-                                    border: "1px solid var(--input-border)",
-                                    zIndex: 100,
-                                }),
-                                option: (base, state) => ({
-                                    ...base,
-                                    backgroundColor: state.isFocused
-                                        ? "var(--input-focus-border)"
-                                        : "var(--input-bg)",
-                                    color: "var(--input-text)",
-                                    cursor: "pointer",
-                                }),
-                                singleValue: (base) => ({
-                                    ...base,
-                                    color: "var(--input-text)",
-                                }),
-                                placeholder: (base) => ({
-                                    ...base,
-                                    color: "var(--input-placeholder)",
-                                }),
-                                input: (base) => ({
-                                    ...base,
-                                    color: "var(--input-text)",
-                                }),
-                            }}
+                    <label>
+                        Código de Barras
+                        <input
+                            type="text"
+                            name="codigo_barras"
+                            value={form.codigo_barras}
+                            onChange={handleChange}
+                            placeholder="Ej: 770200100001"
                         />
-                    )}
+                    </label>
 
-                    <label>Descripción
+                    <label>
+                        Nombre
+                        <input
+                            type="text"
+                            name="nombre"
+                            value={form.nombre}
+                            onChange={handleChange}
+                            placeholder="Nombre del producto"
+                            required
+                        />
+                    </label>
+
+                    <label>
+                        Marca
+                        {isLoadingMarcas ? (
+                            <div style={{ padding: "10px", color: "var(--texto-sec)" }}>
+                                Cargando marcas...
+                            </div>
+                        ) : (
+                            <Select
+                                options={optionsMarcas}
+                                value={marcaSeleccionada}
+                                onChange={handleMarcaChange}
+                                placeholder="Buscar o seleccionar marca..."
+                                isClearable
+                                className={styles.SelectMarca}
+                                styles={{
+                                    control: (base, state) => ({
+                                        ...base,
+                                        backgroundColor: "var(--input-bg)",
+                                        borderColor: state.isFocused ? "var(--rojo-500)" : "var(--input-border)",
+                                        color: "var(--input-text)",
+                                        borderRadius: "var(--radius-md)",
+                                        padding: "0.2rem",
+                                        boxShadow: state.isFocused ? "var(--focus-ring)" : "none",
+                                        "&:hover": {
+                                            borderColor: "var(--rojo-700)",
+                                        },
+                                    }),
+                                    menu: (base) => ({
+                                        ...base,
+                                        backgroundColor: "var(--input-bg)",
+                                        color: "var(--input-text)",
+                                        borderRadius: "var(--radius-md)",
+                                        border: "1px solid var(--input-border)",
+                                        zIndex: 100,
+                                    }),
+                                    option: (base, state) => ({
+                                        ...base,
+                                        backgroundColor: state.isFocused ? "rgba(198, 40, 40, 0.15)" : "var(--input-bg)",
+                                        color: "var(--input-text)",
+                                        cursor: "pointer",
+                                    }),
+                                    singleValue: (base) => ({
+                                        ...base,
+                                        color: "var(--input-text)",
+                                    }),
+                                    placeholder: (base) => ({
+                                        ...base,
+                                        color: "var(--placeholder)",
+                                    }),
+                                    input: (base) => ({
+                                        ...base,
+                                        color: "var(--input-text)",
+                                    }),
+                                }}
+                            />
+                        )}
+                    </label>
+
+                    <label>
+                        Descripción
                         <textarea
                             name="descripcion"
                             value={form.descripcion}
                             onChange={handleChange}
+                            placeholder="Describe el producto..."
                             rows="3"
                         />
                     </label>
@@ -191,64 +208,72 @@ export default function ProductoForm({ open, onClose, onSubmit, modoEdicion, pro
                     <div className={styles.ImagenContainer}>
                         <label htmlFor="imgProduc">
                             Imagen del producto
-                            {preview ? (
-                                <div className={styles.ImagenPreview}>
-                                    <img src={preview} alt="Vista previa" loading="lazy"/>
-                                </div>
-                            ) : (
-                                <div className={styles.ImagenPreview}>
+                            <div className={styles.ImagenPreview} onClick={() => document.getElementById("imgProduc").click()}>
+                                {preview ? (
+                                    <img src={preview} alt="Vista previa" loading="lazy" />
+                                ) : (
                                     <i className="bx bx-image-add"></i>
-                                </div>
-                            )}
+                                )}
+                            </div>
                         </label>
                         <input
                             id="imgProduc"
                             type="file"
                             accept="image/*"
                             onChange={handleFileChange}
-                            className="d-none"
+                            style={{ display: "none" }}
                         />
                     </div>
 
                     <div className={styles.FilaInputs}>
-                        <label>Precio Compra
+                        <label>
+                            Precio Compra
                             <input
                                 type="number"
                                 name="precio_compra"
                                 value={form.precio_compra}
                                 onChange={handleChange}
+                                placeholder="0.00"
+                                step="0.01"
                             />
                         </label>
 
-                        <label>Precio Venta
+                        <label>
+                            Precio Venta
                             <input
                                 type="number"
                                 name="precio_venta"
                                 value={form.precio_venta}
                                 onChange={handleChange}
+                                placeholder="0.00"
+                                step="0.01"
                             />
                         </label>
                     </div>
 
                     <div className={styles.FilaInputs}>
-                        <label>Stock Mínimo
+                        <label>
+                            Stock Mínimo
                             <input
                                 type="number"
                                 name="stock_minimo"
                                 value={form.stock_minimo}
                                 onChange={handleChange}
+                                placeholder="0"
                             />
                         </label>
-                        
-                        <label>Unidad de Medida
+
+                        <label>
+                            Unidad de Medida
                             <input
+                                type="text"
                                 name="unidad_medida"
                                 value={form.unidad_medida}
                                 onChange={handleChange}
+                                placeholder="Ej: kg, L, ud"
                             />
                         </label>
                     </div>
-
 
                     <label className={styles.SwitchLabel}>
                         <input
@@ -259,14 +284,18 @@ export default function ProductoForm({ open, onClose, onSubmit, modoEdicion, pro
                         />
                         <span className={styles.Switch}></span>
                         <span className={styles.SwitchText}>
-                            {form.activo ? "Producto Activo" : "Producto Desactivado"}
+                            Producto {form.activo ? "Activo" : "Desactivado"}
                         </span>
                     </label>
                 </div>
 
                 <div className={styles.ModalActions}>
-                    <button className="btn-secondary" onClick={onClose}>Cancelar</button>
-                    <button className="btn-primary" onClick={handleSubmit}>
+                    <button className={styles.btn_secondary} onClick={onClose}>
+                        <i className="bx bx-x"></i>
+                        Cancelar
+                    </button>
+                    <button className={styles.btn_primary} onClick={handleSubmit}>
+                        <i className={`bx ${modoEdicion ? "bx-check" : "bx-plus"}`}></i>
                         {modoEdicion ? "Actualizar" : "Guardar"}
                     </button>
                 </div>

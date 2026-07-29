@@ -1,13 +1,11 @@
-import styles from "../../../assets/Css/index.module.scss";
-import stylesFiltro from "../../../assets/Css/deuda.module.scss";
 import stylesCatalogo from "../../../assets/Css/Catalogo.module.scss";
-import stylesBoton from "../../../assets/Css/crud.module.scss";
-import { Loading, Error } from "../../../Utils/Cargando";
+import { Loading, Error } from "../../../Utils/Components/Cargando";
 import { useCatalogo, useProductosSinFiltro } from "../../../Hooks/Client/useCatalogo";
 import { useEffect, useMemo, useState } from "react";
 import Filtro from "../../Vendedor/GestionInventario/Filtro";
 import Paginacion from "../../Vendedor/GestionInventario/Paginacion";
 import { useAuthContext } from "../../../Pages/Context/AuthContext";
+import ImagePreview from "../../../Utils/Components/ImagePreview";
 
 export default function Catalogo() {
     const { user } = useAuthContext();
@@ -106,7 +104,7 @@ export default function Catalogo() {
     }, [ProductosNomales, ProductosSinFiltro]);
 
     return (
-        <main className={`${styles.Container} ${stylesFiltro.Container}`}>
+        <main className={stylesCatalogo.container}>
 
             <h2>Catálogo</h2>
 
@@ -167,10 +165,14 @@ export function CartProducto({ Producto }) {
     return (
         <div key={id_producto} className={stylesCatalogo.cartProductoItem}>
             <div className={stylesCatalogo.ImagenProducto}>
-                {imagen ? <img src={imagen} alt={nombre} loading="lazy"/> : <i className="bx bx-image"></i>}
+                <ImagePreview
+                    src={imagen}
+                    alt={nombre}
+                    fallback={<i className="bx bx-image"></i>}
+                />
             </div>
 
-            {!activo && 
+            {!activo &&
                 <p className={stylesCatalogo.ProductoInactivo}>
                     Producto inactivo
                 </p>
@@ -208,14 +210,14 @@ export function CartProducto({ Producto }) {
     );
 }
 
-export function FiltroActivo({estado, setEstado}){
+export function FiltroActivo({ estado, setEstado }) {
     const { user } = useAuthContext();
 
-    return(
+    return (
         <>
             {(user?.rol === 1 || user?.rol === 2) && (
-                <label className={`${stylesBoton.SwitchLabel} ${stylesCatalogo.FiltroActivo}`}>
-                    <span className={stylesBoton.SwitchText}>
+                <label className={`${stylesCatalogo.switchLabel} ${stylesCatalogo.FiltroActivo}`}>
+                    <span className={stylesCatalogo.switchText}>
                         {estado ? "Todos los Productos" : "Productos Acual"}
                     </span>
                     <input
@@ -224,7 +226,7 @@ export function FiltroActivo({estado, setEstado}){
                         checked={estado}
                         onChange={(e) => setEstado(e.target.checked)}
                     />
-                    <span className={stylesBoton.Switch}></span>
+                    <span className={stylesCatalogo.switch}></span>
                 </label>
             )}
         </>

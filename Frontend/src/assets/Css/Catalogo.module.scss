@@ -1,64 +1,83 @@
-.cartProducto{
+.container {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: var(--space-2xl);
+    padding: var(--space-lg);
+
+    h2 {
+        grid-column: span 2 / span 2;
+        font-size: var(--font-2xl);
+        font-weight: var(--weight-bold);
+        color: var(--texto);
+        text-align: center;
+        padding-bottom: var(--space-md);
+        border-bottom: var(--border-width) solid var(--card-border);
+    }
+}
+
+.cartProducto {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 1rem;
+    gap: var(--space-md);
 }
-.cartProductoItem{
+
+.cartProductoItem {
     position: relative;
     width: 250px;
-    background: var(--card-bg);
-    box-shadow: var(--shadow-1);
-    padding: 1rem;
-    border-radius: var(--radius-md);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 0.5rem;
+    gap: var(--space-xs);
+    padding: var(--space-md);
+    background: var(--card-bg);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
 
-    h3{
+    h3 {
         text-align: center;
     }
-    
-    p{
-        text-transform: capitalize;
+
+    p {
         margin: 0;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        gap: 0.2rem;
+        gap: var(--space-xxs);
         text-align: center;
+        text-transform: capitalize;
 
-        b{
+        b {
             color: var(--azul-300);
         }
     }
 
-    &:hover{
-        box-shadow: var(--shadow-2);
+    &:hover {
+        box-shadow: var(--shadow-lg);
         transition: box-shadow var(--transition-fast);
 
-        .ImagenProducto{
+        .ImagenProducto {
             cursor: pointer;
             transform: scale(1.1) translateY(-10px) rotate(3deg);
             transition: transform var(--transition-fast);
         }
     }
 }
-.ImagenProducto{
+
+.ImagenProducto {
     width: 100%;
     height: 200px;
     object-fit: cover;
     border-radius: var(--radius-md);
 
-    img{
+    img {
         width: 100%;
         height: 100%;
         object-fit: cover;
         border-radius: var(--radius-md);
     }
 
-    i{
+    i {
         width: 100%;
         height: 100%;
         display: flex;
@@ -69,32 +88,93 @@
     }
 }
 
-.InfoProducto{
+.InfoProducto {
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
-.ProductoInactivo{
-    color: var(--rojo-300);
-    font-weight: bold;
+
+.ProductoInactivo {
     text-align: center;
+    font-weight: var(--weight-bold);
+    color: var(--rojo-300);
 }
 
-.FiltroActivo{
+.FiltroActivo {
+    padding-top: var(--space-md);
     border-top: 1px solid var(--texto-sec);
-    padding-top: 1rem;
 }
 
-.BotonesProducto{
-    background: var(--texto-sec);
-}
-
-.IconoProducto{
+.IconoProducto {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: absolute;
+    z-index: var(--z-dropdown);
     font-size: 40px;
     color: var(--azul-300);
-    position: absolute;
-    z-index: 10;
+}
+
+/* ======================================================
+   SWITCH (antes en crud.module.scss)
+   ====================================================== */
+
+.switchLabel {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    cursor: pointer;
+
+    input {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+
+        &:checked + .switch {
+            background: var(--btn-primary-bg);
+
+            &::before {
+                transform: translateX(20px);
+            }
+        }
+    }
+}
+
+.switchText {
+    font-size: var(--font-sm);
+    color: var(--texto-sec);
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+    background: var(--input-border);
+    border-radius: var(--radius-full);
+    transition: background var(--transition-fast);
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 20px;
+        height: 20px;
+        background: #fff;
+        border-radius: var(--radius-full);
+        box-shadow: var(--shadow-xs);
+        transition: transform var(--transition-fast);
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: var(--space-md);
+        gap: var(--space-lg);
+    }
 }

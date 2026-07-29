@@ -2,20 +2,21 @@ import { useAuthContext } from "../../../Pages/Context/AuthContext";
 import { Hourglass } from 'ldrs/react'
 import { CalendarClock } from 'lucide-react';
 import useContador from "../../../Hooks/Client/Contador";
-import styles from "../../../assets/Css/index.module.scss";
+import styles from "../../../assets/Css/Principales/index.module.scss";
+import Color from "../../../Utils/Components/Color";
 
 function Footer() {
     const { isAuthenticated , user } = useAuthContext();
     const contador = useContador(user?.exp);
     
     return (
-        <footer className={styles.Footer}>
-            <div className={styles["Footer-container"]}>
-                <p>Cigarrería JJ ©</p>
+        <footer className={styles.footer}>
+            <div className={styles["footer-container"]}>
+                <p className={styles["footer-brand"]}>Cigarrería JJ ©</p>
 
                 {isAuthenticated ? (
-                    <div className={styles.FooterContador}>
-                        <div className={styles.FooterTiempo}>
+                    <div className={styles["footer-contador"]}>
+                        <div className={styles["footer-tiempo"]}>
                             <Hourglass size={32} speed={4} color="var(--rojo-400)" />
                             <span>
                                 Tiempo restante <br />
@@ -23,7 +24,7 @@ function Footer() {
                             </span>
                             <Hourglass size={32} speed={4} color="var(--rojo-400)" />
                         </div>
-                        <div className={styles.FooterTiempo}>
+                        <div className={styles["footer-tiempo"]}>
                             <CalendarClock size={32} color="var(--rojo-400)" />
                             <span>
                                 Cierre de sesión <br />
@@ -32,9 +33,9 @@ function Footer() {
                             <CalendarClock size={32} color="var(--rojo-400)" />
                         </div>
                     </div>
-                ): null}
+                ) : null}
 
-                <p>Desarrollado por: Fabian Amaya</p>
+                <Color />
             </div>
         </footer>
     );

@@ -1,6 +1,6 @@
 import Select from "react-select";
 import styles from "../../../../assets/Css/Pos/productoRow.module.scss";
-import {Loading, Error} from "../../../../Utils/Cargando";
+import {Loading, Error} from "../../../../Utils/Components/Cargando";
 
 export default function BuscadorProducto({ 
     agregarProducto, 

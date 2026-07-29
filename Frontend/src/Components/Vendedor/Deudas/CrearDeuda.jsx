@@ -1,4 +1,3 @@
-import styles from "../../../assets/Css/index.module.scss";
 import stylesDeuda from "../../../assets/Css/deuda.module.scss";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -53,7 +52,7 @@ export default function CrearDeuda() {
     };
 
     return (
-        <main className={`${styles.Container} ${stylesDeuda.Container}`}>
+        <main className={`${stylesDeuda.Container}`}>
             
 
             <h2>Crear Deuda</h2>

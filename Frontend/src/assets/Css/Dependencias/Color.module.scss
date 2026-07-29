@@ -1,0 +1,13 @@
+.themeButton{
+    border: 1px solid var(--card-border);
+    background: none;
+    cursor: pointer;
+    padding: Var(--space-sm) Var(--space-md);
+    border-radius: var(--radius-sm);
+    transition: all 0.15s ease;
+}
+
+.themeButton:hover{
+    border-color: var(--input-focus-border);
+    box-shadow: 0 0 0 2px var(--input-focus-shadow);
+}
