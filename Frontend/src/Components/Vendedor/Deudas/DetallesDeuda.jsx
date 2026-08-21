@@ -2,6 +2,7 @@ import stylesDeuda from "../../../assets/Css/deuda.module.scss";
 import useDetallesDeudas from "../../../Hooks/Vendedor/Deudas/useDetallesDeudas";
 import { Loading, Error } from "../../../Utils/Components/Cargando";
 import { useParams } from "react-router-dom";
+import ImagePreview from "../../../Utils/Components/ImagePreview";
 
 export default function DetallesDeuda() {
     const { id } = useParams();
@@ -73,15 +74,11 @@ export default function DetallesDeuda() {
                                     </p>
                                 </div>
                                 <div className={stylesDeuda.Imagen}>
-                                    {detalle.producto.imagen ? (
-                                        <img
-                                            src={detalle.producto.imagen}
-                                            alt={detalle.producto.nombre}
-                                            loading="lazy"
-                                        />
-                                    ) : (
-                                        <i className="bx bx-image"></i>
-                                    )}
+                                    <ImagePreview
+                                        src={detalle.producto.imagen}
+                                        alt={detalle.producto.nombre}
+                                        fallback={<i className="bx bx-image"></i>}
+                                    />
                                 </div>
                             </div>
                         ))}

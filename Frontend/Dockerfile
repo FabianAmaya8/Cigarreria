@@ -7,7 +7,12 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
+
+ARG VITE_URL_BACKEND
+ENV VITE_URL_BACKEND=$VITE_URL_BACKEND
+
 RUN npm run build
+
 
 # Etapa 2: servir con nginx
 FROM nginx:alpine
@@ -15,7 +20,6 @@ FROM nginx:alpine
 COPY --from=build /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Exponer puerto
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]

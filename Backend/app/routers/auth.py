@@ -13,7 +13,7 @@ from app.core.security import (
     ACCESS_TOKEN_EXPIRE_MINUTES,
 )
 from app.schemas.auth import UserResponse, Token
-from app.core.supabase import supabase
+from app.utils.file_storage import guardar_imagen
 
 router = APIRouter()
 
@@ -32,13 +32,20 @@ async def register(
     if db.query(Usuario).filter(Usuario.correo == correo).first():
         raise HTTPException(status_code=400, detail="El correo ya está registrado")
 
-    # --- Subir a Supabase ---
-    image_url = None
+    # --- Subir a imagen ---
+    image_path = None
+
     if imagen:
-        file_bytes = await imagen.read()
-        filename = f"avatars/{uuid.uuid4()}_{imagen.filename}"
-        supabase.storage.from_("avatars").upload(filename, file_bytes)
-        image_url = supabase.storage.from_("avatars").get_public_url(filename)
+        try:
+            image_path = await guardar_imagen(
+                imagen,
+                "usuarios/avatares"
+            )
+        except ValueError as e:
+            raise HTTPException(
+                status_code=400,
+                detail=str(e)
+            )
 
     # --- Crear usuario en BD ---
     new_user = Usuario(
@@ -47,7 +54,7 @@ async def register(
         contrasena=get_password_hash(contrasena),
         rol=3,
         correo=correo,
-        imagen=image_url,
+        imagen=image_path,
         activo=True
     )
     db.add(new_user)

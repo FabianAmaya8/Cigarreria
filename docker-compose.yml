@@ -1,17 +1,21 @@
 version: "3.9"
 
 services:
+
   api:
     build: ./Backend
     container_name: cigarreria_api
     restart: always
     env_file:
-      - ./Backend/.env
+      - ./.env
     ports:
       - "8000:8000"
     depends_on:
       - mysql
       - redis
+    volumes:
+      - "${STORAGE_HOST_DIR}:/app/storage"
+
 
   mysql:
     image: mysql:8.0
@@ -23,7 +27,8 @@ services:
     ports:
       - "3307:3306"
     volumes:
-      - "C:/BaseDatos/cigarreria:/var/lib/mysql"
+      - "${DATABASE_DIR}:/var/lib/mysql"
+
 
   redis:
     image: redis:7
@@ -32,8 +37,12 @@ services:
     ports:
       - "6379:6379"
 
+
   frontend:
-    build: ./Frontend
+    build:
+      context: ./Frontend
+      args:
+        VITE_URL_BACKEND: ${VITE_URL_BACKEND}
     container_name: cigarreria_frontend
     ports:
       - "80:80"

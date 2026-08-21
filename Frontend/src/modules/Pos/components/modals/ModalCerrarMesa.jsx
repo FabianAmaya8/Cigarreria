@@ -16,6 +16,7 @@ import {
     CreditCard,
     User,
 } from "lucide-react";
+import ImagePreview from "../../../../Utils/Components/ImagePreview";
 
 if (!crypto.randomUUID) {
     crypto.randomUUID = function () {
@@ -166,7 +167,7 @@ const ModalCerrarMesa = forwardRef(function ModalCerrarMesa({
         return (
             <components.Option {...props}>
                 <div className={styles.optionUser}>
-                    <img src={data.imagen} alt={data.label} />
+                    <ImagePreview src={data.imagen} alt={data.label} zoom={false} fallback={<i className="bx bx-user"></i>}/>
                     <span>{data.label}</span>
                 </div>
             </components.Option>
@@ -178,7 +179,7 @@ const ModalCerrarMesa = forwardRef(function ModalCerrarMesa({
         return (
             <components.SingleValue {...props}>
                 <div className={styles.optionUser}>
-                    <img src={data.imagen} alt={data.label} />
+                    <ImagePreview src={data.imagen} alt={data.label} zoom={false} fallback={<i className="bx bx-user"></i>}/>
                     <span>{data.label}</span>
                 </div>
             </components.SingleValue>

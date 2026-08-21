@@ -1,7 +1,8 @@
-import uuid
-from urllib.parse import urlparse
 from app.core.security import get_current_user
-from app.core.supabase import supabase
+from app.utils.file_storage import (
+    guardar_imagen,
+    eliminar_archivo,
+)
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File
 from sqlalchemy.orm import Session
 from app.database import get_db
@@ -20,8 +21,6 @@ router = APIRouter(
     tags=["Perfil"]
 )
 
-UPLOAD_DIR = "uploads/usuarios"
-
 # ---------------------------------------------------------
 # 1️⃣ Obtener información personal
 # ---------------------------------------------------------
@@ -39,11 +38,27 @@ def actualizar_datos(
     db: Session = Depends(get_db),
     current_user: Usuario = Depends(get_current_user)
 ):
+    # Validar si el nuevo nombre de usuario ya existe
+    if datos.usuario and datos.usuario != current_user.usuario:
+        usuario_existente = (
+            db.query(Usuario)
+            .filter(Usuario.usuario == datos.usuario)
+            .first()
+        )
+
+        if usuario_existente:
+            raise HTTPException(
+                status_code=409,
+                detail="El nombre de usuario ya está en uso."
+            )
+
+    # Actualizar únicamente los campos enviados
     for key, value in datos.dict(exclude_unset=True).items():
         setattr(current_user, key, value)
 
     db.commit()
     db.refresh(current_user)
+
     return current_user
 
 
@@ -73,37 +88,28 @@ async def subir_imagen(
     db: Session = Depends(get_db),
     current_user: Usuario = Depends(get_current_user)
 ):
-    if not imagen.content_type.startswith("image/"):
-        raise HTTPException(status_code=400, detail="Solo se permiten archivos de imagen (jpg, png, webp, etc.)")
-
-    # Validar tamaño máximo (5 MB)
-    file_bytes = await imagen.read()
-    max_size = 5 * 1024 * 1024
-    if len(file_bytes) > max_size:
-        raise HTTPException(status_code=400, detail="La imagen no puede superar los 5 MB")
-
-    filename = f"avatars/{uuid.uuid4()}_{imagen.filename}"
-
-    # Subir nueva imagen a Supabase
     try:
-        supabase.storage.from_("avatars").upload(filename, file_bytes)
-        image_url = supabase.storage.from_("avatars").get_public_url(filename)
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error al subir la imagen: {e}")
+        nueva_imagen = await guardar_imagen(
+            imagen,
+            "usuarios/avatares"
+        )
+    except ValueError as e:
+        raise HTTPException(
+            status_code=400,
+            detail=str(e)
+        )
 
-    # Eliminar imagen anterior si existía en Supabase
-    if current_user.imagen:
-        try:
-            # Extraer solo el path relativo desde la URL pública
-            parsed_url = urlparse(current_user.imagen)
-            old_path = parsed_url.path.split("/public/avatars/")[-1]
-            if old_path:
-                supabase.storage.from_("avatars").remove([old_path])
-        except Exception as e:
-            print(f"⚠️ No se pudo eliminar la imagen anterior: {e}")
+    imagen_anterior = current_user.imagen
 
-    current_user.imagen = image_url
+    current_user.imagen = nueva_imagen
+
     db.commit()
     db.refresh(current_user)
 
-    return {"mensaje": "Imagen actualizada correctamente", "imagen": image_url}
+    if imagen_anterior:
+        eliminar_archivo(imagen_anterior)
+
+    return {
+        "mensaje": "Imagen actualizada correctamente",
+        "imagen": nueva_imagen
+    }

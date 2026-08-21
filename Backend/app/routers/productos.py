@@ -1,58 +1,84 @@
-from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form
+﻿from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form
 from sqlalchemy.orm import Session, joinedload
+from sqlalchemy import func
 from typing import List, Optional
-import uuid
-from urllib.parse import urlparse
+
+from app.core.security import get_current_user
+from app.utils.file_storage import (
+    guardar_imagen,
+    eliminar_archivo,
+)
 from app.database import get_db
-from app.models.productos import Producto
-from app.models.marcas import Marca
 from app.models.categorias import Categoria
 from app.models.inventario import Inventario
-from app.models.almacenes import Almacen
+from app.models.marcas import Marca
+from app.models.productos import Producto
+from app.models.usuarios import Usuario
 from app.schemas.productos import (
-    ProductoResponse, ProductoCreate, ProductoUpdate,
-    MarcaResponse, MarcaCreate, MarcaUpdate,
-    CategoriaResponse, CategoriaCreate, CategoriaUpdate
+    CategoriaCreate,
+    CategoriaResponse,
+    CategoriaUpdate,
+    MarcaCreate,
+    MarcaResponse,
+    MarcaUpdate,
+    ProductoResponse,
 )
-from app.core.supabase import supabase
 
 router = APIRouter(
     prefix="/api/productos",
     tags=["Productos"]
 )
 
+
+def _stock_producto(db: Session, id_producto: int) -> int:
+    stock = (
+        db.query(func.coalesce(func.sum(Inventario.stock), 0))
+        .filter(Inventario.id_producto == id_producto)
+        .scalar()
+    )
+    return int(stock or 0)
+
+
+def _cargar_stock_actual(db: Session, producto: Producto) -> Producto:
+    producto.stock_actual = _stock_producto(db, producto.id_producto)
+    return producto
+
+
 # ===========================
-# 🟢 Listar productos
+# Listar productos
 # ===========================
 @router.get("/", response_model=List[ProductoResponse])
 def listar_productos(db: Session = Depends(get_db)):
     productos = (
         db.query(Producto)
         .options(joinedload(Producto.marca).joinedload(Marca.categoria))
-        .filter(Producto.activo == True,
-                Producto.stock_actual > 0)
+        .filter(Producto.activo == True)
         .all()
     )
-    return productos
+
+    return [_cargar_stock_actual(db, producto) for producto in productos]
+
 
 @router.get("/sin_filtro")
 def listar_productos_sin_filtro(db: Session = Depends(get_db)):
     productos = (
         db.query(Producto)
-        .options(
-            joinedload(Producto.marca).joinedload(Marca.categoria)
-        )
+        .options(joinedload(Producto.marca).joinedload(Marca.categoria))
         .all()
     )
 
     inventarios = (
         db.query(Inventario)
-        .join(Almacen, Inventario.id_almacen == Almacen.id_almacen)
+        .options(joinedload(Inventario.almacen))
         .all()
     )
 
-    inventario_por_producto = {}
+    stock_total_por_producto = {}
+    for inv in inventarios:
+        stock_total_por_producto.setdefault(inv.id_producto, 0)
+        stock_total_por_producto[inv.id_producto] += inv.stock
 
+    inventario_por_producto = {}
     for inv in inventarios:
         inventario_por_producto.setdefault(inv.id_producto, []).append({
             "id_inventario": inv.id_inventario,
@@ -62,7 +88,6 @@ def listar_productos_sin_filtro(db: Session = Depends(get_db)):
         })
 
     resultado = []
-
     for producto in productos:
         resultado.append({
             "id_producto": producto.id_producto,
@@ -70,9 +95,8 @@ def listar_productos_sin_filtro(db: Session = Depends(get_db)):
             "nombre": producto.nombre,
             "imagen": producto.imagen,
             "descripcion": producto.descripcion,
-            "precio_compra": float(producto.precio_compra),
             "precio_venta": float(producto.precio_venta),
-            "stock_actual": producto.stock_actual,
+            "stock_actual": stock_total_por_producto.get(producto.id_producto, 0),
             "stock_minimo": producto.stock_minimo,
             "unidad_medida": producto.unidad_medida,
             "activo": producto.activo,
@@ -91,8 +115,9 @@ def listar_productos_sin_filtro(db: Session = Depends(get_db)):
 
     return resultado
 
+
 # ===========================
-# 🟢 Obtener producto por código
+# Obtener producto por cÃ³digo
 # ===========================
 @router.get("/codigo/{codigo_barras}", response_model=ProductoResponse)
 def obtener_producto_por_codigo(codigo_barras: str, db: Session = Depends(get_db)):
@@ -104,20 +129,19 @@ def obtener_producto_por_codigo(codigo_barras: str, db: Session = Depends(get_db
     )
     if not producto:
         raise HTTPException(status_code=404, detail="Producto no encontrado")
-    return producto
+    return _cargar_stock_actual(db, producto)
 
 
 # ===========================
-# 🟢 Crear producto (sube imagen a Supabase)
+# Crear producto (sube imagen a Supabase)
 # ===========================
 @router.post("/", response_model=ProductoResponse)
 async def crear_producto(
     codigo_barras: str = Form(...),
     nombre: str = Form(...),
     descripcion: Optional[str] = Form(None),
-    precio_compra: float = Form(...),
     precio_venta: float = Form(...),
-    stock_actual: int = Form(...),
+    stock_actual: Optional[int] = Form(None),
     stock_minimo: int = Form(...),
     unidad_medida: str = Form(...),
     activo: bool = Form(True),
@@ -125,29 +149,30 @@ async def crear_producto(
     imagen: UploadFile = File(None),
     db: Session = Depends(get_db)
 ):
-    # Verificar existencia de la marca
     marca = db.query(Marca).filter(Marca.id_marca == id_marca).first()
     if not marca:
-        raise HTTPException(status_code=400, detail="Marca no válida")
+        raise HTTPException(status_code=400, detail="Marca no vÃ¡lida")
 
-    # Subir imagen a Supabase (si se envía)
-    image_url = None
+    image_path = None
+
     if imagen:
-        if not imagen.content_type.startswith("image/"):
-            raise HTTPException(status_code=400, detail="Solo se permiten archivos de imagen")
-        file_bytes = await imagen.read()
-        filename = f"productos/{uuid.uuid4()}_{imagen.filename}"
-        supabase.storage.from_("avatars").upload(filename, file_bytes)
-        image_url = supabase.storage.from_("avatars").get_public_url(filename)
+        try:
+            image_path = await guardar_imagen(
+                imagen,
+                "productos/imagenes"
+            )
+        except ValueError as e:
+            raise HTTPException(
+                status_code=400,
+                detail=str(e)
+            )
 
     nuevo = Producto(
         codigo_barras=codigo_barras,
         nombre=nombre,
         descripcion=descripcion,
-        imagen=image_url,
-        precio_compra=precio_compra,
+        imagen=image_path,
         precio_venta=precio_venta,
-        stock_actual=stock_actual,
         stock_minimo=stock_minimo,
         unidad_medida=unidad_medida,
         activo=activo,
@@ -157,11 +182,11 @@ async def crear_producto(
     db.add(nuevo)
     db.commit()
     db.refresh(nuevo)
-    return nuevo
+    return _cargar_stock_actual(db, nuevo)
 
 
 # ===========================
-# 🟡 Actualizar producto (reemplaza imagen anterior en Supabase)
+# Actualizar producto (reemplaza imagen anterior en Supabase)
 # ===========================
 @router.put("/{id_producto}", response_model=ProductoResponse)
 async def actualizar_producto(
@@ -169,7 +194,6 @@ async def actualizar_producto(
     codigo_barras: Optional[str] = Form(None),
     nombre: Optional[str] = Form(None),
     descripcion: Optional[str] = Form(None),
-    precio_compra: Optional[float] = Form(None),
     precio_venta: Optional[float] = Form(None),
     stock_actual: Optional[int] = Form(None),
     stock_minimo: Optional[int] = Form(None),
@@ -183,35 +207,30 @@ async def actualizar_producto(
     if not producto:
         raise HTTPException(status_code=404, detail="Producto no encontrado")
 
-    # Subir nueva imagen a Supabase (y eliminar la anterior)
     if imagen:
-        if not imagen.content_type.startswith("image/"):
-            raise HTTPException(status_code=400, detail="Solo se permiten archivos de imagen")
-        file_bytes = await imagen.read()
-        filename = f"productos/{uuid.uuid4()}_{imagen.filename}"
-        supabase.storage.from_("avatars").upload(filename, file_bytes)
-        image_url = supabase.storage.from_("avatars").get_public_url(filename)
+        try:
+            nueva_imagen = await guardar_imagen(
+                imagen,
+                "productos/imagenes"
+            )
+        except ValueError as e:
+            raise HTTPException(
+                status_code=400,
+                detail=str(e)
+            )
 
-        # Eliminar imagen anterior (si existía)
-        if producto.imagen:
-            try:
-                parsed_url = urlparse(producto.imagen)
-                old_path = parsed_url.path.split("/public/avatars/")[-1]
-                if old_path:
-                    supabase.storage.from_("avatars").remove([old_path])
-            except Exception as e:
-                print(f"⚠️ No se pudo eliminar la imagen anterior: {e}")
+        imagen_anterior = producto.imagen
 
-        producto.imagen = image_url
+        producto.imagen = nueva_imagen
 
-    # Actualizar demás campos
+        if imagen_anterior:
+            eliminar_archivo(imagen_anterior)
+
     campos = {
         "codigo_barras": codigo_barras,
         "nombre": nombre,
         "descripcion": descripcion,
-        "precio_compra": precio_compra,
         "precio_venta": precio_venta,
-        "stock_actual": stock_actual,
         "stock_minimo": stock_minimo,
         "unidad_medida": unidad_medida,
         "activo": activo,
@@ -224,11 +243,11 @@ async def actualizar_producto(
 
     db.commit()
     db.refresh(producto)
-    return producto
+    return _cargar_stock_actual(db, producto)
 
 
 # ===========================
-# 🟣 Categorías
+# Categorias
 # ===========================
 @router.get("/categorias", response_model=List[CategoriaResponse])
 def listar_categorias(db: Session = Depends(get_db)):
@@ -248,7 +267,7 @@ def crear_categoria(categoria: CategoriaCreate, db: Session = Depends(get_db)):
 def actualizar_categoria(id_categoria: int, datos: CategoriaUpdate, db: Session = Depends(get_db)):
     categoria = db.query(Categoria).filter(Categoria.id_categoria == id_categoria).first()
     if not categoria:
-        raise HTTPException(status_code=404, detail="Categoría no encontrada")
+        raise HTTPException(status_code=404, detail="CategorÃ­a no encontrada")
 
     for key, value in datos.dict(exclude_unset=True).items():
         setattr(categoria, key, value)
@@ -259,7 +278,7 @@ def actualizar_categoria(id_categoria: int, datos: CategoriaUpdate, db: Session 
 
 
 # ===========================
-# 🔵 Marcas
+# Marcas
 # ===========================
 @router.get("/marcas", response_model=List[MarcaResponse])
 def listar_marcas(db: Session = Depends(get_db)):
@@ -271,7 +290,7 @@ def listar_marcas(db: Session = Depends(get_db)):
 def crear_marca(marca: MarcaCreate, db: Session = Depends(get_db)):
     categoria = db.query(Categoria).filter(Categoria.id_categoria == marca.id_categoria).first()
     if not categoria:
-        raise HTTPException(status_code=400, detail="Categoría no válida")
+        raise HTTPException(status_code=400, detail="CategorÃ­a no vÃ¡lida")
 
     nueva = Marca(**marca.dict())
     db.add(nueva)
@@ -292,3 +311,4 @@ def actualizar_marca(id_marca: int, datos: MarcaUpdate, db: Session = Depends(ge
     db.commit()
     db.refresh(marca)
     return marca
+

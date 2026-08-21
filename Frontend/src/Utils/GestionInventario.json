@@ -50,5 +50,22 @@
                 "icono": "bx bx-transfer"
             }
         ]
+    },
+    {
+        "Titulo": "Operaciones del Punto de Venta",
+        "items": [
+            {
+                "ruta": "/Proveedores",
+                "nombre": "Proveedores",
+                "descripcion": "Gestión de proveedores, relaciones y seguimiento de compras",
+                "icono": "bx bx-store-alt"
+            },
+            {
+                "ruta": "/Compras",
+                "nombre": "Compras",
+                "descripcion": "Módulo de órdenes, recepción, pagos y devoluciones",
+                "icono": "bx bx-receipt"
+            }
+        ]
     }
 ]

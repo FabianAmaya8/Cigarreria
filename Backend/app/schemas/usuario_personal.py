@@ -21,6 +21,7 @@ class UsuarioPerfilResponse(BaseModel):
 # ---------------------------------------------------------
 class UsuarioPerfilUpdate(BaseModel):
     nombre: Optional[str] = None
+    usuario: Optional[str] = None
     correo: Optional[EmailStr] = None
 
 # ---------------------------------------------------------

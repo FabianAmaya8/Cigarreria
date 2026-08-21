@@ -1,4 +1,4 @@
-from app.models.movimientos_inventario import MovimientoInventario
+﻿from app.models.movimientos_inventario import MovimientoInventario
 from sqlalchemy.orm import Session
 from datetime import datetime
 from typing import Optional
@@ -14,10 +14,13 @@ def registrar_movimiento_inventario(
     id_usuario: int,
     motivo: str,
     id_almacen_origen: Optional[int] = None,
-    id_almacen_destino: Optional[int] = None
+    id_almacen_destino: Optional[int] = None,
+    id_detalle_compra: Optional[int] = None,
+    commit: bool = True,
 ):
     movimiento = MovimientoInventario(
         id_producto=id_producto,
+        id_detalle_compra=id_detalle_compra,
         tipo=tipo,
         cantidad=cantidad,
         id_almacen_origen=id_almacen_origen,
@@ -28,7 +31,10 @@ def registrar_movimiento_inventario(
     )
 
     db.add(movimiento)
-    db.commit()
-    db.refresh(movimiento)
+    if commit:
+        db.commit()
+        db.refresh(movimiento)
+    else:
+        db.flush()
 
     return movimiento

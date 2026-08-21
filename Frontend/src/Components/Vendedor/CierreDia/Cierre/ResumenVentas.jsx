@@ -1,6 +1,7 @@
 ﻿import { useState } from "react";
 import { FaRegFolderOpen, FaRegImage, FaTag, FaTableColumns, FaRegChartBar } from "react-icons/fa6";
 import styles from "../../../../assets/Css/CierraDia/CierreDia.module.scss";
+import ImagePreview from "../../../../Utils/Components/ImagePreview";
 
 const moneyFormatter = new Intl.NumberFormat("es-CO", {
     style: "currency",
@@ -67,15 +68,10 @@ export default function ResumenVentas({ ventas: data }) {
                             return (
                                 <article key={`${item.producto}-${index}`} className={styles.ventaCard}>
                                     <div className={styles.ventaImageWrap}>
-                                        {item.imagen ? (
-                                            <img
-                                                src={item.imagen}
-                                                alt={item.producto}
-                                                className={styles.ventaImagen}
-                                            />
-                                        ) : (
-                                            <FaRegImage />
-                                        )}
+                                        <ImagePreview
+                                            src={item.imagen}
+                                            alt={item.producto}
+                                        />
                                     </div>
                                     <div className={styles.ventaBody}>
                                         <strong>{item.producto}</strong>

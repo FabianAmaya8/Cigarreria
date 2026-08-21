@@ -68,14 +68,11 @@ def obtener_stock_producto(id_producto: int, db: Session = Depends(get_db)):
         .filter(Inventario.id_producto == id_producto).all()
     )
 
-    stock_total = sum(i.stock for i in inventarios)
-    producto.stock_actual = stock_total
     db.commit()
 
     return ProductoStockResponse(
         id_producto=producto.id_producto,
         nombre=producto.nombre,
-        stock_total=stock_total,
         detalle_por_almacen=inventarios
     )
 
@@ -128,7 +125,6 @@ def transferir_stock(
         Inventario.id_producto == id_producto
     ).scalar() or 0
 
-    producto.stock_actual = total
     db.commit()
 
     # Registrar movimiento de inventario
@@ -191,7 +187,6 @@ def actualizar_stock(
     ).scalar() or 0
 
     producto = db.query(Producto).filter(Producto.id_producto == inventario.id_producto).first()
-    producto.stock_actual = stock_total
     db.commit()
 
     diferencia = data.stock - inventario.stock
@@ -270,7 +265,6 @@ def crear_inventario(
         Inventario.id_producto == data.id_producto
     ).scalar() or 0
 
-    producto.stock_actual = stock_total
     db.commit()
 
     respuesta = {

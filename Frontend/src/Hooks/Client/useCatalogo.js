@@ -1,39 +1,25 @@
 import { useQuery } from "@tanstack/react-query";
 import { urlDB } from "../../urlDB";
 
-async function fetchCatalogo() {
-    const endpoint = `/api/productos/`;
-    const urlFetch = await urlDB(endpoint);
-    const res = await fetch(urlFetch);
-    if (!res.ok) throw new Error("Error en la respuesta");
-    const data = await res.json();
-    return data;
-}
+export function useCatalogoProductos(rol) {
 
-export function useCatalogo() {
+    async function fetchData() {
+        const endpoint =
+            rol === 1 || rol === 2
+                ? "/api/productos/sin_filtro"
+                : "/api/productos";
+
+        const urlFetch = await urlDB(endpoint);
+        const res = await fetch(urlFetch);
+
+        if (!res.ok) throw new Error("Error en la respuesta");
+
+        return await res.json();
+    }
+
     return useQuery({
-        queryKey: ["Catalogo"], 
-        queryFn: () => fetchCatalogo(),
-        staleTime: 1000 * 60 * 5,
-        cacheTime: 1000 * 60 * 10,
-    });
-}
-
-// productos sin flitro
-
-async function fetchProductosSinFiltro() {
-    const endpoint = `/api/productos/sin_filtro`;
-    const urlFetch = await urlDB(endpoint);
-    const res = await fetch(urlFetch);
-    if (!res.ok) throw new Error("Error en la respuesta");
-    const productosSinFiltro = await res.json();
-    return productosSinFiltro;
-}
-
-export function useProductosSinFiltro() {
-    return useQuery({
-        queryKey: ["ProductosSinFiltro"], 
-        queryFn: () => fetchProductosSinFiltro(),
+        queryKey: ["catalogoProductos", rol],
+        queryFn: fetchData,
         staleTime: 1000 * 60 * 5,
         cacheTime: 1000 * 60 * 10,
     });

@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import useImagen from "../../../Hooks/Client/useImagen";
 import logo from "../../../assets/logo.png";
+import ImagePreview from "../../../Utils/Components/ImagePreview";
 
 function Header() {
     const { isAuthenticated, user } = useAuthContext();
@@ -56,7 +57,12 @@ function Header() {
                             {loading ? (
                                 <Hourglass size={80} color="var(--texto)" />
                             ) : imagen ? (
-                                <img src={imagen} alt="Imagen de Perfil" />
+                                <ImagePreview 
+                                    src={imagen}
+                                    alt="Imagen de Perfil" 
+                                    fallback={<i className="bx bx-user"></i>}
+                                    zoom={false} 
+                                />
                             ) : (
                                 <i className="bx bx-user"></i>
                             )}
@@ -104,7 +110,12 @@ function Header() {
                             {loading ? (
                                 <Hourglass size={80} color="var(--texto)" />
                             ) : imagen ? (
-                                <img src={imagen} alt="Imagen de Perfil" />
+                                <ImagePreview 
+                                    src={imagen} 
+                                    alt="Imagen de Perfil" 
+                                    zoom={false} 
+                                    fallback={<i className="bx bx-user"></i>}
+                                />
                             ) : (
                                 <i className="bx bx-user"></i>
                             )}

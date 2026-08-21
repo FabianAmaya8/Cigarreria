@@ -18,7 +18,7 @@ function getAuthHeaders(extraHeaders = {}) {
 
 // 🟢 Listar todos los productos
 async function fetchProductos() {
-    const endpoint = "/api/productos/";
+    const endpoint = "/api/productos/sin_filtro";
     const urlFetch = await urlDB(endpoint);
 
     const res = await fetch(urlFetch, { headers: getAuthHeaders() });

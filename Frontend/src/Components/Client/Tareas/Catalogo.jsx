@@ -1,6 +1,6 @@
 import stylesCatalogo from "../../../assets/Css/Catalogo.module.scss";
 import { Loading, Error } from "../../../Utils/Components/Cargando";
-import { useCatalogo, useProductosSinFiltro } from "../../../Hooks/Client/useCatalogo";
+import { useCatalogoProductos } from "../../../Hooks/Client/useCatalogo";
 import { useEffect, useMemo, useState } from "react";
 import Filtro from "../../Vendedor/GestionInventario/Filtro";
 import Paginacion from "../../Vendedor/GestionInventario/Paginacion";
@@ -9,8 +9,7 @@ import ImagePreview from "../../../Utils/Components/ImagePreview";
 
 export default function Catalogo() {
     const { user } = useAuthContext();
-    const { data: ProductosNomales, isLoading, error } = useCatalogo();
-    const { data: ProductosSinFiltro, isLoading: isLoadingSinFiltro, error: errorSinFiltro } = useProductosSinFiltro();
+    const { data: ProductosNomales, isLoading, error } = useCatalogoProductos( user.rol );
     const [Productos, setProductos] = useState(ProductosNomales);
 
     const [categoria, setCategoria] = useState("");
@@ -95,13 +94,8 @@ export default function Catalogo() {
             : "Ocurrió un error al cargar los productos";
 
     useEffect(() => {
-        user?.rol === 1 || user?.rol === 2 ?
-            (
-                setProductos(ProductosSinFiltro)
-            ):(
-                setProductos(ProductosNomales)
-            )
-    }, [ProductosNomales, ProductosSinFiltro]);
+        setProductos(ProductosNomales)
+    }, [ProductosNomales]);
 
     return (
         <main className={stylesCatalogo.container}>
@@ -157,7 +151,6 @@ export function CartProducto({ Producto }) {
         descripcion,
         imagen,
         precio_venta,
-        stock_actual,
         marca,
         activo,
     } = Producto;
@@ -198,9 +191,6 @@ export function CartProducto({ Producto }) {
 
             {user?.rol === 1 || user?.rol === 2 ? (
                 <>
-                    <p>
-                        <b>stock</b> {stock_actual}
-                    </p>
                     <p>
                         <b>código de barras</b> {codigo_barras}
                     </p>

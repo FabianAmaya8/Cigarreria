@@ -5,6 +5,7 @@ import { Info, X } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { useAuthContext } from "../../../../Pages/Context/AuthContext";
 import { useEffect, useRef, useState } from "react";
+import ImagePreview from "../../../../Utils/Components/ImagePreview";
 
 export default function PosHeader({ mesaActiva, estadoMesa }) {
     const { isAuthenticated } = useAuthContext();
@@ -42,12 +43,12 @@ export default function PosHeader({ mesaActiva, estadoMesa }) {
             {isAuthenticated ?
             (
                 <NavLink to="/Personal" className={styles.perfil}>
-                    {imagen ? (
-                        <img src={imagen} alt="Imagen de Perfil" />
-                    ) : (
-                        <i className="bx bx-user "></i>
-                    )
-                    }
+                    <ImagePreview 
+                        src={imagen}
+                        alt="Imagen de Perfil"
+                        zoom={false}
+                        fallback={<i className="bx bx-user"></i>}
+                    />
                 </NavLink>
             ): null}
 

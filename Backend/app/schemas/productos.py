@@ -1,8 +1,8 @@
-from pydantic import BaseModel
+﻿from pydantic import BaseModel
 from typing import Optional
 
 # ===========================
-# Categorías
+# Categorias
 # ===========================
 class CategoriaBase(BaseModel):
     nombre: str
@@ -59,9 +59,8 @@ class ProductoBase(BaseModel):
     nombre: str
     descripcion: Optional[str] = None
     imagen: Optional[str] = None
-    precio_compra: float
     precio_venta: float
-    stock_actual: int
+    stock_actual: Optional[int] = None
     stock_minimo: int
     unidad_medida: str
     activo: bool = True
@@ -77,7 +76,6 @@ class ProductoUpdate(BaseModel):
     nombre: Optional[str] = None
     descripcion: Optional[str] = None
     imagen: Optional[str] = None
-    precio_compra: Optional[float] = None
     precio_venta: Optional[float] = None
     stock_actual: Optional[int] = None
     stock_minimo: Optional[int] = None
@@ -92,7 +90,6 @@ class ProductoResponse(BaseModel):
     nombre: str
     imagen: Optional[str]
     descripcion: Optional[str]
-    precio_compra: float
     precio_venta: float
     stock_actual: int
     stock_minimo: int

@@ -4,6 +4,7 @@ import { useAuthContext } from "../../../Pages/Context/AuthContext";
 import useInfoPersonal from "../../../Hooks/Client/useInfoPersonal";
 import stylesPersonal from "../../../assets/Css/PerfilPersonal.module.scss";
 import { Loading, Error } from "../../../Utils/Components/Cargando";
+import ImagePreview from "../../../Utils/Components/ImagePreview";
 
 export default function Personal() {
     const { user } = useAuthContext();
@@ -97,16 +98,13 @@ export default function Personal() {
 
                 {/* Imagen de perfil */}
                 <section className={`${stylesPersonal["imagen-section"]} card`}>
-                    {perfil?.imagen === null ? (
-                        <i className="bx bx-user"></i>
-                    ) : (
-                        <motion.img
-                            src={perfil?.imagen || "/default-user.png"}
-                            alt="perfil"
-                            className={stylesPersonal["imagen-perfil"]}
-                            whileHover={{ scale: 1.05 }}
-                        />
-                    )}
+                    <ImagePreview 
+                        src={perfil?.imagen}
+                        alt="imagen de perfil"
+                        className={stylesPersonal["imagen-perfil"]}
+                        fallback={<i className="bx bx-user"></i>}
+                        zoom={false}
+                    />
                     <label
                         htmlFor="imagen"
                         className={`${stylesPersonal["btn-subir"]} btn btn-primary`}

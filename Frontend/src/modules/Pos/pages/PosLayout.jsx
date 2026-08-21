@@ -27,7 +27,6 @@ export default function POSLayout() {
         productos,
         productosLoading,
         productosError,
-        productosSinFiltro,
         usuarios,
     } = usePOSGlobal();
 
@@ -244,7 +243,7 @@ export default function POSLayout() {
 
             <ModalProducto
                 open={openProducto}
-                productos={productosSinFiltro}
+                productos={productos}
                 onClose={() => setOpenProducto(false)}
                 formatearPrecio={formatearPrecio}
             />

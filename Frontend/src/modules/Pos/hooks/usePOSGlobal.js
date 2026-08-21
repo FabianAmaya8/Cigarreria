@@ -1,20 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
-import { useCatalogo, useProductosSinFiltro } from "../../../Hooks/Client/useCatalogo";
+import { useCatalogoProductos } from "../../../Hooks/Client/useCatalogo";
 import { useUsuarios } from "../../../Hooks/Vendedor/useUsuarios";
 
 export default function usePOSGlobal() {
+    const rol = 2;
 
-    const catalogoQuery = useCatalogo({
-        staleTime: Infinity,
-        refetchOnWindowFocus: false,
-        refetchOnMount: false,
-    });
-
-    const productosSinFiltroQuery = useProductosSinFiltro({
-        staleTime: Infinity,
-        refetchOnWindowFocus: false,
-        refetchOnMount: false,
-    });
+    const productosQuery = useCatalogoProductos(rol);
 
     const usuariosQuery = useUsuarios({
         staleTime: Infinity,
@@ -23,11 +13,9 @@ export default function usePOSGlobal() {
     });
 
     return {
-        productos: catalogoQuery.data || [],
-        productosLoading: catalogoQuery.isLoading,
-        productosError: catalogoQuery.isError,
-
-        productosSinFiltro: productosSinFiltroQuery.data || [],
+        productos: productosQuery.data || [],
+        productosLoading: productosQuery.isLoading,
+        productosError: productosQuery.isError,
 
         usuarios: usuariosQuery.data || [],
     };

@@ -2,6 +2,7 @@ import Select from "react-select";
 import { useState, useEffect, useRef } from "react";
 import useCrudCategorias from "../../../../Hooks/Vendedor/GestionInventario/useCrudCategorias";
 import styles from "../../../../assets/Css/crud.module.scss";
+import ImagePreview from "../../../../Utils/Components/ImagePreview";
 
 export default function ProductoForm({ open, onClose, onSubmit, modoEdicion, producto }) {
     const { marcas, isLoadingMarcas } = useCrudCategorias();
@@ -9,9 +10,7 @@ export default function ProductoForm({ open, onClose, onSubmit, modoEdicion, pro
         codigo_barras: "",
         nombre: "",
         descripcion: "",
-        precio_compra: "",
         precio_venta: "",
-        stock_actual: "",
         stock_minimo: "",
         unidad_medida: "",
         activo: true,
@@ -44,9 +43,7 @@ export default function ProductoForm({ open, onClose, onSubmit, modoEdicion, pro
                 codigo_barras: "",
                 nombre: "",
                 descripcion: "",
-                precio_compra: "",
                 precio_venta: "",
-                stock_actual: 0,
                 stock_minimo: "",
                 unidad_medida: "",
                 activo: true,
@@ -209,35 +206,24 @@ export default function ProductoForm({ open, onClose, onSubmit, modoEdicion, pro
                         <label htmlFor="imgProduc">
                             Imagen del producto
                             <div className={styles.ImagenPreview} onClick={() => document.getElementById("imgProduc").click()}>
-                                {preview ? (
-                                    <img src={preview} alt="Vista previa" loading="lazy" />
-                                ) : (
-                                    <i className="bx bx-image-add"></i>
-                                )}
+                                <ImagePreview
+                                    src={preview}
+                                    alt="Vista previa"
+                                    zoom={false}
+                                />
                             </div>
                         </label>
                         <input
                             id="imgProduc"
                             type="file"
                             accept="image/*"
+                            capture="environment"
                             onChange={handleFileChange}
                             style={{ display: "none" }}
                         />
                     </div>
 
                     <div className={styles.FilaInputs}>
-                        <label>
-                            Precio Compra
-                            <input
-                                type="number"
-                                name="precio_compra"
-                                value={form.precio_compra}
-                                onChange={handleChange}
-                                placeholder="0.00"
-                                step="0.01"
-                            />
-                        </label>
-
                         <label>
                             Precio Venta
                             <input

@@ -16,3 +16,7 @@ class Usuario(Base):
 
     rol_rel = relationship("Rol", back_populates="usuarios")
     deudas = relationship("Deuda", back_populates="usuario")
+    pagos_compra = relationship( "PagoCompra" )
+    movimientos_libro_mayor = relationship( "LibroMayor")
+    compensaciones = relationship( "Compensacion" )
+    devoluciones_compra = relationship( "DevolucionCompra" )

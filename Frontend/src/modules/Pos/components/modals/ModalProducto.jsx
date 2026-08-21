@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 
 import styles from "../../../../assets/Css/Pos/modalProducto.module.scss";
+import ImagePreview from "../../../../Utils/Components/ImagePreview";
 
 export default function ModalProducto({
     open,
@@ -79,8 +80,7 @@ export default function ModalProducto({
     if (!open) return null;
 
     const stockCritico =
-        productoSeleccionado &&
-        productoSeleccionado.stock_actual <= productoSeleccionado.stock_minimo;
+        productoSeleccionado && productoSeleccionado.stock_minimo;
 
     /* ===============================
         CLICK AFUERA
@@ -175,15 +175,11 @@ export default function ModalProducto({
                             <>
                                 <div className={styles.topDetalle}>
                                     <div className={styles.imagen}>
-                                        {productoSeleccionado.imagen ? (
-                                            <img
-                                                src={productoSeleccionado.imagen}
-                                                alt={productoSeleccionado.nombre}
-                                                loading="lazy"
-                                            />
-                                        ):(
-                                            <i className="bx bx-image-add"></i>
-                                        )}
+                                        <ImagePreview 
+                                            src={productoSeleccionado.imagen}
+                                            alt={productoSeleccionado.nombre}
+                                            zoom={false}
+                                        />
                                     </div>
 
                                     {productoSeleccionado.activo ? (
@@ -218,9 +214,6 @@ export default function ModalProducto({
                                     <span>
                                         <Tag size={14} />
                                         Venta: {formatearPrecio(productoSeleccionado.precio_venta)}
-                                    </span>
-                                    <span className={styles.compra}>
-                                        Compra: {formatearPrecio(productoSeleccionado.precio_compra)}
                                     </span>
                                 </div>
 
