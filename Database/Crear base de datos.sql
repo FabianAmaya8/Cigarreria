@@ -150,6 +150,8 @@ CREATE TABLE compras (
 
     fecha_recepcion TIMESTAMP NULL,
 
+    fecha_entrega TIMESTAMP NULL,
+
     numero_factura VARCHAR(100) NULL,
 
     archivo_factura VARCHAR(255) NULL,
