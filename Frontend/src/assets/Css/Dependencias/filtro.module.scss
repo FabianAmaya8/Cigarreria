@@ -17,9 +17,8 @@
     position: sticky;
     top: 120px;
     width: 100%;
-    max-height: max-content;
+    height: min-content;
     display: flex;
-    flex-wrap: wrap;
     gap: var(--space-md);
     padding: var(--space-lg);
     background: var(--card-bg);

@@ -151,6 +151,7 @@ def _serializar_compra(db: Session, compra: Compra) -> CompraResponse:
         proveedor=compra.proveedor,
         fecha_pedido=compra.fecha_pedido,
         fecha_recepcion=compra.fecha_recepcion,
+        fecha_entrega=compra.fecha_entrega,
         numero_factura=compra.numero_factura,
         archivo_factura=compra.archivo_factura,
         estado_pedido=compra.estado_pedido,
@@ -210,20 +211,40 @@ def listar_compras(
     estado_recepcion: Optional[str] = Query(None),
     db: Session = Depends(get_db),
 ):
+    print("1. Entró a listar_compras")
+
     query = db.query(Compra).options(
         joinedload(Compra.proveedor),
         joinedload(Compra.detalles).joinedload(DetalleCompra.producto),
         joinedload(Compra.pagos).joinedload(PagoCompra.origenes),
     )
+
+    print("2. Query creada")
+
     if id_proveedor is not None:
         query = query.filter(Compra.id_proveedor == id_proveedor)
+
     if estado_pago:
         query = query.filter(Compra.estado_pago == estado_pago)
+
     if estado_recepcion:
         query = query.filter(Compra.estado_recepcion == estado_recepcion)
-    compras = query.order_by(Compra.fecha_pedido.desc()).all()
-    return [_serializar_compra(db, compra) for compra in compras]
 
+    print("3. Antes del .all()")
+
+    compras = query.order_by(Compra.fecha_pedido.desc()).all()
+
+    print("4. Compras encontradas:", len(compras))
+
+    resultado = []
+
+    for compra in compras:
+        print("5. Serializando compra:", compra.id_compra)
+        resultado.append(_serializar_compra(db, compra))
+
+    print("6. Serialización terminada")
+
+    return resultado
 
 @router.get("/{id_compra}", response_model=CompraResponse)
 def obtener_compra(id_compra: int, db: Session = Depends(get_db)):
@@ -250,12 +271,12 @@ def crear_compra(
             id_proveedor=proveedor.id_proveedor,
             numero_factura=data.numero_factura,
             archivo_factura=data.archivo_factura,
+            fecha_entrega=data.fecha_entrega,
             observaciones=data.observaciones,
             total=Decimal("0"),
             estado_pedido="pendiente",
             estado_recepcion="pendiente",
             estado_pago="pendiente",
-            fecha_pedido=datetime.now(),
         )
         db.add(compra)
         db.flush()
@@ -313,7 +334,15 @@ def actualizar_compra(
             raise HTTPException(status_code=400, detail="No se pueden asignar proveedores inactivos")
         compra.id_proveedor = data.id_proveedor
 
-    for campo in ("numero_factura", "archivo_factura", "observaciones", "estado_pedido", "estado_recepcion", "estado_pago"):
+    for campo in (
+            "numero_factura",
+            "archivo_factura",
+            "fecha_entrega",
+            "observaciones",
+            "estado_pedido",
+            "estado_recepcion",
+            "estado_pago"
+        ):
         valor = getattr(data, campo)
         if valor is not None:
             setattr(compra, campo, valor)
@@ -865,6 +894,7 @@ def historial_precios(
             Producto.nombre.label("producto"),
             Compra.fecha_pedido,
             Compra.fecha_recepcion,
+            Compra.fecha_entrega,
             DetalleCompra.precio_pedido,
             DetalleCompra.precio_recibido,
             DetalleCompra.cantidad_solicitada,
@@ -895,6 +925,7 @@ def historial_precios(
             proveedor=f.proveedor,
             fecha_pedido=f.fecha_pedido,
             fecha_recepcion=f.fecha_recepcion,
+            fecha_entrega=f.fecha_entrega,
             precio_pedido=f.precio_pedido,
             precio_recibido=f.precio_recibido,
             cantidad_solicitada=f.cantidad_solicitada,

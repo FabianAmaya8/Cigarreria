@@ -20,7 +20,12 @@ function formatMoney(value) {
 }
 
 function getProveedorResumen(proveedor) {
-    return proveedor?.nit || proveedor?.telefono || proveedor?.correo || "Sin datos de contacto";
+    return (
+        proveedor?.nit ||
+        proveedor?.telefono ||
+        proveedor?.correo ||
+        "Sin datos de contacto"
+    );
 }
 
 export default function Proveedores() {
@@ -30,27 +35,47 @@ export default function Proveedores() {
     const [proveedorEditar, setProveedorEditar] = useState(null);
     const [proveedorDetalleId, setProveedorDetalleId] = useState(null);
 
-    const filtros = useMemo(() => ({
-        buscar,
-        activo: activo === "" ? undefined : activo === "true",
-    }), [buscar, activo]);
+    const filtros = useMemo(
+        () => ({
+            buscar,
+            activo: activo === "" ? undefined : activo === "true",
+        }),
+        [buscar, activo],
+    );
 
     const { data: proveedores, isLoading, error } = useProveedores(filtros);
     const crearProveedor = useCrearProveedor();
     const actualizarProveedor = useActualizarProveedor();
 
-    const proveedorDetalleQuery = useProveedor(proveedorDetalleId, Boolean(proveedorDetalleId));
-    const productosRelacionadosQuery = useProductosRelacionadosProveedor(proveedorDetalleId, Boolean(proveedorDetalleId));
-    const comprasProveedorQuery = useComprasProveedor(proveedorDetalleId, Boolean(proveedorDetalleId));
-    const historialProveedorQuery = useHistorialPreciosProveedor(proveedorDetalleId, Boolean(proveedorDetalleId));
+    const proveedorDetalleQuery = useProveedor(
+        proveedorDetalleId,
+        Boolean(proveedorDetalleId),
+    );
+    const productosRelacionadosQuery = useProductosRelacionadosProveedor(
+        proveedorDetalleId,
+        Boolean(proveedorDetalleId),
+    );
+    const comprasProveedorQuery = useComprasProveedor(
+        proveedorDetalleId,
+        Boolean(proveedorDetalleId),
+    );
+    const historialProveedorQuery = useHistorialPreciosProveedor(
+        proveedorDetalleId,
+        Boolean(proveedorDetalleId),
+    );
 
-    const proveedorDetalle = proveedorDetalleQuery.data || proveedores?.find((item) => item.id_proveedor === proveedorDetalleId) || null;
+    const proveedorDetalle =
+        proveedorDetalleQuery.data ||
+        proveedores?.find((item) => item.id_proveedor === proveedorDetalleId) ||
+        null;
 
     const stats = useMemo(() => {
         const lista = Array.isArray(proveedores) ? proveedores : [];
         const activos = lista.filter((item) => item.activo).length;
         const inactivos = lista.length - activos;
-        const yo = lista.find((item) => item.nombre?.trim()?.toUpperCase() === "YO");
+        const yo = lista.find(
+            (item) => item.nombre?.trim()?.toUpperCase() === "YO",
+        );
         return {
             total: lista.length,
             activos,
@@ -65,10 +90,18 @@ export default function Proveedores() {
                 idProveedor: proveedorEditar.id_proveedor,
                 data,
             });
-            Swal.fire("Proveedor actualizado", "Los cambios se guardaron correctamente.", "success");
+            Swal.fire(
+                "Proveedor actualizado",
+                "Los cambios se guardaron correctamente.",
+                "success",
+            );
         } else {
             await crearProveedor.mutateAsync(data);
-            Swal.fire("Proveedor creado", "El proveedor fue registrado correctamente.", "success");
+            Swal.fire(
+                "Proveedor creado",
+                "El proveedor fue registrado correctamente.",
+                "success",
+            );
         }
         setOpenForm(false);
         setProveedorEditar(null);
@@ -89,7 +122,11 @@ export default function Proveedores() {
     }
 
     if (error) {
-        return <Error msg={error.message || "No se pudieron cargar los proveedores"} />;
+        return (
+            <Error
+                msg={error.message || "No se pudieron cargar los proveedores"}
+            />
+        );
     }
 
     return (
@@ -99,11 +136,17 @@ export default function Proveedores() {
                     <span className={styles.kicker}>Compras y proveedores</span>
                     <h2>Gestión de Proveedores</h2>
                     <p>
-                        Controla tus proveedores, su historial de compras, los productos relacionados y el proveedor interno <strong>YO</strong>.
+                        Controla tus proveedores, su historial de compras, los
+                        productos relacionados y el proveedor interno{" "}
+                        <strong>YO</strong>.
                     </p>
                 </div>
                 <div className={styles.heroActions}>
-                    <button type="button" className={`${styles.button} ${styles.buttonPrimary}`} onClick={abrirNuevo}>
+                    <button
+                        type="button"
+                        className={`${styles.button} ${styles.buttonPrimary}`}
+                        onClick={abrirNuevo}
+                    >
                         <i className="bx bx-plus" />
                         Nuevo proveedor
                     </button>
@@ -123,7 +166,11 @@ export default function Proveedores() {
                 </label>
                 <label className={styles.field}>
                     <span className={styles.fieldLabel}>Estado</span>
-                    <select className={styles.fieldSelect} value={activo} onChange={(event) => setActivo(event.target.value)}>
+                    <select
+                        className={styles.fieldSelect}
+                        value={activo}
+                        onChange={(event) => setActivo(event.target.value)}
+                    >
                         <option value="">Todos</option>
                         <option value="true">Activos</option>
                         <option value="false">Inactivos</option>
@@ -143,9 +190,15 @@ export default function Proveedores() {
                 <div className={styles.sectionHeader}>
                     <div>
                         <h3>Listado de proveedores</h3>
-                        <p>Selecciona un proveedor para ver sus compras, productos relacionados e historial de precios.</p>
+                        <p>
+                            Selecciona un proveedor para ver sus compras,
+                            productos relacionados e historial de precios.
+                        </p>
                     </div>
-                    <span className={`${styles.badge} ${styles.badgeInfo}`}>{Array.isArray(proveedores) ? proveedores.length : 0} registros</span>
+                    <span className={`${styles.badge} ${styles.badgeInfo}`}>
+                        {Array.isArray(proveedores) ? proveedores.length : 0}{" "}
+                        registros
+                    </span>
                 </div>
 
                 <div className={styles.tableWrap}>
@@ -165,35 +218,72 @@ export default function Proveedores() {
                                     <td data-label="Proveedor">
                                         <div className={styles.stack}>
                                             <strong>{proveedor.nombre}</strong>
-                                            <span className={styles.muted}>{getProveedorResumen(proveedor)}</span>
-                                            {proveedor.nombre?.trim()?.toUpperCase() === "YO" ? (
-                                                <span className={`${styles.badge} ${styles.badgeYo}`}>Proveedor interno</span>
+                                            <span className={styles.muted}>
+                                                {getProveedorResumen(proveedor)}
+                                            </span>
+                                            {proveedor.nombre
+                                                ?.trim()
+                                                ?.toUpperCase() === "YO" ? (
+                                                <span
+                                                    className={`${styles.badge} ${styles.badgeYo}`}
+                                                >
+                                                    Proveedor interno
+                                                </span>
                                             ) : null}
                                         </div>
                                     </td>
                                     <td data-label="Contacto">
                                         <div className={styles.cardMeta}>
-                                            <span>{proveedor.telefono || "Sin teléfono"}</span>
-                                            <span>{proveedor.correo || "Sin correo"}</span>
+                                            <span>
+                                                {proveedor.telefono ||
+                                                    "Sin teléfono"}
+                                            </span>
+                                            <span>
+                                                {proveedor.correo ||
+                                                    "Sin correo"}
+                                            </span>
                                         </div>
                                     </td>
                                     <td data-label="Ubicación">
                                         <div className={styles.cardMeta}>
-                                            <span>{proveedor.ciudad || "Sin ciudad"}</span>
-                                            <span>{proveedor.pais || "Sin país"}</span>
+                                            <span>
+                                                {proveedor.ciudad ||
+                                                    "Sin ciudad"}
+                                            </span>
+                                            <span>
+                                                {proveedor.pais || "Sin país"}
+                                            </span>
                                         </div>
                                     </td>
                                     <td data-label="Estado">
-                                        <span className={`${styles.badge} ${proveedor.activo ? styles.badgeActive : styles.badgeInactive}`}>
-                                            {proveedor.activo ? "Activo" : "Inactivo"}
+                                        <span
+                                            className={`${styles.badge} ${proveedor.activo ? styles.badgeActive : styles.badgeInactive}`}
+                                        >
+                                            {proveedor.activo
+                                                ? "Activo"
+                                                : "Inactivo"}
                                         </span>
                                     </td>
                                     <td data-label="Acciones">
                                         <div className={styles.inlineActions}>
-                                            <button type="button" className={`${styles.button} ${styles.buttonGhost} ${styles.buttonSmall}`} onClick={() => setProveedorDetalleId(proveedor.id_proveedor)}>
+                                            <button
+                                                type="button"
+                                                className={`${styles.button} ${styles.buttonGhost} ${styles.buttonSmall}`}
+                                                onClick={() =>
+                                                    setProveedorDetalleId(
+                                                        proveedor.id_proveedor,
+                                                    )
+                                                }
+                                            >
                                                 Ver
                                             </button>
-                                            <button type="button" className={`${styles.button} ${styles.buttonGhost} ${styles.buttonSmall}`} onClick={() => abrirEdicion(proveedor)}>
+                                            <button
+                                                type="button"
+                                                className={`${styles.button} ${styles.buttonGhost} ${styles.buttonSmall}`}
+                                                onClick={() =>
+                                                    abrirEdicion(proveedor)
+                                                }
+                                            >
                                                 Editar
                                             </button>
                                         </div>
@@ -231,7 +321,9 @@ export default function Proveedores() {
                     setProveedorEditar(null);
                 }}
                 initialData={proveedorEditar}
-                isSubmitting={crearProveedor.isPending || actualizarProveedor.isPending}
+                isSubmitting={
+                    crearProveedor.isPending || actualizarProveedor.isPending
+                }
                 onSubmit={handleGuardar}
             />
 

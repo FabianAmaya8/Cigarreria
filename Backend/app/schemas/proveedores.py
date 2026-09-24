@@ -67,6 +67,7 @@ class ProveedorCompraResumen(BaseModel):
     id_compra: int
     fecha_pedido: datetime
     fecha_recepcion: Optional[datetime] = None
+    fecha_entrega: Optional[datetime] = None
     numero_factura: Optional[str] = None
     estado_pedido: str
     estado_recepcion: str
@@ -131,6 +132,7 @@ class CompraCreate(BaseModel):
     id_proveedor: Optional[int] = None
     numero_factura: Optional[str] = None
     archivo_factura: Optional[str] = None
+    fecha_entrega: Optional[datetime] = None
     observaciones: Optional[str] = None
     detalles: List[DetalleCompraCreate]
 
@@ -139,6 +141,7 @@ class CompraUpdate(BaseModel):
     id_proveedor: Optional[int] = None
     numero_factura: Optional[str] = None
     archivo_factura: Optional[str] = None
+    fecha_entrega: Optional[datetime] = None
     observaciones: Optional[str] = None
     estado_pedido: Optional[str] = None
     estado_recepcion: Optional[str] = None
@@ -150,6 +153,7 @@ class CompraResponse(BaseModel):
     proveedor: Optional[ProveedorResponse] = None
     fecha_pedido: datetime
     fecha_recepcion: Optional[datetime] = None
+    fecha_entrega: Optional[datetime] = None
     numero_factura: Optional[str] = None
     archivo_factura: Optional[str] = None
     estado_pedido: str
@@ -338,6 +342,7 @@ class HistorialPrecioResponse(BaseModel):
     proveedor: Optional[str] = None
     fecha_pedido: datetime
     fecha_recepcion: Optional[datetime] = None
+    fecha_entrega: Optional[datetime] = None
     precio_pedido: Decimal
     precio_recibido: Optional[Decimal] = None
     cantidad_solicitada: int

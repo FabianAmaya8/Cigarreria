@@ -65,7 +65,9 @@ export default function ProveedorModal({
             });
             onClose();
         } catch (submissionError) {
-            setError(submissionError?.message || "No se pudo guardar el proveedor.");
+            setError(
+                submissionError?.message || "No se pudo guardar el proveedor.",
+            );
         }
     }
 
@@ -73,20 +75,33 @@ export default function ProveedorModal({
 
     return (
         <div className={styles.modalBackdrop} onClick={onClose}>
-            <div className={`${styles.modal} ${styles.modalNarrow}`} onClick={(event) => event.stopPropagation()}>
+            <div
+                className={`${styles.modal} ${styles.modalNarrow}`}
+                onClick={(event) => event.stopPropagation()}
+            >
                 <header className={styles.modalHeader}>
                     <div>
                         <span className={styles.kicker}>
-                            {initialData?.id_proveedor ? "Editar proveedor" : "Nuevo proveedor"}
+                            {initialData?.id_proveedor
+                                ? "Editar proveedor"
+                                : "Nuevo proveedor"}
                         </span>
                         <h3 className={styles.modalTitle}>
-                            {initialData?.id_proveedor ? initialData.nombre || "Proveedor" : "Crear proveedor"}
+                            {initialData?.id_proveedor
+                                ? initialData.nombre || "Proveedor"
+                                : "Crear proveedor"}
                         </h3>
                         <p className={styles.modalSub}>
-                            Registra la información básica para compras y seguimiento.
+                            Registra la información básica para compras y
+                            seguimiento.
                         </p>
                     </div>
-                    <button type="button" className={styles.button} onClick={onClose} aria-label="Cerrar modal">
+                    <button
+                        type="button"
+                        className={styles.button}
+                        onClick={onClose}
+                        aria-label="Cerrar modal"
+                    >
                         <LuX size={18} />
                     </button>
                 </header>
@@ -99,19 +114,25 @@ export default function ProveedorModal({
                                 className={styles.fieldInput}
                                 type="text"
                                 value={form.nombre}
-                                onChange={(event) => updateField("nombre", event.target.value)}
+                                onChange={(event) =>
+                                    updateField("nombre", event.target.value)
+                                }
                                 placeholder="Ej. Distribuidora XYZ"
                                 autoFocus
                             />
                         </label>
 
                         <label className={styles.field}>
-                            <span className={styles.fieldLabel}>Documento / NIT</span>
+                            <span className={styles.fieldLabel}>
+                                Documento / NIT
+                            </span>
                             <input
                                 className={styles.fieldInput}
                                 type="text"
                                 value={form.nit}
-                                onChange={(event) => updateField("nit", event.target.value)}
+                                onChange={(event) =>
+                                    updateField("nit", event.target.value)
+                                }
                                 placeholder="Opcional"
                             />
                         </label>
@@ -122,7 +143,9 @@ export default function ProveedorModal({
                                 className={styles.fieldInput}
                                 type="text"
                                 value={form.telefono}
-                                onChange={(event) => updateField("telefono", event.target.value)}
+                                onChange={(event) =>
+                                    updateField("telefono", event.target.value)
+                                }
                                 placeholder="Opcional"
                             />
                         </label>
@@ -133,7 +156,9 @@ export default function ProveedorModal({
                                 className={styles.fieldInput}
                                 type="email"
                                 value={form.correo}
-                                onChange={(event) => updateField("correo", event.target.value)}
+                                onChange={(event) =>
+                                    updateField("correo", event.target.value)
+                                }
                                 placeholder="Opcional"
                             />
                         </label>
@@ -144,7 +169,9 @@ export default function ProveedorModal({
                                 className={styles.fieldInput}
                                 type="text"
                                 value={form.ciudad}
-                                onChange={(event) => updateField("ciudad", event.target.value)}
+                                onChange={(event) =>
+                                    updateField("ciudad", event.target.value)
+                                }
                                 placeholder="Opcional"
                             />
                         </label>
@@ -155,7 +182,9 @@ export default function ProveedorModal({
                                 className={styles.fieldInput}
                                 type="text"
                                 value={form.pais}
-                                onChange={(event) => updateField("pais", event.target.value)}
+                                onChange={(event) =>
+                                    updateField("pais", event.target.value)
+                                }
                                 placeholder="Opcional"
                             />
                         </label>
@@ -166,17 +195,26 @@ export default function ProveedorModal({
                                 className={styles.fieldInput}
                                 type="text"
                                 value={form.direccion}
-                                onChange={(event) => updateField("direccion", event.target.value)}
+                                onChange={(event) =>
+                                    updateField("direccion", event.target.value)
+                                }
                                 placeholder="Opcional"
                             />
                         </label>
 
                         <label className={styles.field + " " + styles.full}>
-                            <span className={styles.fieldLabel}>Observaciones</span>
+                            <span className={styles.fieldLabel}>
+                                Observaciones
+                            </span>
                             <textarea
                                 className={styles.fieldTextarea}
                                 value={form.observaciones}
-                                onChange={(event) => updateField("observaciones", event.target.value)}
+                                onChange={(event) =>
+                                    updateField(
+                                        "observaciones",
+                                        event.target.value,
+                                    )
+                                }
                                 placeholder="Notas útiles sobre el proveedor"
                                 rows="3"
                             />
@@ -187,7 +225,12 @@ export default function ProveedorModal({
                             <select
                                 className={styles.fieldSelect}
                                 value={form.activo ? "true" : "false"}
-                                onChange={(event) => updateField("activo", event.target.value === "true")}
+                                onChange={(event) =>
+                                    updateField(
+                                        "activo",
+                                        event.target.value === "true",
+                                    )
+                                }
                             >
                                 <option value="true">Activo</option>
                                 <option value="false">Inactivo</option>
@@ -195,14 +238,31 @@ export default function ProveedorModal({
                         </label>
                     </div>
 
-                    {error ? <p className={`${styles.alert} ${styles.alertDanger}`}>{error}</p> : null}
+                    {error ? (
+                        <p className={`${styles.alert} ${styles.alertDanger}`}>
+                            {error}
+                        </p>
+                    ) : null}
 
                     <footer className={styles.modalFooter}>
-                        <button type="button" className={`${styles.button} ${styles.buttonGhost}`} onClick={onClose} disabled={isSubmitting}>
+                        <button
+                            type="button"
+                            className={`${styles.button} ${styles.buttonGhost}`}
+                            onClick={onClose}
+                            disabled={isSubmitting}
+                        >
                             Cancelar
                         </button>
-                        <button type="submit" className={`${styles.button} ${styles.buttonPrimary}`} disabled={isSubmitting}>
-                            {isSubmitting ? "Guardando..." : initialData?.id_proveedor ? "Actualizar" : "Crear"}
+                        <button
+                            type="submit"
+                            className={`${styles.button} ${styles.buttonPrimary}`}
+                            disabled={isSubmitting}
+                        >
+                            {isSubmitting
+                                ? "Guardando..."
+                                : initialData?.id_proveedor
+                                  ? "Actualizar"
+                                  : "Crear"}
                         </button>
                     </footer>
                 </form>

@@ -38,6 +38,11 @@ class Compra(Base):
         nullable=True
     )
 
+    fecha_entrega = Column(
+        TIMESTAMP,
+        nullable=True
+    )
+
     numero_factura = Column(
         String(100),
         nullable=True

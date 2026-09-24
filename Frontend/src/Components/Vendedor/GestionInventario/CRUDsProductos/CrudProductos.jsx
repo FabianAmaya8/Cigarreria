@@ -84,7 +84,6 @@ export default function ProductoForm({ open, onClose, onSubmit, modoEdicion, pro
             return;
         }
         onSubmit(form);
-        onClose();
     };
 
     const handleOverlayClick = (e) => {
